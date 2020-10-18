@@ -6,26 +6,26 @@
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
 		<!-- Begin Jekyll SEO tag v2.6.1 -->
 		<title>Portfolio | Uri Sh.</title>
-		<meta name="generator" content="Jekyll v4.1.0" />
+		<meta name="generator" content="Jekyll v4.1.1" />
 		<meta property="og:title" content="Portfolio" />
 		<meta name="author" content="Uri Shani" />
 		<meta property="og:locale" content="en_US" />
 		<meta
 			name="description"
-			content="This is a short portfolio of significant works I have done over the past few years. Clicking on the tiles will open a popup with more details about the work. Some of the tiles also have a link to code samples, 3D designs, or other relevant materials."
+			content="A portfolio centered site with a blog, to feature my adventures and projects in making, programming, and engineering. Built in Jekyll, to be served from Github pages."
 		/>
 		<meta
 			property="og:description"
-			content="This is a short portfolio of significant works I have done over the past few years. Clicking on the tiles will open a popup with more details about the work. Some of the tiles also have a link to code samples, 3D designs, or other relevant materials."
+			content="A portfolio centered site with a blog, to feature my adventures and projects in making, programming, and engineering. Built in Jekyll, to be served from Github pages."
 		/>
 		<link rel="canonical" href="https://urishx.github.io/portfolio/" />
 		<meta property="og:url" content="https://urishx.github.io/portfolio/" />
 		<meta property="og:site_name" content="Uri Sh." />
 		<script type="application/ld+json">
 			{
-				"description": "This is a short portfolio of significant works I have done over the past few years. Clicking on the tiles will open a popup with more details about the work. Some of the tiles also have a link to code samples, 3D designs, or other relevant materials.",
+				"description": "A portfolio centered site with a blog, to feature my adventures and projects in making, programming, and engineering. Built in Jekyll, to be served from Github pages.",
 				"@type": "WebPage",
-				"headline": "Portfolio",
+				"author": { "@type": "Person", "name": "Uri Shani" },
 				"url": "https://urishx.github.io/portfolio/",
 				"publisher": {
 					"@type": "Organization",
@@ -35,7 +35,7 @@
 					},
 					"name": "Uri Shani"
 				},
-				"author": { "@type": "Person", "name": "Uri Shani" },
+				"headline": "Portfolio",
 				"@context": "https://schema.org"
 			}
 		</script>
@@ -1793,7 +1793,7 @@
 							>
 								<div class="modal-inner">
 									<header>
-										<h2 id="stackable-label">Stacked modal</h2>
+										<h2 id="stackable-label">Markdown / Readme</h2>
 									</header>
 									<div class="modal-content">
 										<h1 id="custom-range-slider-wble-write--notify">
@@ -2489,7 +2489,7 @@
 						>
 							<div
 								class="portfolio-front"
-								style="background-image: url('/assets/img/logo.png');"
+								style="background-image: url('/assets/img/logo_code.png');"
 							></div>
 							<div class="portfolio-overlay"></div>
 							<div class="portfolio-excerpt">
@@ -2525,7 +2525,7 @@
 							>
 								<div class="modal-inner">
 									<header>
-										<h2 id="stackable-label">Stacked modal</h2>
+										<h2 id="stackable-label">Code: cpp</h2>
 									</header>
 									<div class="modal-content">
 										<figure class="highlight">
@@ -3571,7 +3571,7 @@
 						>
 							<div
 								class="portfolio-front"
-								style="background-image: url('/assets/img/logo.png');"
+								style="background-image: url('/assets/img/logo_code.png');"
 							></div>
 							<div class="portfolio-overlay"></div>
 							<div class="portfolio-excerpt">
@@ -3606,95 +3606,95 @@
 							>
 								<div class="modal-inner">
 									<header>
-										<h2 id="stackable-label">Stacked modal</h2>
+										<h2 id="stackable-label">Code: python</h2>
 									</header>
 									<div class="modal-content">
 										<figure class="highlight">
-											<pre><code class="language-cpp" data-lang="cpp">                        <span class="cp">#!/usr/bin/env python3
+											<pre><code class="language-python" data-lang="python">                        <span class="c1">#!/usr/bin/env python3
 </span>
-<span class="cp"># A short python script to play once a video file when button is pressed
+<span class="c1"># A short python script to play once a video file when button is pressed
 # meant to run on Raspberry Pi, with button connected to GPIO 21
 # script meant to be used in a commercial exhibition, and button to be pressed by PMMA "coin"
 # inserted to slot in arcade-styled enclosure.
 # Sample video from https://peach.blender.org/download/
 # Requires omxplayer!!
 </span>
-<span class="n">import</span> <span class="n">RPi</span><span class="p">.</span><span class="n">GPIO</span> <span class="n">as</span> <span class="n">GPIO</span>
-<span class="n">import</span> <span class="n">os</span>
-<span class="n">import</span> <span class="n">sys</span>
-<span class="n">from</span> <span class="n">omxplayer</span><span class="p">.</span><span class="n">player</span> <span class="n">import</span> <span class="n">OMXPlayer</span>
-<span class="n">from</span> <span class="n">pathlib</span> <span class="n">import</span> <span class="n">Path</span>
-<span class="n">from</span> <span class="n">time</span> <span class="n">import</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="k">as</span> <span class="n">GPIO</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">omxplayer.player</span> <span class="kn">import</span> <span class="n">OMXPlayer</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
 
 <span class="n">GPIO</span><span class="p">.</span><span class="n">setmode</span><span class="p">(</span><span class="n">GPIO</span><span class="p">.</span><span class="n">BCM</span><span class="p">)</span>
 
-<span class="cp"># button on GPIO 21
+<span class="c1"># button on GPIO 21
 </span><span class="n">GPIO</span><span class="p">.</span><span class="n">setup</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="n">GPIO</span><span class="p">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">pull_up_down</span><span class="o">=</span><span class="n">GPIO</span><span class="p">.</span><span class="n">PUD_UP</span><span class="p">)</span>
-<span class="cp"># indication LED on GPIO 13
+<span class="c1"># indication LED on GPIO 13
 </span><span class="n">GPIO</span><span class="p">.</span><span class="n">setup</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="n">GPIO</span><span class="p">.</span><span class="n">OUT</span><span class="p">)</span>
-<span class="cp"># DEBUG button on GPIO 24
+<span class="c1"># DEBUG button on GPIO 24
 #GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 </span>    
 <span class="n">VIDEO_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s">"/home/pi/mu_code/videos/SampleVideo_1280x720_10mb.mp4"</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">:</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
     <span class="n">VIDEO_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     
-<span class="n">player</span> <span class="o">=</span> <span class="n">OMXPlayer</span><span class="p">(</span><span class="n">VIDEO_PATH</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="err">'</span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">osd</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">keys</span> <span class="o">-</span><span class="n">b</span> <span class="o">-</span><span class="n">o</span> <span class="n">hdmi</span><span class="err">'</span><span class="p">)</span>
+<span class="n">player</span> <span class="o">=</span> <span class="n">OMXPlayer</span><span class="p">(</span><span class="n">VIDEO_PATH</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="s">'--no-osd --no-keys -b -o hdmi'</span><span class="p">)</span>
 
-<span class="n">def</span> <span class="n">playerExit</span><span class="p">(</span><span class="n">code</span><span class="p">)</span><span class="o">:</span>
+<span class="k">def</span> <span class="nf">playerExit</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
     <span class="n">player</span><span class="p">.</span><span class="n">quit</span><span class="p">()</span>
-    <span class="n">print</span><span class="p">(</span><span class="err">'</span><span class="n">exit</span><span class="err">'</span><span class="p">,</span><span class="n">code</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'exit'</span><span class="p">,</span><span class="n">code</span><span class="p">)</span>
     <span class="n">os</span><span class="p">.</span><span class="n">_exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">last_state1</span> <span class="o">=</span> <span class="n">True</span>
-<span class="n">input_state1</span> <span class="o">=</span> <span class="n">True</span>
-<span class="n">quit_video</span> <span class="o">=</span> <span class="n">False</span>
+<span class="n">last_state1</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">input_state1</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">quit_video</span> <span class="o">=</span> <span class="bp">False</span>
 <span class="n">timer</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">playing</span> <span class="o">=</span> <span class="n">False</span>
+<span class="n">playing</span> <span class="o">=</span> <span class="bp">False</span>
 
-<span class="cp"># set variable for length of video
+<span class="c1"># set variable for length of video
 </span><span class="n">videoLength</span> <span class="o">=</span> <span class="n">player</span><span class="p">.</span><span class="n">duration</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.1</span>
 
-<span class="cp"># after loading pause at end of video
+<span class="c1"># after loading pause at end of video
 </span><span class="n">sleep</span><span class="p">(</span><span class="n">videoLength</span><span class="p">)</span>
 <span class="n">player</span><span class="p">.</span><span class="n">pause</span><span class="p">()</span>
 <span class="n">GPIO</span><span class="p">.</span><span class="n">output</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="n">True</span><span class="o">:</span>
-    <span class="cp">#Read states of input
-</span>    <span class="n">input_state1</span> <span class="o">=</span> <span class="n">GPIO</span><span class="p">.</span><span class="n">input</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1">#Read states of input
+</span>    <span class="n">input_state1</span> <span class="o">=</span> <span class="n">GPIO</span><span class="p">.</span><span class="nb">input</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
 
-    <span class="cp">#If GPIO(21) is shorted to Ground
-</span>    <span class="k">if</span> <span class="n">input_state1</span> <span class="o">!=</span> <span class="n">last_state1</span><span class="o">:</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">not</span> <span class="n">playing</span> <span class="n">and</span> <span class="n">not</span> <span class="n">input_state1</span><span class="p">)</span><span class="o">:</span>
+    <span class="c1">#If GPIO(21) is shorted to Ground
+</span>    <span class="k">if</span> <span class="n">input_state1</span> <span class="o">!=</span> <span class="n">last_state1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">playing</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">input_state1</span><span class="p">):</span>
             <span class="n">player</span><span class="p">.</span><span class="n">set_position</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">player</span><span class="p">.</span><span class="n">play</span><span class="p">()</span>
             <span class="n">GPIO</span><span class="p">.</span><span class="n">output</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="n">playing</span> <span class="o">=</span> <span class="n">True</span>
+            <span class="n">playing</span> <span class="o">=</span> <span class="bp">True</span>
     
-    <span class="k">if</span> <span class="n">playing</span><span class="o">:</span>
-        <span class="k">if</span> <span class="n">timer</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">videoLength</span> <span class="o">-</span> <span class="mf">0.01</span><span class="p">)</span><span class="o">:</span>
-            <span class="n">print</span> <span class="p">(</span><span class="s">"Video flie length: %f, Timer: %f"</span> <span class="o">%</span><span class="p">(</span><span class="n">videoLength</span><span class="p">,</span> <span class="n">timer</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">playing</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">timer</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">videoLength</span> <span class="o">-</span> <span class="mf">0.01</span><span class="p">):</span>
+            <span class="k">print</span> <span class="p">(</span><span class="s">"Video flie length: %f, Timer: %f"</span> <span class="o">%</span><span class="p">(</span><span class="n">videoLength</span><span class="p">,</span> <span class="n">timer</span><span class="p">))</span>
             <span class="n">timer</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">player</span><span class="p">.</span><span class="n">pause</span><span class="p">()</span>
             <span class="n">GPIO</span><span class="p">.</span><span class="n">output</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-            <span class="n">playing</span> <span class="o">=</span> <span class="n">False</span>
-        <span class="k">else</span><span class="o">:</span>
+            <span class="n">playing</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
             <span class="n">timer</span> <span class="o">+=</span> <span class="n">player</span><span class="p">.</span><span class="n">position</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1000.0</span>
     
-    <span class="n">player</span><span class="p">.</span><span class="n">exitEvent</span> <span class="o">+=</span> <span class="n">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">exit_code</span><span class="o">:</span> <span class="n">playerExit</span><span class="p">(</span><span class="n">exit_code</span><span class="p">)</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">exitEvent</span> <span class="o">+=</span> <span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">exit_code</span><span class="p">:</span> <span class="n">playerExit</span><span class="p">(</span><span class="n">exit_code</span><span class="p">)</span>
     
-    <span class="cp">#GPIO(24) to close omxplayer manually - used during debug
-</span>    <span class="k">if</span> <span class="n">quit_video</span> <span class="o">==</span> <span class="n">True</span><span class="o">:</span>
-<span class="cp">#        pygame.quit()
+    <span class="c1">#GPIO(24) to close omxplayer manually - used during debug
+</span>    <span class="k">if</span> <span class="n">quit_video</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+<span class="c1">#        pygame.quit()
 </span>        <span class="n">player</span><span class="p">.</span><span class="n">quit</span><span class="p">()</span>
-        <span class="n">os</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="err">'</span><span class="n">killall</span> <span class="n">omxplayer</span><span class="p">.</span><span class="n">bin</span><span class="err">'</span><span class="p">)</span>
-        <span class="n">playing</span> <span class="o">=</span> <span class="n">False</span>
-        <span class="n">sys</span><span class="p">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">os</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">'killall omxplayer.bin'</span><span class="p">)</span>
+        <span class="n">playing</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">os</span><span class="p">.</span><span class="n">_exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">break</span>
 
-    <span class="cp">#Set last_input states
+    <span class="c1">#Set last_input states
 </span>    <span class="n">last_state1</span> <span class="o">=</span> <span class="n">input_state1</span>
                         </code></pre>
 										</figure>
@@ -3846,6 +3846,23 @@
 					})();
 				</script>
 
+				<script>
+					function handleResize() {
+						if (window.innerWidth <= 640) {
+							document.querySelectorAll(".portfolio-modal").forEach((_) => {
+								_.setAttribute("data-cssmodal-resize", "false");
+							});
+						} else {
+							document.querySelectorAll(".portfolio-modal").forEach((_) => {
+								_.setAttribute("data-cssmodal-resize", "true");
+							});
+						}
+					}
+
+					window.addEventListener("resize", handleResize);
+					window.addEventListener("load", handleResize);
+				</script>
+
 				<script src="/assets/script/portfolio-tag-filter.js"></script>
 				<script src="/assets/script/modal.js"></script>
 				<script src="/assets/script/modal-gallery.js"></script>
@@ -3913,6 +3930,17 @@
 								><svg class="svg-icon grey">
 									<use
 										xlink:href="/assets/minima-social-icons.svg#github"
+									></use></svg
+							></a>
+						</li>
+						<li>
+							<a
+								rel="me"
+								href="https://www.linkedin.com/in/urishx"
+								title="urishx"
+								><svg class="svg-icon grey">
+									<use
+										xlink:href="/assets/minima-social-icons.svg#linkedin"
 									></use></svg
 							></a>
 						</li>
