@@ -6,12 +6,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!-- Begin Jekyll SEO tag v2.7.1 -->
 		<title>
-			Uri Sh. | A portfolio centered site with a blog, to feature my adventures
-			and projects in making, programming, and engineering. Built in Jekyll, to
-			be served from Github pages.
+			Microblog | A portfolio centered site with a blog, to feature my
+			adventures and projects in making, programming, and engineering. Built in
+			Jekyll, to be served from Github pages.
 		</title>
 		<meta name="generator" content="Jekyll v4.1.1" />
-		<meta property="og:title" content="Uri Sh." />
+		<meta property="og:title" content="Microblog" />
 		<meta name="author" content="Uri Shani" />
 		<meta property="og:locale" content="en_US" />
 		<meta
@@ -22,23 +22,23 @@
 			property="og:description"
 			content="A portfolio centered site with a blog, to feature my adventures and projects in making, programming, and engineering. Built in Jekyll, to be served from Github pages."
 		/>
-		<link rel="canonical" href="https://urishx.github.io/" />
-		<meta property="og:url" content="https://urishx.github.io/" />
-		<meta property="og:site_name" content="Uri Sh." />
+		<link rel="canonical" href="https://urishx.github.io/microblog/" />
+		<meta property="og:url" content="https://urishx.github.io/microblog/" />
+		<meta property="og:site_name" content="Microblog" />
 		<meta name="twitter:card" content="summary" />
-		<meta property="twitter:title" content="Uri Sh." />
+		<meta property="twitter:title" content="Microblog" />
 		<script type="application/ld+json">
 			{
-				"headline": "Uri Sh.",
+				"headline": "Microblog",
 				"description": "A portfolio centered site with a blog, to feature my adventures and projects in making, programming, and engineering. Built in Jekyll, to be served from Github pages.",
 				"@type": "WebSite",
-				"url": "https://urishx.github.io/",
-				"name": "Uri Sh.",
+				"url": "https://urishx.github.io/microblog/",
+				"name": "Microblog",
 				"publisher": {
 					"@type": "Organization",
 					"logo": {
 						"@type": "ImageObject",
-						"url": "https://urishx.github.io/logo.png"
+						"url": "https://urishx.github.io/microblog/logo.png"
 					},
 					"name": "Uri Shani"
 				},
@@ -47,12 +47,12 @@
 			}
 		</script>
 		<!-- End Jekyll SEO tag -->
-		<link rel="stylesheet" href="/assets/css/style.css" />
+		<link rel="stylesheet" href="/microblog/assets/css/style.css" />
 		<link
 			type="application/atom+xml"
 			rel="alternate"
-			href="https://urishx.github.io/feed.xml"
-			title="Uri Sh."
+			href="https://urishx.github.io/microblog/feed.xml"
+			title="Microblog"
 		/>
 		<link
 			href="https://fonts.googleapis.com/css2?family=Alef&family=Tinos&display=swap"
@@ -62,20 +62,24 @@
 			href="https://fonts.googleapis.com/icon?family=Material+Icons"
 			rel="stylesheet"
 		/>
-		<link rel="icon" href="/assets/cropped-logo-1-32x32.png" sizes="32x32" />
+		<link
+			rel="icon"
+			href="/microblog/assets/cropped-logo-1-32x32.png"
+			sizes="32x32"
+		/>
 	</head>
 	<body>
 		<div>
 			<header
 				class="site-header"
-				style="background-image: url('/assets/img/banner.png')"
+				style="background-image: url('/microblog/assets/img/banner.png')"
 			>
 				<div class="banner">
 					<div class="img-container">
-						<img alt="logo" src="/assets/img/logo.png" />
+						<img alt="logo" src="/microblog/assets/img/logo.png" />
 					</div>
 					<h1 class="site-title">
-						<a rel="author" href="/">Uri Sh.</a>
+						<a rel="author" href="/microblog/">Microblog</a>
 					</h1>
 					<h2>Making, Engineering, and Blogging about it too</h2>
 				</div>
@@ -93,9 +97,9 @@
 						</label>
 
 						<div class="trigger">
-							<a class="page-current" href="/" aria-disabled="true">Home</a
-							><a class="page-link" href="/about/">About me</a
-							><a class="page-link" href="/portfolio/">Portfolio</a>
+							<a class="page-current" href="/microblog/" aria-disabled="true"
+								>Home</a
+							><a class="page-link" href="/microblog/portfolio/">Portfolio</a>
 						</div>
 					</nav>
 				</div>
@@ -104,32 +108,93 @@
 		<main class="page-content" aria-label="Content">
 			<div class="wrapper">
 				<div class="home">
-					<h1 id="welcome"><em>Welcome!</em></h1>
+					<h2 id="welcome-to-github-pages">Welcome to GitHub Pages</h2>
+
 					<p>
-						My name is Uri Shani, and I am a maker, a tinkerer, and an engineer.
+						You can use the
+						<a href="https://github.com/UriShX/microblog/edit/master/index.md"
+							>editor on GitHub</a
+						>
+						to maintain and preview the content for your website in Markdown
+						files.
 					</p>
 
 					<p>
-						I can design and build most anything out of wood, program and build
-						Arduino and Raspberry Pi devices, design all sorts of mechanical
-						contraptions and devices, and design rubber and plastic parts for
-						any manufacturing technology. In the past year or so I’ve taught
-						myself to program web apps, at first in order to provide virtual UI
-						to Arduino apps, then later it became a goal all in it’s own.
+						Whenever you commit to this repository, GitHub Pages will run
+						<a href="https://jekyllrb.com/">Jekyll</a> to rebuild the pages in
+						your site, from the content in your Markdown files.
 					</p>
 
+					<h3 id="markdown">Markdown</h3>
+
 					<p>
-						You can find out more about some of my past and current projects on
-						my <a href="/portfolio">portfolio</a>. You can also read about some
-						of my adventures in making over the last few years on my blog
-						postings, below.
+						Markdown is a lightweight and easy-to-use syntax for styling your
+						writing. It includes conventions for
+					</p>
+
+					<div class="language-markdown highlighter-rouge">
+						<div class="highlight">
+							<pre class="highlight"><code>Syntax highlighted code block
+
+<span class="gh"># Header 1</span>
+
+<span class="gu">## Header 2</span>
+
+<span class="gu">### Header 3</span>
+<span class="p">
+-</span> Bulleted
+<span class="p">-</span> List
+<span class="p">
+1.</span> Numbered
+<span class="p">2.</span> List
+
+<span class="gs">**Bold**</span> and _Italic_ and <span class="sb">`Code`</span> text
+
+<span class="p">[</span><span class="nv">Link</span><span class="p">](</span><span class="sx">url</span><span class="p">)</span> and !<span class="p">[</span><span class="nv">Image</span><span class="p">](</span><span class="sx">src</span><span class="p">)</span>
+</code></pre>
+						</div>
+					</div>
+
+					<p>
+						For more details see
+						<a href="https://guides.github.com/features/mastering-markdown/"
+							>GitHub Flavored Markdown</a
+						>.
+					</p>
+
+					<h3 id="jekyll-themes">Jekyll Themes</h3>
+
+					<p>
+						Your Pages site will use the layout and styles from the Jekyll theme
+						you have selected in your
+						<a href="https://github.com/UriShX/microblog/settings"
+							>repository settings</a
+						>. The name of this theme is saved in the Jekyll
+						<code class="language-plaintext highlighter-rouge"
+							>_config.yml</code
+						>
+						configuration file.
+					</p>
+
+					<h3 id="support-or-contact">Support or Contact</h3>
+
+					<p>
+						Having trouble with Pages? Check out our
+						<a href="https://help.github.com/categories/github-pages-basics/"
+							>documentation</a
+						>
+						or <a href="https://github.com/contact">contact support</a> and
+						we’ll help you sort it out.
 					</p>
 
 					<ul class="post-list">
 						<li>
 							<span class="post-meta">Nov 21, 2019</span>
 							<h3>
-								<a class="post-link" href="/2019/11/21/new-order.html">
+								<a
+									class="post-link"
+									href="/microblog/2019/11/21/new-order.html"
+								>
 									New Order
 								</a>
 							</h3>
@@ -148,7 +213,10 @@
 						<li>
 							<span class="post-meta">Apr 7, 2019</span>
 							<h3>
-								<a class="post-link" href="/2019/04/07/niti-light-1-2.html">
+								<a
+									class="post-link"
+									href="/microblog/2019/04/07/niti-light-1-2.html"
+								>
 									NiTi Light (1/2)
 								</a>
 							</h3>
@@ -165,7 +233,10 @@
 						<li>
 							<span class="post-meta">Apr 7, 2018</span>
 							<h3>
-								<a class="post-link" href="/2018/04/07/whats-on-my-mind.html">
+								<a
+									class="post-link"
+									href="/microblog/2018/04/07/whats-on-my-mind.html"
+								>
 									What&#39;s on my mind, 07.04.18 edition
 								</a>
 							</h3>
@@ -192,7 +263,7 @@
 							<h3>
 								<a
 									class="post-link"
-									href="/2018/01/26/engineering-for-the-love-of-music.html"
+									href="/microblog/2018/01/26/engineering-for-the-love-of-music.html"
 								>
 									Engineering for the love of music
 								</a>
@@ -214,16 +285,16 @@
 			</div>
 		</main>
 		<footer class="site-footer h-card">
-			<data class="u-url" href="/"></data>
+			<data class="u-url" href="/microblog/"></data>
 
 			<div class="wrapper">
 				<div class="footer-col-wrapper">
 					<div class="footer-col">
 						<p class="feed-subscribe">
-							<a href="/feed.xml">
+							<a href="/microblog/feed.xml">
 								<svg class="svg-icon orange">
 									<use
-										xlink:href="/assets/minima-social-icons.svg#rss"
+										xlink:href="/microblog/assets/minima-social-icons.svg#rss"
 									></use></svg
 								><span>Subscribe</span>
 							</a>
@@ -252,7 +323,7 @@
 							<a rel="me" href="https://hackaday.io/UriSh" title="UriSh"
 								><svg class="svg-icon grey">
 									<use
-										xlink:href="/assets/minima-social-icons.svg#hackaday"
+										xlink:href="/microblog/assets/minima-social-icons.svg#hackaday"
 									></use></svg
 							></a>
 						</li>
@@ -263,7 +334,7 @@
 								title="uri.sh.982"
 								><svg class="svg-icon grey">
 									<use
-										xlink:href="/assets/minima-social-icons.svg#facebook"
+										xlink:href="/microblog/assets/minima-social-icons.svg#facebook"
 									></use></svg
 							></a>
 						</li>
@@ -271,7 +342,7 @@
 							<a rel="me" href="https://github.com/UriShX" title="UriShX"
 								><svg class="svg-icon grey">
 									<use
-										xlink:href="/assets/minima-social-icons.svg#github"
+										xlink:href="/microblog/assets/minima-social-icons.svg#github"
 									></use></svg
 							></a>
 						</li>
@@ -282,7 +353,7 @@
 								title="urishx"
 								><svg class="svg-icon grey">
 									<use
-										xlink:href="/assets/minima-social-icons.svg#linkedin"
+										xlink:href="/microblog/assets/minima-social-icons.svg#linkedin"
 									></use></svg
 							></a>
 						</li>
@@ -290,7 +361,7 @@
 							<a rel="me" href="https://twitter.com/UriShX" title="UriShX"
 								><svg class="svg-icon grey">
 									<use
-										xlink:href="/assets/minima-social-icons.svg#twitter"
+										xlink:href="/microblog/assets/minima-social-icons.svg#twitter"
 									></use></svg
 							></a>
 						</li>
