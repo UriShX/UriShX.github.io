@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Begin Jekyll SEO tag v2.7.1 -->
+		<title>Customizing Jekyll&#8217;s Default Theme | Uri Sh.</title>
+		<meta name="generator" content="Jekyll v4.1.1" />
+		<meta
+			property="og:title"
+			content="Customizing Jekyll&#8217;s Default Theme"
+		/>
+		<meta name="author" content="Uri Shani" />
+		<meta property="og:locale" content="en_US" />
+		<meta
+			name="description"
+			content="Jekyll installs with a nice, clean theme, called Minima. While there are a lot of nice themes out there, I had both a clear view in my head of what I wanted to accomplish, and ample time thanks to CoVid19. So, armed with Minima’s source and Jekyll’s documentation, I decided to have a go with modifying the theme a bit, and in this post I’ll try to outline the way I went about it."
+		/>
+		<meta
+			property="og:description"
+			content="Jekyll installs with a nice, clean theme, called Minima. While there are a lot of nice themes out there, I had both a clear view in my head of what I wanted to accomplish, and ample time thanks to CoVid19. So, armed with Minima’s source and Jekyll’s documentation, I decided to have a go with modifying the theme a bit, and in this post I’ll try to outline the way I went about it."
+		/>
+		<link
+			rel="canonical"
+			href="https://urishx.github.io/2020/12/16/Customizing-Jekyll's-default-theme.html"
+		/>
+		<meta
+			property="og:url"
+			content="https://urishx.github.io/2020/12/16/Customizing-Jekyll's-default-theme.html"
+		/>
+		<meta property="og:site_name" content="Uri Sh." />
+		<meta property="og:type" content="article" />
+		<meta
+			property="article:published_time"
+			content="2020-12-16T00:00:00+00:00"
+		/>
+		<meta name="twitter:card" content="summary" />
+		<meta
+			property="twitter:title"
+			content="Customizing Jekyll&#8217;s Default Theme"
+		/>
+		<script type="application/ld+json">
+			{
+				"headline": "Customizing Jekyll&#8217;s Default Theme",
+				"description": "Jekyll installs with a nice, clean theme, called Minima. While there are a lot of nice themes out there, I had both a clear view in my head of what I wanted to accomplish, and ample time thanks to CoVid19. So, armed with Minima’s source and Jekyll’s documentation, I decided to have a go with modifying the theme a bit, and in this post I’ll try to outline the way I went about it.",
+				"datePublished": "2020-12-16T00:00:00+00:00",
+				"dateModified": "2020-12-16T00:00:00+00:00",
+				"@type": "BlogPosting",
+				"mainEntityOfPage": {
+					"@type": "WebPage",
+					"@id": "https://urishx.github.io/2020/12/16/Customizing-Jekyll's-default-theme.html"
+				},
+				"url": "https://urishx.github.io/2020/12/16/Customizing-Jekyll's-default-theme.html",
+				"publisher": {
+					"@type": "Organization",
+					"logo": {
+						"@type": "ImageObject",
+						"url": "https://urishx.github.io/logo.png"
+					},
+					"name": "Uri Shani"
+				},
+				"author": { "@type": "Person", "name": "Uri Shani" },
+				"@context": "https://schema.org"
+			}
+		</script>
+		<!-- End Jekyll SEO tag -->
+		<link rel="stylesheet" href="/assets/css/style.css" />
+		<link
+			type="application/atom+xml"
+			rel="alternate"
+			href="https://urishx.github.io/feed.xml"
+			title="Uri Sh."
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Alef&family=Tinos&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<link rel="icon" href="/assets/cropped-logo-1-32x32.png" sizes="32x32" />
+	</head>
+	<body>
+		<div>
+			<header
+				class="site-header"
+				style="background-image: url('/assets/img/banner.png')"
+			>
+				<div class="banner">
+					<div class="img-container">
+						<img alt="logo" src="/assets/img/logo.png" />
+					</div>
+					<h1 class="site-title">
+						<a rel="author" href="/">Uri Sh.</a>
+					</h1>
+					<h2>Making, Engineering, and Blogging about it too</h2>
+				</div>
+				<div class="wrapper">
+					<nav class="site-nav">
+						<input class="nav-trigger" id="nav-trigger" type="checkbox" />
+						<label for="nav-trigger">
+							<span class="menu-icon">
+								<svg height="15px" viewbox="0 0 18 15" width="18px">
+									<path
+										d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"
+									/>
+								</svg>
+							</span>
+						</label>
+
+						<div class="trigger">
+							<a class="page-link" href="/">Home</a
+							><a class="page-link" href="/about/">About me</a
+							><a class="page-link" href="/portfolio/">Portfolio</a>
+						</div>
+					</nav>
+				</div>
+			</header>
+		</div>
+		<main class="page-content" aria-label="Content">
+			<div class="wrapper">
+				<article
+					class="post h-entry"
+					itemscope
+					itemtype="http://schema.org/BlogPosting"
+				>
+					<header class="post-header">
+						<h1 class="post-title p-name" itemprop="name headline">
+							Customizing Jekyll&#39;s Default Theme
+						</h1>
+						<p class="post-meta">
+							<time
+								class="dt-published"
+								datetime="2020-12-16T00:00:00+00:00"
+								itemprop="datePublished"
+							>
+								Dec 16, 2020
+							</time>
+						</p>
+					</header>
+
+					<div class="post-content e-content" itemprop="articleBody">
+						<p>
+							Jekyll installs with a nice, clean theme, called
+							<a href="https://github.com/jekyll/minima">Minima</a>. While there
+							are <em>a lot</em> of nice themes out there, I had both a clear
+							view in my head of what I wanted to accomplish, and ample time
+							thanks to CoVid19. So, armed with
+							<a href="https://github.com/jekyll/minima">Minima’s</a> source and
+							<a href="https://jekyllrb.com/docs/themes/"
+								>Jekyll’s documentation</a
+							>, I decided to have a go with modifying the theme a bit, and in
+							this post I’ll try to outline the way I went about it.
+							<!--more-->
+							I started off with the latest version of the
+							<a href="https://github.com/jekyll/minima">Minima</a>, even though
+							it’s not published as a stable version, and is not what you get
+							‘out of the box’ when you get when you start a new site with the
+							<code class="language-plaintext highlighter-rouge"
+								>jekyll new &lt;PATH&gt;</code
+							>
+							command. The main reason for that was that I had more of a desire
+							for understanding how Jekyll themes were built, rather than a
+							‘getting the job done’ approach. So, I cloned the theme from its
+							Github repository, and started to modify the way things looked and
+							felt, to better fit my desired look and feel. If you’d like to
+							follow along, you would need to change your
+							<code class="language-plaintext highlighter-rouge">Gemfile</code>
+							to point to Minima’s Github repository, like so:
+						</p>
+						<div class="language-plaintext highlighter-rouge">
+							<div class="highlight">
+								<pre
+									class="highlight"
+								><code>gem "minima", :github =&gt; 'jekyll/minima' # github v.3.0, latest build is 2.5.1
+</code></pre>
+							</div>
+						</div>
+						<p>
+							Set your theme on your
+							<code class="language-plaintext highlighter-rouge"
+								>_config.yml</code
+							>, then run
+							<code class="language-plaintext highlighter-rouge">bundle</code>
+							from the command line.
+						</p>
+						<h3 id="design-goals">Design goals</h3>
+						<p>
+							I wanted my site to maintain the general look and feel of my
+							existing WordPress blog, which uses the WordPress team’s
+							<a href="https://wordpress.org/themes/twentythirteen/"
+								>Twentythirteen theme</a
+							>. <br />
+							<img
+								src="/assets/img/wp_blog_snapshot_211020.png"
+								alt="My existing WordPress blog"
+								class="post-block-image"
+							/>
+							<em class="post-image-desc">My existing WordPress blog</em> <br />
+							Starting with the general layout of this theme, I wanted to have a
+							header that will showcase the site’s name, some subtitle with the
+							site’s motto, a logo, and to have all that in front of some
+							colorful banner. I grabbed the banner straight from the WP theme I
+							was using, re-designed my site’s logo, and started working on the
+							layout.
+						</p>
+						<h2 id="modifying-minima">Modifying Minima</h2>
+						<p>
+							<a href="https://github.com/jekyll/minima">Minima’s</a> latest
+							(unreleased) version, v.3.0, has got some nice features for easy
+							customization. It imports some empty files while rendering both
+							the theme’s
+							<code class="language-plaintext highlighter-rouge"
+								>default.html</code
+							>
+							layout as well when compiling
+							<a href="https://sass-lang.com/">Sass</a> (<code
+								class="language-plaintext highlighter-rouge"
+								>.scss</code
+							>) files. This complements Jekyll’s [theme building
+							process]](https://jekyllrb.com/docs/themes/) nicely, as it allows
+							the user to only modify what’s needed, without needing to copy and
+							paste whole files. I found out that worked great with styling, but
+							needed to make quite a few changes in the
+							<code class="language-plaintext highlighter-rouge"
+								>_includes</code
+							>
+							HTML files, since there was no easy way for changing the page
+							layouts themselves without that. <br />
+							You can click on the filename in the headings to go to the file
+							the paragraph describes.
+						</p>
+						<h3 id="modifying-_includes">
+							Modifying
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_includes/"
+								><code class="language-plaintext highlighter-rouge"
+									>_includes</code
+								></a
+							>
+						</h3>
+						<h4 id="custom-headhtml">
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_includes/custom-head.html"
+								><code class="language-plaintext highlighter-rouge"
+									>custom-head.html</code
+								></a
+							>
+						</h4>
+						<p>
+							This file is really all you need to change if all you want is a
+							slightly different look and feel, and some basic branding. This
+							file is included in the
+							<code class="language-plaintext highlighter-rouge"
+								>&lt;head&gt;</code
+							>
+							section in the generated site, so including a favicon, for
+							example, is perfect here. I decided to change the fonts, so I
+							grabbed the cdn link from
+							<a href="https://fonts.google.com/">Google fonts</a> for two fonts
+							I like (and used on my old site) -
+							<a
+								href="https://fonts.google.com/specimen/Alef?preview.text=&amp;preview.text_type=custom&amp;query=alef"
+								>Alef</a
+							>
+							and
+							<a
+								href="https://fonts.google.com/specimen/Tinos?preview.text=&amp;preview.text_type=custom&amp;query=tinos#standard-styles"
+								>Tinos</a
+							>. These two fonts were originally selected since they both
+							support Hebrew as well as English (and other European languages),
+							though I don’t intend to implement Hebrew on this site in the near
+							future. I just sorta got used to them in my old site, and decided
+							to keep them. <br />
+							Those fonts will simply override Minima’s default font, by
+							reassigning some variables in
+							<code class="language-plaintext highlighter-rouge"
+								>_sass/minma/custom-variables.scss</code
+							>
+						</p>
+						<h4 id="headerhtml">
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_includes/header.html"
+								><code class="language-plaintext highlighter-rouge"
+									>header.html</code
+								></a
+							>
+						</h4>
+						<p>
+							Starting off from the top of the page, the branding for my site
+							consists of a banner, which features my name, a subtitle, the
+							site’s logo, and a navigation bar. Those are all inserted through
+							<a href="https://jekyllrb.com/docs/liquid/">Liquid</a> tags,
+							pulled from either Jekyll’s
+							<code class="language-plaintext highlighter-rouge"
+								>_config.yml</code
+							>, or from the Jekyll’s structure. <br />
+							The banner itself is a css background, using Liquid to insert a
+							relative URL from the site’s assets folder:
+						</p>
+
+						<div class="language-html highlighter-rouge">
+							<div class="highlight">
+								<pre
+									class="highlight"
+								><code><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"site-header"</span> <span class="na">style=</span><span class="s">"background-image: url('{{ site.banner | escape | prepend: "</span><span class="err">/</span><span class="na">assets</span><span class="err">/</span><span class="na">img</span><span class="err">/"</span> <span class="err">|</span> <span class="na">relative_url</span>  <span class="err">}}');"</span><span class="nt">&gt;</span>
+</code></pre>
+							</div>
+						</div>
+
+						<p>
+							Then, inside a
+							<code class="language-plaintext highlighter-rouge">banner</code>
+							HTML class, the template checks if there’s a
+							<code class="language-plaintext highlighter-rouge"
+								>site.logo</code
+							>
+							image in
+							<code class="language-plaintext highlighter-rouge"
+								>_config.yml</code
+							>, which (if it is configured) is inserted as a relative URL to
+							the site’s assets folder again.
+						</p>
+
+						<div class="language-html highlighter-rouge">
+							<div class="highlight">
+								<pre
+									class="highlight"
+								><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"img-container"</span><span class="nt">&gt;</span>
+    {% if site.logo %}
+        <span class="nt">&lt;img</span> <span class="na">alt=</span><span class="s">"logo"</span> <span class="na">src=</span><span class="s">"{{ site.logo | escape | prepend: "</span><span class="err">/</span><span class="na">assets</span><span class="err">/</span><span class="na">img</span><span class="err">/"</span> <span class="err">|</span> <span class="na">relative_url</span> <span class="err">}}"</span><span class="nt">/&gt;</span>
+    {% endif %}
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+							</div>
+						</div>
+
+						<p>
+							After that, the site’s title and subtitle are also pulled from
+							<code class="language-plaintext highlighter-rouge"
+								>_config.yml</code
+							>:
+						</p>
+
+						<div class="language-html highlighter-rouge">
+							<div class="highlight">
+								<pre
+									class="highlight"
+								><code><span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"site-title"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">rel=</span><span class="s">"author"</span> <span class="na">href=</span><span class="s">"{{ '/' | relative_url }}"</span><span class="nt">&gt;</span>{{ site.title | escape }}<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2&gt;</span>{{ site.subtitle | escape}}<span class="nt">&lt;/h2&gt;</span>
+</code></pre>
+							</div>
+						</div>
+
+						<p>
+							The navigation bar remains unchanged in it’s structure from
+							Minima’s.
+						</p>
+						<h4 id="footerhtml">
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_includes/footer.html"
+								><code class="language-plaintext highlighter-rouge"
+									>footer.html</code
+								></a
+							>
+						</h4>
+						<p>
+							I added a copyright symbol (©) and the year to my site’s footer
+							(the year was also added to
+							<code class="language-plaintext highlighter-rouge"
+								>_config.yml</code
+							>):
+						</p>
+
+						<div class="language-html highlighter-rouge">
+							<div class="highlight">
+								<pre
+									class="highlight"
+								><code><span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"p-name"</span><span class="nt">&gt;</span><span class="ni">&amp;#169;</span> {{ site.author.name | escape }} {{ site.author.copyright-year | escape }}<span class="nt">&lt;/li&gt;</span>
+</code></pre>
+							</div>
+						</div>
+
+						<h4 id="socialhtml">
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_includes/social.html"
+								><code class="language-plaintext highlighter-rouge"
+									>social.html</code
+								></a
+							>
+						</h4>
+						<p>
+							I changed the included
+							<code class="language-plaintext highlighter-rouge"
+								>assets/minima-social-icons.svg</code
+							>
+							to include an icon for
+							<a href="https://hackaday.io/">Hackaday.io</a>. Technically, the
+							icon I included is for
+							<a href="https://hackaday.com/">Hackaday.com</a>, but I think it’s
+							the more easily recognizable of the two. <br />
+							To add it into my social icons, I simply added a single line to
+							the list of social icons, which displays the
+							<em>Hackaday</em> icon with the appropriate link, if it is
+							configured in
+							<code class="language-plaintext highlighter-rouge"
+								>_config.yml</code
+							>:
+						</p>
+
+						<div class="language-html highlighter-rouge">
+							<div class="highlight">
+								<pre
+									class="highlight"
+								><code>{%- if social.hackaday -%}<span class="nt">&lt;li&gt;&lt;a</span> <span class="na">rel=</span><span class="s">"me"</span> <span class="na">href=</span><span class="s">"https://hackaday.io/{{ social.hackaday | cgi_escape | escape }}"</span> <span class="na">title=</span><span class="s">"{{ social.hackaday | escape }}"</span><span class="nt">&gt;&lt;svg</span> <span class="na">class=</span><span class="s">"svg-icon grey"</span><span class="nt">&gt;&lt;use</span> <span class="na">xlink:href=</span><span class="s">"{{ '/assets/minima-social-icons.svg#hackaday' | relative_url }}"</span><span class="nt">&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/li&gt;</span>{%- endif -%}
+</code></pre>
+							</div>
+						</div>
+
+						<h5 id="adding-the-icon-for-hackadayio">
+							Adding the icon for <a href="https://hackaday.io/">Hackaday.io</a>
+						</h5>
+						<p>
+							I used ntembed’s
+							<a
+								href="https://hackaday.io/project/165314-hackaday-social-media-icon"
+								>Hackaday social media icon</a
+							>, and simply added the svg to Minima’s
+							<code class="language-plaintext highlighter-rouge"
+								>assets/minima-social-icons.svg</code
+							>
+							using <a href="https://inkscape.org/">Inkscape</a>. As I wrote
+							above, the icon is actually for
+							<a href="https://hackaday.com/">Hackaday.com</a>, but that was
+							good enough for my purposes. <br />
+							I then added
+							<code class="language-plaintext highlighter-rouge"
+								>hackaday: UriSh</code
+							>
+							(which is my username on
+							<a href="https://hackaday.io/urish">Hackaday.io</a>) to Minima
+							v3’s
+							<code class="language-plaintext highlighter-rouge"
+								>social_links:</code
+							>
+							category, under
+							<code class="language-plaintext highlighter-rouge">minima:</code>,
+							in Jekyll’s
+							<code class="language-plaintext highlighter-rouge"
+								>_config.yml</code
+							>. You can have a look at a sample
+							<code class="language-plaintext highlighter-rouge"
+								>_config.yml</code
+							>
+							file
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_config.yml"
+								>here</a
+							>.
+						</p>
+
+						<h3 id="modifying-_sassminima">
+							Modifying
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/tree/master/_sass/minima"
+								><code class="language-plaintext highlighter-rouge"
+									>_sass/minima</code
+								></a
+							>
+						</h3>
+						<p>
+							<a href="https://github.com/jekyll/minima">Minima’s</a> latest
+							version (v.3.0) provides a few skins, to change it’s color scheme.
+							It also, as I wrote above, gives the user hooks to modify the
+							theme further. This is achieved by importing a couple of empty
+							<code class="language-plaintext highlighter-rouge">scss</code>
+							files, one right after some initial variable assignments, then
+							another after most of the site’s styling is defined. <br />
+							I set up the Minima’s skin to be
+							<code class="language-plaintext highlighter-rouge">skin:</code
+							><i
+								style="
+									background-color: black;
+									color: salmon;
+									padding: 0 0.25rem;
+									border-radius: 0.2rem;
+								"
+								>solarized</i
+							>, in
+							<code class="language-plaintext highlighter-rouge"
+								>_config.yml</code
+							>
+							under
+							<code class="language-plaintext highlighter-rouge">minima:</code>.
+						</p>
+						<h4 id="custom-variablesscss">
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_sass/minima/custom-styles.scss"
+								><code class="language-plaintext highlighter-rouge"
+									>custom-variables.scss</code
+								></a
+							>
+						</h4>
+						<p>
+							In this file one can override Minima’s defaults by reassigning
+							certain variables. It is also possible to add custom variables,
+							which I needed for controlling the position and styling of the
+							navigation bar’s look and feel. <br />
+							I first overrode the default font for the site and adding a second
+							font for headlines, using the fonts I linked to in
+							<code class="language-plaintext highlighter-rouge"
+								>_includes/custom_head.html</code
+							>,
+							<a
+								href="https://fonts.google.com/specimen/Alef?preview.text=&amp;preview.text_type=custom&amp;query=alef"
+								>Alef</a
+							>
+							and
+							<a
+								href="https://fonts.google.com/specimen/Tinos?preview.text=&amp;preview.text_type=custom&amp;query=tinos#standard-styles"
+								>Tinos</a
+							>. <br />
+							I added a couple of navbar definitions, for background color and
+							hover effects, linking them to Minima’s skin definitions, and I
+							also added a couple more breaks for size, since I found out my
+							subtitle was too long to handle the banner / navigation bar
+							properly.
+						</p>
+						<h4 id="custom-stylesscss">
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_sass/minima/custom-styles.scss"
+								><code class="language-plaintext highlighter-rouge"
+									>custom-styles.scss</code
+								></a
+							>
+						</h4>
+						<p>
+							This file contains the styling for the site’s branding, as well as
+							the styling for other layouts I will cover in future posts. <br />
+							First, I wanted to style code on my site in a way that will
+							contrast the styling of other text in my site, to make it a bit
+							more discernible. I did that by importing a stylesheet I got from
+							<a href="https://github.com/jwarby/jekyll-pygments-themes"
+								>the repository</a
+							>
+							recommended in
+							<a
+								href="https://jekyllrb.com/docs/liquid/tags/#stylesheets-for-syntax-highlighting"
+								>Jekyll’s docs</a
+							>.
+						</p>
+
+						<div class="language-scss highlighter-rouge">
+							<div class="highlight">
+								<pre
+									class="highlight"
+								><code><span class="k">@import</span> <span class="sx">url('zenburn.css')</span><span class="p">;</span>
+</code></pre>
+							</div>
+						</div>
+
+						<p>
+							Next, I defined the headings’ font to use
+							<a
+								href="https://fonts.google.com/specimen/Tinos?preview.text=&amp;preview.text_type=custom&amp;query=tinos#standard-styles"
+								>Tinos</a
+							>, and since I decided to override Minima’s skin code highlighter
+							defaults, I also redefined the highlighted area to fit. After
+							that, besides importing
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_sass/minima/_mixins.scss"
+								>some useful mixins</a
+							>, comes the actual styling for the site’s header, banner, logo,
+							and navbar. <br />
+							Since this is quite a long list of changes from Minima’s header, I
+							will only list a few, and if anyone’s interested in investigating
+							further, the file is hosted
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_sass/minima/custom-styles.scss"
+								>here</a
+							>, or leave me a comment down below. <br />
+							I set the area for the banner (the background image defined in
+							<a
+								href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_includes/header.html"
+								><code class="language-plaintext highlighter-rouge"
+									>header.html</code
+								></a
+							>) under the class
+							<code class="language-plaintext highlighter-rouge"
+								>.site-header</code
+							>:
+						</p>
+						<div class="language-scss highlighter-rouge">
+							<div class="highlight">
+								<pre
+									class="highlight"
+								><code><span class="nl">background-color</span><span class="p">:</span> <span class="nv">$brand-color-light</span><span class="p">;</span>
+<span class="nl">background-size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
+<span class="nl">background-position</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+<span class="nl">min-height</span><span class="p">:</span> <span class="m">14</span><span class="mi">.1vw</span><span class="p">;</span>
+</code></pre>
+							</div>
+						</div>
+						<p>
+							The
+							<code class="language-plaintext highlighter-rouge"
+								>min-height</code
+							>
+							attribute is defined to fit the WxH ratio of the banner image I
+							used. <br />
+							Next, the
+							<code class="language-plaintext highlighter-rouge">.banner</code>
+							class defines the styling for the logo, title, and subtitle.
+							<br />
+							The
+							<code class="language-plaintext highlighter-rouge">.top-nav</code>
+							class then defines the navbar, including background, position, and
+							hover behavior. <br />
+							The class
+							<code class="language-plaintext highlighter-rouge"
+								>.site-title</code
+							>
+							overrides Minima’s default by disabling
+							<code class="language-plaintext highlighter-rouge">float</code>
+							and
+							<code class="language-plaintext highlighter-rouge">hover</code>
+							decoration. <br />
+							The
+							<code class="language-plaintext highlighter-rouge"
+								>.site-nav</code
+							>
+							class and its subclasses control the behavior of the navbar
+							further, including it’s alignment according to window size, and
+							also highlights and disables the link for the current page. \
+						</p>
+
+						<p>
+							One thing I found important while styling my site was setting the
+							correct breaks for window width. I added a couple more
+							<code class="language-plaintext highlighter-rouge">@media</code>
+							queries under
+							<code class="language-plaintext highlighter-rouge"
+								>.site-title</code
+							>:
+						</p>
+						<div class="language-scss highlighter-rouge">
+							<div class="highlight">
+								<pre
+									class="highlight"
+								><code><span class="k">@media</span> <span class="n">screen</span> <span class="nf">and</span> <span class="p">(</span><span class="n">min-width</span><span class="o">:</span> <span class="nv">$on-med-wide</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nl">top</span><span class="p">:</span> <span class="nf">unquote</span><span class="p">(</span><span class="s1">'calc(max(14.1vw, 165px) - 1.6rem)'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">@media</span> <span class="n">screen</span> <span class="nf">and</span> <span class="p">(</span><span class="n">min-width</span><span class="o">:</span> <span class="nv">$on-medium</span><span class="p">)</span> <span class="nf">and</span> <span class="p">(</span><span class="n">max-width</span><span class="o">:</span> <span class="nv">$on-med-wide</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nl">top</span><span class="p">:</span> <span class="nf">unquote</span><span class="p">(</span><span class="s1">'calc(max(14.1vw, 200.25px) - 1.6rem)'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+							</div>
+						</div>
+						<p>
+							to allow for better positioning of the navbar, while letting the
+							banner grow in height to fit the long subtitle I chose.
+						</p>
+
+						<h3 id="conclusion">Conclusion</h3>
+						<p>
+							Styling <a href="https://github.com/jekyll/minima">Minima</a> v3
+							to follow an existing WP theme is quite straight forward mostly,
+							though I did get into some ruts. <br />
+							Mostly, it’s a matter of moving overriding existing definitions,
+							and figuring out what class an element is in, in order to change
+							it’s behavior in a couple of
+							<code class="language-plaintext highlighter-rouge">.scss</code>
+							files Minima imports by default. <br />
+							Most of this work has been done in preparation for a more
+							elaborate change I needed to implement, which is adding a
+							portfolio page to this site. One of my next posts will be on that
+							subject, as it was the driving force for moving from WP to Jekyll,
+							even though it might not seem like an obvious decision.
+						</p>
+
+						<p>
+							You can find a ready template that includes the above changes I
+							made to Minima in
+							<a href="https://github.com/UriShX/Jekyll-portfolio"
+								>Jekyll-portfolio</a
+							>, which also includes the portfolio page and static commenting.
+						</p>
+
+						<p>
+							If anything above is not clear, or if you find you have better
+							ways to do what I outlined here, or if you find the template repo
+							useful, please leave a comment.
+						</p>
+					</div>
+					<section class="comments" id="comment-section">
+						<hr />
+
+						<!-- New comment form -->
+						<div id="respond" class="comment__new">
+							<form
+								class="js-form form"
+								method="post"
+								action="https://staticman-urishx.herokuapp.com/v2/entry/urishx/microblog/master/comments"
+							>
+								<input
+									type="hidden"
+									name="options[origin]"
+									value="https://urishx.github.io/2020/12/16/Customizing-Jekyll's-default-theme.html"
+								/>
+								<input
+									type="hidden"
+									name="options[parent]"
+									value="https://urishx.github.io/2020/12/16/Customizing-Jekyll's-default-theme.html"
+								/>
+								<input
+									type="hidden"
+									id="comment-replying-to-uid"
+									name="fields[replying_to_uid]"
+									value=""
+								/>
+								<input
+									type="hidden"
+									name="options[slug]"
+									value="Customizing-Jekyll's-default-theme"
+								/>
+								<input
+									type="hidden"
+									name="options[reCaptcha][siteKey]"
+									value="6Lf-5PsZAAAAAPE5gYoafxsJsCuVgBUrTvRtzpI1"
+								/>
+								<input
+									type="hidden"
+									name="options[reCaptcha][secret]"
+									value="k/IyI7f3u8pAghWwSPzVVGFAklupbVkVpinnhc8vXuFxuisjZ5GMSzlN/OsD0q9DJMj7PRSXILJJHLujEyJHqzKgoLWHrpRtWedVZlngpfDs41puCyb96QmqPt4N65FJqg9lk6GOH50SXJ2G4OhWYSsczvfur0geL7bG3mUFLayKOqHmaIxZczkvSgDRXYlsLzX52azt50sbx/1MgIzJCSmxzAC7uapnNEisSblCV8SXaKqUq+JOuDzRO7M44obFvPZ+iCiGq8tjiU790PtOC216tGu0teuN+WW6WON/UKQjf+MSw90lv6CQNq3P2AZIkfS8QHqldho8xnELgATjG0DoUC/ZBZtIOGIZMk0gXFAJQsxp0lKDF/woktufpXBJZgMJL8BjrA/eWn82IaujiTJdHOSWDgy14v1H+ItyVaGJcfhAj7pYdp4pZlA7Ovx9tuWncSG4mp1dzrMRaprnL3VCLqDPiusgSITtQzxM/KtCEC+r40B9WRdPnMVfRXkc6Bx+7eCRHOYrUvSJXnmISWTVJpsrmYKdbjN63tjXmtMIdKa8JswqR+vFTW5MBbGoJfNEi0sh3XHytE54Pfs4uzmiIbepkyBl9OsNH/2aFUffaz1ZXz7jb5gR0D9XISDlwQ0lagjXQzBpqIx1FpWYTrCPyfR0XkiqOYN1SDnJQic="
+								/>
+
+								<div class="textfield">
+									<label for="comment-form-message"
+										><h2>
+											Add Comment<small
+												><a
+													rel="nofollow"
+													id="cancel-comment-reply-link"
+													href="https://urishx.github.io/2020/12/16/Customizing-Jekyll's-default-theme.html#respond"
+													style="display: none"
+													>(cancel reply)</a
+												></small
+											>
+										</h2>
+										<textarea
+											class="textfield__input"
+											name="fields[message]"
+											type="text"
+											id="comment-form-message"
+											placeholder="Your comment (markdown accepted)"
+											required
+											rows="6"
+										></textarea>
+									</label>
+								</div>
+
+								<div class="textfield narrowfield">
+									<label for="comment-form-name"
+										>Name
+										<input
+											class="textfield__input"
+											name="fields[name]"
+											type="text"
+											id="comment-form-name"
+											placeholder="Your name (required)"
+											required
+										/>
+									</label>
+								</div>
+
+								<div class="textfield narrowfield">
+									<label for="comment-form-email"
+										>E-mail
+										<input
+											class="textfield__input"
+											name="fields[email]"
+											type="email"
+											id="comment-form-email"
+											placeholder="Your email (optional)"
+										/>
+									</label>
+								</div>
+
+								<div class="textfield narrowfield hp">
+									<label for="hp">
+										<input
+											class="textfield__input"
+											name="fields[hp]"
+											id="hp"
+											type="text"
+											placeholder="Leave blank"
+										/>
+									</label>
+								</div>
+
+								<div
+									id="reCaptcha"
+									class="g-recaptcha"
+									data-sitekey="6Lf-5PsZAAAAAPE5gYoafxsJsCuVgBUrTvRtzpI1"
+									data-callback="recaptcha_callback"
+								></div>
+
+								<button
+									disabled="disabled"
+									class="button"
+									id="comment-form-submit"
+								>
+									Submit
+								</button>
+							</form>
+
+							<article class="modal mdl-card mdl-shadow--2dp">
+								<div>
+									<h3 class="modal-title js-modal-title"></h3>
+								</div>
+								<div class="mdl-card__supporting-text js-modal-text"></div>
+								<div class="mdl-card__actions mdl-card--border">
+									<button
+										class="button mdl-button--colored mdl-js-button mdl-js-ripple-effect js-close-modal"
+									>
+										Close
+									</button>
+								</div>
+							</article>
+
+							<svg
+								version="1.1"
+								xmlns="http://www.w3.org/2000/svg"
+								xmlns:xlink="http://www.w3.org/1999/xlink"
+								style="display: none"
+							>
+								<symbol id="icon-loading" viewBox="149.8 37.8 499.818 525">
+									<path
+										d="M557.8 187.8c13.8 0 24.601-10.8 24.601-24.6S571.6 138.6 557.8 138.6s-24.6 10.8-24.6 24.6c0 13.2 10.8 24.6 24.6 24.6zm61.2 90.6c-16.8 0-30.6 13.8-30.6 30.6s13.8 30.6 30.6 30.6 30.6-13.8 30.6-30.6c.6-16.8-13.2-30.6-30.6-30.6zm-61.2 145.2c-20.399 0-36.6 16.2-36.6 36.601 0 20.399 16.2 36.6 36.6 36.6 20.4 0 36.601-16.2 36.601-36.6C595 439.8 578.2 423.6 557.8 423.6zM409 476.4c-24 0-43.2 19.199-43.2 43.199s19.2 43.2 43.2 43.2 43.2-19.2 43.2-43.2S433 476.4 409 476.4zM260.8 411c-27 0-49.2 22.2-49.2 49.2s22.2 49.2 49.2 49.2 49.2-22.2 49.2-49.2-22.2-49.2-49.2-49.2zm-10.2-102c0-27.6-22.8-50.4-50.4-50.4-27.6 0-50.4 22.8-50.4 50.4 0 27.6 22.8 50.4 50.4 50.4 27.6 0 50.4-22.2 50.4-50.4zm10.2-199.8c-30 0-54 24-54 54s24 54 54 54 54-24 54-54-24.6-54-54-54zM409 37.8c-35.4 0-63.6 28.8-63.6 63.6S374.2 165 409 165s63.6-28.8 63.6-63.6-28.2-63.6-63.6-63.6z"
+									/>
+								</symbol>
+							</svg>
+						</div>
+					</section>
+
+					<script src="/assets/script/staticman-comments.js"></script>
+					<script src="https://www.google.com/recaptcha/api.js"></script>
+					<a
+						class="u-url"
+						href="/2020/12/16/Customizing-Jekyll's-default-theme.html"
+						hidden
+					></a>
+				</article>
+			</div>
+		</main>
+		<footer class="site-footer h-card">
+			<data class="u-url" href="/"></data>
+
+			<div class="wrapper">
+				<div class="footer-col-wrapper">
+					<div class="footer-col">
+						<p class="feed-subscribe">
+							<a href="/feed.xml">
+								<svg class="svg-icon orange">
+									<use
+										xlink:href="/assets/minima-social-icons.svg#rss"
+									></use></svg
+								><span>Subscribe</span>
+							</a>
+						</p>
+						<ul class="contact-list">
+							<li class="p-name">&#169; Uri Shani 2020</li>
+							<li>
+								<a class="u-email" href="mailto:urish@urishx.com"
+									>urish@urishx.com</a
+								>
+							</li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<p>
+							A portfolio centered site with a blog, to feature my adventures
+							and projects in making, programming, and engineering. Built in
+							Jekyll, to be served from Github pages.
+						</p>
+					</div>
+				</div>
+
+				<div class="social-links">
+					<ul class="social-media-list">
+						<li>
+							<a rel="me" href="https://hackaday.io/UriSh" title="UriSh"
+								><svg class="svg-icon grey">
+									<use
+										xlink:href="/assets/minima-social-icons.svg#hackaday"
+									></use></svg
+							></a>
+						</li>
+						<li>
+							<a
+								rel="me"
+								href="https://www.facebook.com/uri.sh.982"
+								title="uri.sh.982"
+								><svg class="svg-icon grey">
+									<use
+										xlink:href="/assets/minima-social-icons.svg#facebook"
+									></use></svg
+							></a>
+						</li>
+						<li>
+							<a rel="me" href="https://github.com/UriShX" title="UriShX"
+								><svg class="svg-icon grey">
+									<use
+										xlink:href="/assets/minima-social-icons.svg#github"
+									></use></svg
+							></a>
+						</li>
+						<li>
+							<a
+								rel="me"
+								href="https://www.linkedin.com/in/urishx"
+								title="urishx"
+								><svg class="svg-icon grey">
+									<use
+										xlink:href="/assets/minima-social-icons.svg#linkedin"
+									></use></svg
+							></a>
+						</li>
+						<li>
+							<a rel="me" href="https://twitter.com/UriShX" title="UriShX"
+								><svg class="svg-icon grey">
+									<use
+										xlink:href="/assets/minima-social-icons.svg#twitter"
+									></use></svg
+							></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
