@@ -670,6 +670,12 @@ h1, h2, h3, h4, h5, h6 { font-family: "Tinos", serif; }
 
 .portfolio-wrapper .portfolio-block .portflio-links a:hover { text-decoration: none; }
 
+.portfolio-wrapper .limited-hover .portfolio-overlay { z-index: 2; opacity: 0.25; }
+
+.portfolio-wrapper .limited-hover .portfolio-excerpt { transform: translateY(380px); z-index: 3; }
+
+.portfolio-wrapper .limited-hover .portfolio-excerpt h3, .portfolio-wrapper .limited-hover .portfolio-excerpt p { visibility: visible; }
+
 .portfolio-modal { background-color: rgba(147, 161, 161, 0.65); }
 
 /*# sourceMappingURL=style.css.map */
