@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Customizing Jekyll With A Portfolio | Uri Sh.</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Customizing Jekyll With A Portfolio" />
+<meta name="author" content="Uri Shani" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In my last post I detailed how I used Jekyll and the the new version (3) of the Minima theme, to style my site so that it looked similar to the WordPress team’s Twentythirteen theme. In this post, I am going to outline how I created a new layout portfolio that could showcase any project of my making/tinkering/engineering/enginerding - be it a woodworking project, a mechanical contraption, or a Python script." />
+<meta property="og:description" content="In my last post I detailed how I used Jekyll and the the new version (3) of the Minima theme, to style my site so that it looked similar to the WordPress team’s Twentythirteen theme. In this post, I am going to outline how I created a new layout portfolio that could showcase any project of my making/tinkering/engineering/enginerding - be it a woodworking project, a mechanical contraption, or a Python script." />
+<link rel="canonical" href="http://localhost:4000/2021/01/20/Customizing-Jekyll-with-a-Portfolio.html" />
+<meta property="og:url" content="http://localhost:4000/2021/01/20/Customizing-Jekyll-with-a-Portfolio.html" />
+<meta property="og:site_name" content="Uri Sh." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-01-20T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Customizing Jekyll With A Portfolio" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/2021/01/20/Customizing-Jekyll-with-a-Portfolio.html","@type":"BlogPosting","description":"In my last post I detailed how I used Jekyll and the the new version (3) of the Minima theme, to style my site so that it looked similar to the WordPress team’s Twentythirteen theme. In this post, I am going to outline how I created a new layout portfolio that could showcase any project of my making/tinkering/engineering/enginerding - be it a woodworking project, a mechanical contraption, or a Python script.","author":{"@type":"Person","name":"Uri Shani"},"headline":"Customizing Jekyll With A Portfolio","dateModified":"2021-01-20T00:00:00+00:00","datePublished":"2021-01-20T00:00:00+00:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/logo.png"},"name":"Uri Shani"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/01/20/Customizing-Jekyll-with-a-Portfolio.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Uri Sh." />
+<link href="https://fonts.googleapis.com/css2?family=Alef&family=Tinos&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link rel="icon" href="/assets/cropped-logo-1-32x32.png" sizes="32x32"/></head>
+<body><div>
+    <header class="site-header" style="background-image: url('/assets/img/banner.png');">
+        <div class="banner">
+            <div class="img-container">
+                
+                    <img alt="logo" src="/assets/img/logo.png"/>
+                
+            </div>
+            <h1 class="site-title">
+                <a rel="author" href="/">Uri Sh.</a>
+            </h1>
+            <h2>Making, Engineering, and Blogging about it too</h2>
+        </div>
+        <div class="wrapper"><nav class="site-nav">
+                    <input class="nav-trigger" id="nav-trigger" type="checkbox"/>
+                    <label for="nav-trigger">
+                        <span class="menu-icon">
+                            <svg height="15px" viewbox="0 0 18 15" width="18px">
+                                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+                            </svg>
+                        </span>
+                    </label>
+
+                    <div class="trigger">
+                        <a class="page-link" href="/" >Home</a><a class="page-link" href="/about/" >About me</a><a class="page-link" href="/portfolio/" >Portfolio</a></div>
+                </nav></div>
+    </header>
+</div>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Customizing Jekyll With A Portfolio</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2021-01-20T00:00:00+00:00" itemprop="datePublished">
+        Jan 20, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In my <a href="/2020/12/16/Customizing-Jekyll's-default-theme.html">last post</a> 
+I detailed how I used <a href="https://jekyllrb.com/">Jekyll</a> and the the new version (3) of the <a href="https://github.com/jekyll/minima">Minima</a> theme, to style my site so that it looked similar to the WordPress team’s <a href="https://wordpress.org/themes/twentythirteen/">Twentythirteen theme</a>. <br />
+In this post, I am going to outline how I created a new layout portfolio that could showcase any project of my making/tinkering/engineering/enginerding - be it a woodworking project, a mechanical contraption, or a Python script.
+<!--more--></p>
+<h3 id="design-considerations">Design considerations</h3>
+<p>The portfolio layout started with a basic need. I wanted portfolio to keep the layout I was using on my WordPress site, which uses a paid plugin called <a href="https://wpsofts.com/">GridKit</a>. I was quite happy with the layout this plugin allowed me to have, but I wanted a bit more. <br />
+<img src="/assets/img/wp_portfolio_snapshot_201020.png" alt="My WordPress portfolio using GridKit" class="post-block-image" /> <em class="post-image-desc">My WordPress portfolio using GridKit</em> <br />
+First, I wanted to be able to display code snippets and projects’ readme’s. Second, I wanted to have a better understanding of how things were built. Third, though the plugin has got a free version, I found that it was not enough for what I wanted to display, and it was costing me money. <br />
+So, I set out to find how I could display a grid of pictures representing my projects, with a description scrolling from the top of each grid box describing the specific project on <code class="language-plaintext highlighter-rouge">:hover</code>, then on a click to open a modal displaying the project’s content - be it a <code class="language-plaintext highlighter-rouge">README.md</code>, a code snippet, or pictures. <br />
+<img src="/assets/img/wp_portfolio_modal_snapshot_201020.png" alt="GridKit portfolio modal" class="post-block-image" /> <em class="post-image-desc">GridKit portfolio modal</em></p>
+<h3 id="finding-solutions">Finding solutions</h3>
+<h4 id="using-jekylls-structure-and-yaml-front-matter">Using Jekyll’s structure and YAML front matter</h4>
+<p>I started out with adding a <a href="https://jekyllrb.com/docs/collections/">collection</a> to my <code class="language-plaintext highlighter-rouge">_config.yml</code>, then adding a new layout, <code class="language-plaintext highlighter-rouge">_layouts/portfolio.html</code>. A new page, <code class="language-plaintext highlighter-rouge">portfolio.md</code> was also added, as well as some markdown files in the <code class="language-plaintext highlighter-rouge">_portfolio/</code> folder, describing the project and adding some content for the new layout to parse. The example below is of one the projects, and displays nicely a lot of the capabilities. It has a title, and some cover picture, and a text displaying the project in a few words. It also has tags, so the layout can group several projects sharing the same tag for the person viewing the portfolio to filter by, and a link to the project’s web page (in this case a github repository for the project). The last part of the yaml front matter is an array containing pictures, code, or markdown, to be rendered in the specific project’s modal.</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">cover</span><span class="pi">:</span> <span class="s">ble_slider_web_app_2.png</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Web-BLE</span><span class="nv"> </span><span class="s">control</span><span class="nv"> </span><span class="s">app</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">esp32</span><span class="nv"> </span><span class="s">sketches"</span>
+<span class="na">tags</span><span class="pi">:</span> <span class="s">iot control</span>
+<span class="na">link</span><span class="pi">:</span> <span class="s">https://github.com/UriShX/ESP32_fader</span>
+<span class="na">modal</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">md</span><span class="pi">:</span> <span class="s">https://raw.githubusercontent.com/UriShX/ESP32_fader/master/readme.md</span>
+  <span class="pi">-</span> <span class="na">img</span><span class="pi">:</span> <span class="s">ble_slider_web_app_2.png</span>
+  <span class="pi">-</span> <span class="na">img</span><span class="pi">:</span> <span class="s">ble_slider_web_app_1.png</span>
+<span class="nn">---</span>
+<span class="s">A web-ble responsive web app to demonstrate control over BLE of ESP32 projects.</span> 
+<span class="s">Includes links to github repo of web app, and to a couple of ESP32 sketches for testing.</span>
+</code></pre></div></div>
+<p>However, when displaying code, my layout needs a bit more information, so an object specifying the language to be displayed and whether line numbers should be rendered is also required. That is since code in one language can sometimes contain bits in some other language, such as a <code class="language-plaintext highlighter-rouge">HTML</code> page contained inside an embedded <code class="language-plaintext highlighter-rouge">C</code> code, <a href="https://github.com/UriShX/portfolio/blob/master/Roboclaw_control_over_ESP32_with_AP_for_control/roboclaw_esp32_w_AP_and_config.ino">for example</a>.</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">modal</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">code</span><span class="pi">:</span> 
+      <span class="na">link</span><span class="pi">:</span> <span class="s">https://raw.githubusercontent.com/UriShX/portfolio/master/Roboclaw_control_over_ESP32_with_AP_for_control/roboclaw_esp32_w_AP_and_config.ino</span>
+      <span class="na">lang</span><span class="pi">:</span> <span class="s">cpp</span>
+  <span class="c1"># - linenos: linenos</span>
+</code></pre></div></div>
+<h4 id="adding-modals">Adding modals</h4>
+<p>The two main characteristics of the <a href="https://wpsofts.com/">GridKit</a> portfolio I had on my WP site were its general layout, and that each project was displayed in its own modal window. Laying out the projects in a grid and animating their display is done through Jekyll’s own structure, and detailed below. But I had to come up with a way to display each project’s content in it’s own modal, which is not part of the theme I was using, <a href="https://github.com/jekyll/minima">Minima</a>.</p>
+
+<p>I started out looking for a ready-made solution, and my search parameters were threefold:</p>
+<ol>
+  <li>I wanted a modal library that will use the least amount of JavaScript - so, mostly implemented in CSS.</li>
+  <li>I wanted the modal library to be either pure CSS, or - preferably - in <a href="https://sass-lang.com/">Sass</a>.</li>
+  <li>I also did not want to include a whole CSS framework, mostly because I wanted to use the existing layout of the Minima theme.</li>
+  <li>And, naturally, I would prefer a library that will have ample examples, and is developed enough to use in production.</li>
+</ol>
+
+<p>Searching Google got me to <a href="https://drublic.github.io/css-modal/">CSS-Modal</a>, which checked all the boxes. All I had to do was figure out how to use it in my new layout. I copied it’s <code class="language-plaintext highlighter-rouge">.scss</code> files into Jekyll’s <code class="language-plaintext highlighter-rouge">_sass/</code> folder (under a fitting subfolder, <code class="language-plaintext highlighter-rouge">_sass/drublic-css-modal/</code>), and it’s few JS utilities into Jekyll’s <code class="language-plaintext highlighter-rouge">assets</code> folder, under <code class="language-plaintext highlighter-rouge">assets/script</code>.</p>
+
+<h4 id="importing-and-displaying-remote-code">Importing and displaying remote code</h4>
+<p>As I wrote above, I wanted to add the ability to display projects that consist of code or <a href="https://www.markdownguide.org/">markdown</a> files. Simply put, not all of my projects have a visual element to them, but I still wanted to display them in a way that will be similar to the more visually- centric projects. <br />
+I wanted to use Jekyll’s statically built structure to my advantage, and import all the code snippets and MD files at build time. That way, the site contains all of it’s components, and can even be displayed off-line quite easily, which can be important when displaying my work in places with bad internet connection. In those cases, the site can be displayed directly from my phone’s cache.</p>
+
+<p>For achieving that, I had to use a couple of Jekyll plugins. <br />
+The first one because Jekyll’s <a href="https://jekyllrb.com/docs/includes/"><code class="language-plaintext highlighter-rouge">include</code> and <code class="language-plaintext highlighter-rouge">include_relative</code></a> tags were designed to include HTML files in layouts, and not content - thus they allow only for including files from the current Jekyll project. <br />
+The second plugin was needed to allow passing parameters to Jekyll’s <a href="https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting"><code class="language-plaintext highlighter-rouge">highlight</code></a> tag, in a similar way to what’s possible with the <code class="language-plaintext highlighter-rouge">include</code> tags. Jekyll uses <a href="http://rouge.jneen.net/">Rouge</a> to format code snippets, and it does so quite intelligently, figuring out the code’s language from its’ syntax. Since some of my projects mix languages (as I wrote above, HTML code in an embedded C program, for eg.), or use non standard file extensions (such as <code class="language-plaintext highlighter-rouge">.pde</code> for <a href="https://processing.org/">Processing</a>, or <code class="language-plaintext highlighter-rouge">.ino</code> for <a href="https://www.arduino.cc/">Arduino</a>), I wanted to have the same control over the rendered language as for the source itself.</p>
+
+<p>I searched <a href="https://rubygems.org/">RubyGems</a> for Jekyll plugins that could quite fill my requirements, but couldn’t find any ‘out of the box’ solutions, so I set about adapting and writing some code.</p>
+
+<p>For including files, I found <a href="https://rubygems.org/gems/jekyll-remote-include">jekyll-remote-include</a>. This plugin can include a remote file in a similar way to Jekyll’s <code class="language-plaintext highlighter-rouge">include</code> tag already, but I wanted to add to it a capability. I wanted to be able to use Liquid to render my portfolio from a template, so each included remote source should be passed on as a variable. To achieve that, I forked the plugin’s repository, and added a begin/rescue block (which is Ruby’s way of calling a <em>try/catch</em> block). In this block the plugin simply tries to parse the URI from the given parameter, and if it fails, it tries to parse the URI as a <code class="language-plaintext highlighter-rouge">context</code> variable. That seems to work in a decent enough manner, so <a href="https://github.com/netrics/jekyll-remote-include/pull/2">I opened a PR</a> with my addition, which I hope will be merged to the plugin repo some day. In the meantime, my revised plugin can be found <a href="https://github.com/UriShX/jekyll-remote-include/tree/context-variables">here</a>.</p>
+
+<p>As for passing variables to the <code class="language-plaintext highlighter-rouge">highlight</code> tag, I <strong>really</strong> couldn’t find what I was looking for as a plugin, so I set about writing my own, or rather re-writing Jekyll’s <a href="https://github.com/jekyll/jekyll/blob/master/lib/jekyll/tags/highlight.rb">mainline implementation</a>. My first implementation was pretty rough. I basically tried to use the same method as I did with the remote-include plugin, using a <em>begin/rescue</em> block, but that only got me part way to my goal. What it actually do is fail gracefully, by checking if the code is a context variable, and trying to parse it. If it cannot do that, the code simply continues as the mainline tag does. Once I figured that didn’t quite do what I was expecting it to do, I set about implementing a better model for selecting the route to go by. <br />
+Implementing a better model for detecting the passed parameters required a change to the <a href="https://ruby-doc.org/core-2.7.1/Regexp.html">regular expression</a> in the tag’s code. I wanted the syntax to be as close to Jekyll’s implementation of Liquid, so my implementation is looking for curly braces to filter passed variables, and if it does not find any - it considers the parameter as a constant. That means backwards compatibility is maintained with Jekyll’s <code class="language-plaintext highlighter-rouge">highlight</code> tag, while allowing for variables to be passed. I opened a <a href="https://github.com/jekyll/jekyll/issues/8290">feature request</a> for that in Jekyll’s repository, but I haven’t opened a PR yet. My implementation can be found on rubygems.org as <a href="https://rubygems.org/gems/jekyll-highlight-param">jekyll-highlight-param</a>.</p>
+
+<p>Adding the plugins into a Jekyll site is quite simple, by directing the Gemfile to pull straight from Github:</p>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># frozen_string_literal: true</span>
+
+<span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+
+<span class="n">gem</span> <span class="s2">"jekyll"</span><span class="p">,</span> <span class="s2">"~&gt; 4.1"</span>
+<span class="n">gem</span> <span class="s2">"minima"</span><span class="p">,</span> <span class="ss">:github</span> <span class="o">=&gt;</span> <span class="s1">'jekyll/minima'</span> <span class="c1">#:git =&gt; "git@github.com:jekyll/minima.git" # github v.3.0, latest build is 2.5.1</span>
+
+<span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
+    <span class="n">gem</span> <span class="s2">"jekyll-remote-include"</span><span class="p">,</span> <span class="ss">:github</span> <span class="o">=&gt;</span> <span class="s1">'UriShX/jekyll-remote-include'</span><span class="p">,</span> <span class="ss">:branch</span> <span class="o">=&gt;</span> <span class="s1">'context-variables'</span> <span class="c1">#:git =&gt; "git@github.com:UriShX/jekyll-remote-include.git", :branch =&gt; "context-variables"</span>
+    <span class="n">gem</span> <span class="s2">"jekyll-highlight-param"</span><span class="p">,</span> <span class="ss">:github</span> <span class="o">=&gt;</span> <span class="s1">'UriShX/jekyll-highlight-param'</span> <span class="c1">#:git =&gt; "git@github.com:UriShX/jekyll-highlight-param.git"</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<p>Note, that to direct a plugin to a specific branch (like to my revised <code class="language-plaintext highlighter-rouge">jekyll-remote-include</code> plugin, which accepts variables, and is not yet merged to the main plugin repo), it is possible to pass <code class="language-plaintext highlighter-rouge">:branch =&gt;</code> to the gem.</p>
+
+<h3 id="building-up-the-page">building up the page</h3>
+<h4 id="building-the-page-using-liquid">Building the page using Liquid</h4>
+
+<p>Building a portfolio from a <a href="https://jekyllrb.com/docs/collections/">collection</a> and a bunch of markdown was a bit convoluted. I used quite a lot of flow control logic, checking whether the collection was indeed a portfolio, looking through the files in the <code class="language-plaintext highlighter-rouge">_portfolio</code> directory, pulling the content of each (the text describing the project), and creating a modal for each sort of project - code based, a markdown file, a picture gallery, a combination of those, or even none at all. I then arranged the projects (programatically) by order of their place in Jekyll’s <code class="language-plaintext highlighter-rouge">_config.yml</code>, and push the projects that were found in the <code class="language-plaintext highlighter-rouge">_portfolio</code> folder but were not in the <code class="language-plaintext highlighter-rouge">_config.yml</code> to be sorted alphabetically at the end of the portfolio. <br />
+Cover images and tags are also pulled from the project’s front matter, and by using some icons from Google’s Material Design <a href="https://material.io/resources/icons/?style=baseline">Icons</a>, (linked to in <a href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_includes/custom-head.html"><code class="language-plaintext highlighter-rouge">_includes/custom-head.html</code></a>), links and modals are linked to each graphical representation of a project.</p>
+
+<p>Most of the modal code for image galleries is based on <a href="https://github.com/drublic/css-modal/tree/master/examples">the examples</a> for the <a href="https://drublic.github.io/css-modal/">CSS modal library</a> I used. With some Liquid <a href="https://shopify.github.io/liquid/tags/control-flow/">control logic</a>, and with the aid of the two plugins I wrote of above, creating a nice modal view of markdown and code files was not that difficult to implement also.</p>
+
+<p>The whole portfolio layout can be found in my <code class="language-plaintext highlighter-rouge">jekyll-portfolio</code> repository, under <a href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_layouts/portfolio.html"><code class="language-plaintext highlighter-rouge">_layouts/portfolio.html</code></a>.</p>
+
+<h4 id="layout-using-sass">Layout using Sass</h4>
+
+<p>Since I’m using <a href="https://github.com/jekyll/minima">Minima</a> v.3, it was quite easy to link the <a href="https://drublic.github.io/css-modal/">CSS modal</a> library. All that’s needs to be done was linking the modal library’s <code class="language-plaintext highlighter-rouge">.scss</code> files, which I placed under <code class="language-plaintext highlighter-rouge">_sass/drublic-css-modal</code>, into Minima’s <a href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_sass/minima/custom-styles.scss#L6"><code class="language-plaintext highlighter-rouge">_sass/minima/custom-styles.scss</code></a>, under an <code class="language-plaintext highlighter-rouge">@import</code> tag.</p>
+
+<p>The rest of the portfolio styling can be found on lines <a href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_sass/minima/custom-styles.scss#L226">226</a> onward:</p>
+
+<p>I then used the new <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout">CSS grid layout</a> to style the layout of the <a href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_sass/minima/custom-styles.scss#L266"><code class="language-plaintext highlighter-rouge">.portfolio-wrapper</code></a> class, in a similar way to how <a href="https://wpsofts.com/">GridKit</a> styles portfolios.</p>
+
+<p>Some more styling for each <a href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_sass/minima/custom-styles.scss#L326"><code class="language-plaintext highlighter-rouge">.portfolio-block</code></a> class to get the zoom-in and sliding animations for the text and links, darkening the background when a modal is open, as well as creating a satisfying layout for narrow screens such as phones, and that was it.</p>
+
+<h4 id="filtering-using-js">Filtering using JS</h4>
+
+<p>Finally, I needed a way to filter the projects by some key words. I used Jekyll’s <a href="https://jekyllrb.com/docs/front-matter/">tags</a> to group them using Liquid in <a href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_layouts/portfolio.html#L10">_layouts/portfolio.html</a>, then <a href="https://github.com/UriShX/Jekyll-portfolio/blob/master/_layouts/portfolio.html#L20">display the tags</a> on top of the portfolio blocks.</p>
+
+<p>I then wrote a <a href="https://github.com/UriShX/Jekyll-portfolio/blob/master/assets/script/portfolio-tag-filter.js">short JS script</a> for querying the list of <code class="language-plaintext highlighter-rouge">a href</code> links created by the Jekyll layout, generating an array of links to projects, and by adding an event listener to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/hashchange_event"><code class="language-plaintext highlighter-rouge">hashchange</code></a> event, hiding or revealing the projects with the appropriate tags.</p>
+
+<p>The script uses a mix of ES5 and ES6, though I believe it is quite easy to read and understand. I made a conscious decision to not provide support for older browsers, so using modern JS is easier for me.</p>
+
+<h3 id="conclusions">Conclusions</h3>
+
+<p>This has been a really long post, so I think I’ll end here. The whole layout can be found on the repository I opened for it, called <a href="https://github.com/UriShX/Jekyll-portfolio">jekyll-portfolio</a>.</p>
+
+<p>Writing my own implementation for a portfolio layout in Jekyll was quite a learning experience. I still have some ways to go, as I still need to figure out a better way for sizing images better, and perhaps adding a <a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps">PWA</a> capability.</p>
+
+<p>Besides that, the versioning for <a href="https://github.com/UriShX/jekyll-highlight-param">jekyll-highlight-param</a>’s does not follow the <a href="https://semver.org/">semantic versioning</a> scheme, and my additions to <a href="https://github.com/UriShX/jekyll-remote-include/tree/context-variables">jekyll-remote-include</a> need some refining.</p>
+
+  </div><section class="comments" id="comment-section">
+  <hr>
+  
+
+  <!-- New comment form -->
+  <div id="respond" class="comment__new">
+    <form class="js-form form" method="post" action="https://staticman-urishx.herokuapp.com/v2/entry/urishx/microblog/master/comments">
+  <input type="hidden" name="options[origin]" value="http://localhost:4000/2021/01/20/Customizing-Jekyll-with-a-Portfolio.html">
+  <input type="hidden" name="options[parent]" value="http://localhost:4000/2021/01/20/Customizing-Jekyll-with-a-Portfolio.html">
+  <input type="hidden" id="comment-replying-to-uid" name="fields[replying_to_uid]" value="">
+  <input type="hidden" name="options[slug]" value="Customizing-Jekyll-with-a-Portfolio">
+  <input type="hidden" name="options[reCaptcha][siteKey]" value="6Lf-5PsZAAAAAPE5gYoafxsJsCuVgBUrTvRtzpI1">
+  <input type="hidden" name="options[reCaptcha][secret]"  value="k/IyI7f3u8pAghWwSPzVVGFAklupbVkVpinnhc8vXuFxuisjZ5GMSzlN/OsD0q9DJMj7PRSXILJJHLujEyJHqzKgoLWHrpRtWedVZlngpfDs41puCyb96QmqPt4N65FJqg9lk6GOH50SXJ2G4OhWYSsczvfur0geL7bG3mUFLayKOqHmaIxZczkvSgDRXYlsLzX52azt50sbx/1MgIzJCSmxzAC7uapnNEisSblCV8SXaKqUq+JOuDzRO7M44obFvPZ+iCiGq8tjiU790PtOC216tGu0teuN+WW6WON/UKQjf+MSw90lv6CQNq3P2AZIkfS8QHqldho8xnELgATjG0DoUC/ZBZtIOGIZMk0gXFAJQsxp0lKDF/woktufpXBJZgMJL8BjrA/eWn82IaujiTJdHOSWDgy14v1H+ItyVaGJcfhAj7pYdp4pZlA7Ovx9tuWncSG4mp1dzrMRaprnL3VCLqDPiusgSITtQzxM/KtCEC+r40B9WRdPnMVfRXkc6Bx+7eCRHOYrUvSJXnmISWTVJpsrmYKdbjN63tjXmtMIdKa8JswqR+vFTW5MBbGoJfNEi0sh3XHytE54Pfs4uzmiIbepkyBl9OsNH/2aFUffaz1ZXz7jb5gR0D9XISDlwQ0lagjXQzBpqIx1FpWYTrCPyfR0XkiqOYN1SDnJQic=">
+
+  <div class="textfield">
+    <label for="comment-form-message"><h2>Add Comment<small><a rel="nofollow" id="cancel-comment-reply-link" href="http://localhost:4000/2021/01/20/Customizing-Jekyll-with-a-Portfolio.html#respond" style="display:none;">(cancel reply)</a></small></h2>
+      <textarea class="textfield__input" name="fields[message]" type="text" id="comment-form-message" placeholder="Your comment (markdown accepted)" required rows="6"></textarea>
+    </label>
+  </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-name">Name
+        <input class="textfield__input" name="fields[name]" type="text" id="comment-form-name" placeholder="Your name (required)" required/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-email">E-mail
+        <input class="textfield__input" name="fields[email]" type="email" id="comment-form-email" placeholder="Your email (optional)"/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield hp">
+      <label for="hp">
+        <input class="textfield__input" name="fields[hp]" id="hp" type="text" placeholder="Leave blank">
+      </label>
+    </div>
+
+    <div id="reCaptcha" class="g-recaptcha" data-sitekey="6Lf-5PsZAAAAAPE5gYoafxsJsCuVgBUrTvRtzpI1" data-callback="recaptcha_callback"></div>
+
+    <button disabled="disabled" class="button" id="comment-form-submit">
+      Submit
+    </button>
+
+</form>
+
+<article class="modal mdl-card mdl-shadow--2dp">
+  <div>
+    <h3 class="modal-title js-modal-title"></h3>
+  </div>
+  <div class="mdl-card__supporting-text js-modal-text"></div>
+  <div class="mdl-card__actions mdl-card--border">
+    <button class="button mdl-button--colored mdl-js-button mdl-js-ripple-effect js-close-modal">Close</button>
+  </div>
+</article>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none" >
+  <symbol id="icon-loading" viewBox="149.8 37.8 499.818 525"><path d="M557.8 187.8c13.8 0 24.601-10.8 24.601-24.6S571.6 138.6 557.8 138.6s-24.6 10.8-24.6 24.6c0 13.2 10.8 24.6 24.6 24.6zm61.2 90.6c-16.8 0-30.6 13.8-30.6 30.6s13.8 30.6 30.6 30.6 30.6-13.8 30.6-30.6c.6-16.8-13.2-30.6-30.6-30.6zm-61.2 145.2c-20.399 0-36.6 16.2-36.6 36.601 0 20.399 16.2 36.6 36.6 36.6 20.4 0 36.601-16.2 36.601-36.6C595 439.8 578.2 423.6 557.8 423.6zM409 476.4c-24 0-43.2 19.199-43.2 43.199s19.2 43.2 43.2 43.2 43.2-19.2 43.2-43.2S433 476.4 409 476.4zM260.8 411c-27 0-49.2 22.2-49.2 49.2s22.2 49.2 49.2 49.2 49.2-22.2 49.2-49.2-22.2-49.2-49.2-49.2zm-10.2-102c0-27.6-22.8-50.4-50.4-50.4-27.6 0-50.4 22.8-50.4 50.4 0 27.6 22.8 50.4 50.4 50.4 27.6 0 50.4-22.2 50.4-50.4zm10.2-199.8c-30 0-54 24-54 54s24 54 54 54 54-24 54-54-24.6-54-54-54zM409 37.8c-35.4 0-63.6 28.8-63.6 63.6S374.2 165 409 165s63.6-28.8 63.6-63.6-28.2-63.6-63.6-63.6z"/>
+  </symbol>
+</svg>
+
+
+
+  </div>
+</section>
+
+<script src="/assets/script/staticman-comments.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<a class="u-url" href="/2021/01/20/Customizing-Jekyll-with-a-Portfolio.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">&#169; Uri Shani 2020</li>
+          <li><a class="u-email" href="mailto:urish@urishx.com">urish@urishx.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>A portfolio centered site with a blog, to feature my adventures and projects in  making, programming, and engineering. Built in Jekyll, to be served from Github pages.
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://hackaday.io/UriSh" title="UriSh"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#hackaday"></use></svg></a></li><li><a rel="me" href="https://www.facebook.com/uri.sh.982" title="uri.sh.982"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg></a></li><li><a rel="me" href="https://github.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/urishx" title="urishx"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
