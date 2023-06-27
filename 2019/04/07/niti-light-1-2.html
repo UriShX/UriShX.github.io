@@ -10,17 +10,17 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="This post is mostly a technical documentation of a project I have done a few years ago, and have never been documented before. The reason for doing a write-up now is so I can have a step back and see where I am today, compared to a few years ago. Also, it might be interesting to others. I hope my wife, which designed the lampshade, will someday do a write-up concerning her design decisions." />
 <meta property="og:description" content="This post is mostly a technical documentation of a project I have done a few years ago, and have never been documented before. The reason for doing a write-up now is so I can have a step back and see where I am today, compared to a few years ago. Also, it might be interesting to others. I hope my wife, which designed the lampshade, will someday do a write-up concerning her design decisions." />
-<link rel="canonical" href="http://localhost:4000/2019/04/07/niti-light-1-2.html" />
-<meta property="og:url" content="http://localhost:4000/2019/04/07/niti-light-1-2.html" />
+<link rel="canonical" href="https://urishx.github.io/2019/04/07/niti-light-1-2.html" />
+<meta property="og:url" content="https://urishx.github.io/2019/04/07/niti-light-1-2.html" />
 <meta property="og:site_name" content="Uri Sh." />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-04-07T00:00:00+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="NiTi Light (1/2)" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/2019/04/07/niti-light-1-2.html","@type":"BlogPosting","description":"This post is mostly a technical documentation of a project I have done a few years ago, and have never been documented before. The reason for doing a write-up now is so I can have a step back and see where I am today, compared to a few years ago. Also, it might be interesting to others. I hope my wife, which designed the lampshade, will someday do a write-up concerning her design decisions.","author":{"@type":"Person","name":"Uri Shani"},"headline":"NiTi Light (1/2)","dateModified":"2019-04-07T00:00:00+00:00","datePublished":"2019-04-07T00:00:00+00:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/logo.png"},"name":"Uri Shani"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/04/07/niti-light-1-2.html"},"@context":"https://schema.org"}</script>
+{"dateModified":"2019-04-07T00:00:00+00:00","datePublished":"2019-04-07T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://urishx.github.io/2019/04/07/niti-light-1-2.html"},"url":"https://urishx.github.io/2019/04/07/niti-light-1-2.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://urishx.github.io/logo.png"},"name":"Uri Shani"},"@type":"BlogPosting","description":"This post is mostly a technical documentation of a project I have done a few years ago, and have never been documented before. The reason for doing a write-up now is so I can have a step back and see where I am today, compared to a few years ago. Also, it might be interesting to others. I hope my wife, which designed the lampshade, will someday do a write-up concerning her design decisions.","author":{"@type":"Person","name":"Uri Shani"},"headline":"NiTi Light (1/2)","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Uri Sh." />
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://urishx.github.io/feed.xml" title="Uri Sh." />
 <link href="https://fonts.googleapis.com/css2?family=Alef&family=Tinos&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 <link rel="icon" href="/assets/cropped-logo-1-32x32.png" sizes="32x32"/></head>
@@ -103,15 +103,15 @@ This has been a long write-up, and I can see now I’m not even near the end I i
   <!-- New comment form -->
   <div id="respond" class="comment__new">
     <form class="js-form form" method="post" action="https://staticman-urishx.herokuapp.com/v2/entry/urishx/microblog/master/comments">
-  <input type="hidden" name="options[origin]" value="http://localhost:4000/2019/04/07/niti-light-1-2.html">
-  <input type="hidden" name="options[parent]" value="http://localhost:4000/2019/04/07/niti-light-1-2.html">
+  <input type="hidden" name="options[origin]" value="https://urishx.github.io/2019/04/07/niti-light-1-2.html">
+  <input type="hidden" name="options[parent]" value="https://urishx.github.io/2019/04/07/niti-light-1-2.html">
   <input type="hidden" id="comment-replying-to-uid" name="fields[replying_to_uid]" value="">
   <input type="hidden" name="options[slug]" value="niti-light-1-2">
   <input type="hidden" name="options[reCaptcha][siteKey]" value="6Lf-5PsZAAAAAPE5gYoafxsJsCuVgBUrTvRtzpI1">
   <input type="hidden" name="options[reCaptcha][secret]"  value="k/IyI7f3u8pAghWwSPzVVGFAklupbVkVpinnhc8vXuFxuisjZ5GMSzlN/OsD0q9DJMj7PRSXILJJHLujEyJHqzKgoLWHrpRtWedVZlngpfDs41puCyb96QmqPt4N65FJqg9lk6GOH50SXJ2G4OhWYSsczvfur0geL7bG3mUFLayKOqHmaIxZczkvSgDRXYlsLzX52azt50sbx/1MgIzJCSmxzAC7uapnNEisSblCV8SXaKqUq+JOuDzRO7M44obFvPZ+iCiGq8tjiU790PtOC216tGu0teuN+WW6WON/UKQjf+MSw90lv6CQNq3P2AZIkfS8QHqldho8xnELgATjG0DoUC/ZBZtIOGIZMk0gXFAJQsxp0lKDF/woktufpXBJZgMJL8BjrA/eWn82IaujiTJdHOSWDgy14v1H+ItyVaGJcfhAj7pYdp4pZlA7Ovx9tuWncSG4mp1dzrMRaprnL3VCLqDPiusgSITtQzxM/KtCEC+r40B9WRdPnMVfRXkc6Bx+7eCRHOYrUvSJXnmISWTVJpsrmYKdbjN63tjXmtMIdKa8JswqR+vFTW5MBbGoJfNEi0sh3XHytE54Pfs4uzmiIbepkyBl9OsNH/2aFUffaz1ZXz7jb5gR0D9XISDlwQ0lagjXQzBpqIx1FpWYTrCPyfR0XkiqOYN1SDnJQic=">
 
   <div class="textfield">
-    <label for="comment-form-message"><h2>Add Comment<small><a rel="nofollow" id="cancel-comment-reply-link" href="http://localhost:4000/2019/04/07/niti-light-1-2.html#respond" style="display:none;">(cancel reply)</a></small></h2>
+    <label for="comment-form-message"><h2>Add Comment<small><a rel="nofollow" id="cancel-comment-reply-link" href="https://urishx.github.io/2019/04/07/niti-light-1-2.html#respond" style="display:none;">(cancel reply)</a></small></h2>
       <textarea class="textfield__input" name="fields[message]" type="text" id="comment-form-message" placeholder="Your comment (markdown accepted)" required rows="6"></textarea>
     </label>
   </div>
