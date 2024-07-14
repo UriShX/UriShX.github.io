@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Portfolio" />
 <script type="application/ld+json">
-{"url":"https://urishx.github.io/portfolio/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://urishx.github.io/logo.png"},"name":"Uri Shani"},"@type":"WebPage","description":"A portfolio centered site with a blog, to feature my adventures and projects in making, programming, and engineering. Built in Jekyll, to be served from Github pages.","author":{"@type":"Person","name":"Uri Shani"},"headline":"Portfolio","@context":"https://schema.org"}</script>
+{"headline":"Portfolio","description":"A portfolio centered site with a blog, to feature my adventures and projects in making, programming, and engineering. Built in Jekyll, to be served from Github pages.","@type":"WebPage","url":"https://urishx.github.io/portfolio/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://urishx.github.io/logo.png"},"name":"Uri Shani"},"author":{"@type":"Person","name":"Uri Shani"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://urishx.github.io/feed.xml" title="Uri Sh." />
 <link href="https://fonts.googleapis.com/css2?family=Alef&family=Tinos&display=swap" rel="stylesheet"/>
@@ -3714,8 +3714,9 @@ As part of my work there I was involved in elastomeric material selection, advis
 
 <span class="nb">set</span> <span class="nt">-e</span>
 
-<span class="nv">PROTOCOL</span><span class="o">=</span><span class="s2">"udp"</span>
-<span class="nv">SECRET</span><span class="o">=</span><span class="s2">"secret"</span>
+<span class="nv">protocol</span><span class="o">=</span><span class="s2">"udp"</span>
+<span class="nv">secret</span><span class="o">=</span><span class="s2">"secret"</span>
+<span class="nv">recommendations_n</span><span class="o">=</span>1
 
 <span class="k">function </span>show_usage<span class="o">()</span> <span class="o">{</span>
     <span class="nb">printf</span> <span class="s2">"vpn-profile-switcher.sh v1.0.0</span><span class="se">\n</span><span class="s2">"</span>
@@ -3726,6 +3727,8 @@ As part of my work there I was involved in elastomeric material selection, advis
     <span class="nb">printf</span> <span class="s2">"  -p | --protocol &lt; udp | tcp &gt;,</span><span class="se">\t</span><span class="s2">Select either UDP or TCP connection. Default is UDP.</span><span class="se">\n</span><span class="s2">"</span>
     <span class="nb">printf</span> <span class="s2">"  -c | --country &lt; code | name &gt;,</span><span class="se">\t</span><span class="s2">Select Country to filter by. Default is closest to your location.</span><span class="se">\n</span><span class="s2">"</span>
     <span class="nb">printf</span> <span class="s2">"  -g | --group &lt; group_name &gt;,</span><span class="se">\t\t</span><span class="s2">Select group to filter by.</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="nb">printf</span> <span class="s2">"  -r | --recommendations &lt; number &gt;,</span><span class="se">\t</span><span class="s2">Number of recommendations to ask from NordVPN API.</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="nb">printf</span> <span class="s2">"  -d | --distance &lt; number &gt;,</span><span class="se">\t\t</span><span class="s2">Minimal load distance between recommended server and current configuration.</span><span class="se">\n</span><span class="s2">"</span>
     <span class="nb">printf</span> <span class="s2">"  -l | --login-info &lt; filename &gt;,</span><span class="se">\t</span><span class="s2">Specify file for VPN login credentials. Default is 'secret'.</span><span class="se">\n</span><span class="s2">"</span>
     <span class="nb">printf</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">For more information see README in repo: https://github.com/UriShX/vpn-profile-switcher</span><span class="se">\n</span><span class="s2">"</span>
 
@@ -3735,10 +3738,20 @@ As part of my work there I was involved in elastomeric material selection, advis
 <span class="k">function </span>check_required<span class="o">()</span> <span class="o">{</span>
     <span class="nv">WGET</span><span class="o">=</span><span class="si">$(</span>which wget<span class="si">)</span>
     <span class="nv">JSONFILTER</span><span class="o">=</span><span class="si">$(</span>which jsonfilter<span class="si">)</span>
+    <span class="nv">LIBUSTREAM</span><span class="o">=</span><span class="si">$(</span>opkg info libustream<span class="k">*</span> | <span class="nb">awk</span> <span class="s1">'/installed/{print $0}'</span><span class="si">)</span>
 
-    <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nv">$WGET</span> <span class="o">]</span> <span class="o">||</span> <span class="o">[</span> <span class="o">!</span> <span class="nv">$JSONFILTER</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$WGET</span><span class="s2">"</span> <span class="o">]</span> <span class="o">||</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$JSONFILTER</span><span class="s2">"</span> <span class="o">]</span> <span class="o">||</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$LIBUSTREAM</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
         <span class="c"># wget: SSL support not available, please install one of the libustream-.*[ssl|tls] packages as well as the ca-bundle and ca-certificates packages.</span>
-        logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) You must have the required packages installed: wget jsonfilter</span><span class="se">\n</span><span class="s2">"</span>
+        logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) You must have the required packages installed: wget jsonfilter libustream*tls</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="nb">exit </span>1
+    <span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="k">function </span>check_is_num<span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="nt">-n</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="nt">-a</span> <span class="nv">$1</span> <span class="nt">-eq</span> <span class="nv">$1</span> <span class="o">]</span> 2&gt;/dev/null<span class="p">;</span> <span class="k">then
+        </span><span class="nb">echo</span> <span class="nv">$1</span>
+    <span class="k">else
+        </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Parameter </span><span class="nv">$1</span><span class="s2"> is not a number, quitting"</span>
         <span class="nb">exit </span>1
     <span class="k">fi</span>
 <span class="o">}</span>
@@ -3753,67 +3766,117 @@ As part of my work there I was involved in elastomeric material selection, advis
 <span class="o">}</span>
 
 <span class="k">function </span>country_code<span class="o">()</span> <span class="o">{</span>
-    <span class="nv">IDENTIFIER</span><span class="o">=</span><span class="si">$(</span>wget <span class="nt">-q</span> <span class="nt">-O</span> - <span class="s2">"https://raw.githubusercontent.com/urishx/vpn-profile-switcher/db/countries.tsv"</span> | <span class="nb">grep</span> <span class="nt">-iw</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'\t'</span> <span class="s1">'/[0-9]+/{print $1}'</span><span class="si">)</span>
+    <span class="nv">identifier</span><span class="o">=</span><span class="si">$(</span>wget <span class="nt">-q</span> <span class="nt">-O</span> - <span class="s2">"https://raw.githubusercontent.com/urishx/vpn-profile-switcher/db/countries.tsv"</span> | <span class="nb">grep</span> <span class="nt">-iw</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'\t'</span> <span class="s1">'/[0-9]+/{print $1}'</span><span class="si">)</span>
 
-    <span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$IDENTIFIER</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    <span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$identifier</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
         </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) The query you entered ("</span><span class="nv">$1</span><span class="s2">") could not be found in the countries databse."</span>
         logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) You can view the list of countries in which NordVPN has OpenVPN servers online: https://github.com/urishx/vpn-profile-switcher/blob/db/countries.tsv"</span>
         <span class="nb">exit </span>1
     <span class="k">else
-        </span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$IDENTIFIER</span><span class="s2">"</span>
+        </span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$identifier</span><span class="s2">"</span>
     <span class="k">fi</span>
 <span class="o">}</span>
 
 <span class="k">function </span>server_groups<span class="o">()</span> <span class="o">{</span>
-    <span class="nv">IDENTIFIER</span><span class="o">=</span><span class="si">$(</span>wget <span class="nt">-q</span> <span class="nt">-O</span> - <span class="s2">"https://raw.githubusercontent.com/urishx/vpn-profile-switcher/db/server-groups.tsv"</span> | <span class="nb">grep</span> <span class="nt">-iw</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'\t'</span> <span class="s1">'/.*/{print $2}'</span><span class="si">)</span>
+    <span class="nv">identifier</span><span class="o">=</span><span class="si">$(</span>wget <span class="nt">-q</span> <span class="nt">-O</span> - <span class="s2">"https://raw.githubusercontent.com/urishx/vpn-profile-switcher/db/server-groups.tsv"</span> | <span class="nb">grep</span> <span class="nt">-iw</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'\t'</span> <span class="s1">'/.*/{print $2}'</span><span class="si">)</span>
 
-    <span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$IDENTIFIER</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    <span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$identifier</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
         </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) The query you entered ("</span><span class="nv">$1</span><span class="s2">") could not be found in the server groups databse."</span>
         logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) You can view the list of NordVPN OpenVPN server groups online: https://github.com/urishx/vpn-profile-switcher/blob/db/server-groups.tsv"</span>
         logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Not all server groups are available for OpenVPN connection, please check NordVPN's server recommendation site: https://nordvpn.com/servers/tools/"</span>
         <span class="nb">exit </span>1
     <span class="k">else
-        </span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$IDENTIFIER</span><span class="s2">"</span>
+        </span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$identifier</span><span class="s2">"</span>
     <span class="k">fi</span>
 <span class="o">}</span>
 
 <span class="k">function </span>get_recommended<span class="o">()</span> <span class="o">{</span>
-    <span class="nv">URL</span><span class="o">=</span><span class="s2">"https://api.nordvpn.com/v1/servers/recommendations?"</span>
-    <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$GROUP_IDENTIFIER</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
-        </span><span class="nv">URL</span><span class="o">=</span><span class="k">${</span><span class="nv">URL</span><span class="k">}</span><span class="s2">"filters[servers_groups][identifier]="</span><span class="k">${</span><span class="nv">GROUP_IDENTIFIER</span><span class="k">}</span><span class="s2">"&amp;"</span>
+    <span class="nv">_url</span><span class="o">=</span><span class="s2">"https://api.nordvpn.com/v1/servers/recommendations?"</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$group_identifier</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nv">_url</span><span class="o">=</span><span class="k">${</span><span class="nv">_url</span><span class="k">}</span><span class="s2">"filters[servers_groups][identifier]="</span><span class="k">${</span><span class="nv">group_identifier</span><span class="k">}</span><span class="s2">"&amp;"</span>
     <span class="k">fi
-    if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$COUNTRY_ID</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
-        </span><span class="nv">URL</span><span class="o">=</span><span class="k">${</span><span class="nv">URL</span><span class="k">}</span><span class="s2">"filters[country_id]="</span><span class="k">${</span><span class="nv">COUNTRY_ID</span><span class="k">}</span><span class="s2">"&amp;"</span>
+    if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$country_id</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nv">_url</span><span class="o">=</span><span class="k">${</span><span class="nv">_url</span><span class="k">}</span><span class="s2">"filters[country_id]="</span><span class="k">${</span><span class="nv">country_id</span><span class="k">}</span><span class="s2">"&amp;"</span>
     <span class="k">fi
-    </span><span class="nv">URL</span><span class="o">=</span><span class="k">${</span><span class="nv">URL</span><span class="k">}</span><span class="s2">"filters[servers_technologies][identifier]=openvpn_"</span><span class="k">${</span><span class="nv">PROTOCOL</span><span class="k">}</span><span class="s2">"&amp;limit=1"</span>
-    logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Fetching VPN recommendations from: </span><span class="nv">$URL</span><span class="s2">"</span>
-    <span class="nv">RECOMMENDED</span><span class="o">=</span><span class="si">$(</span>wget <span class="nt">-q</span> <span class="nt">-O</span> - <span class="s2">"</span><span class="nv">$URL</span><span class="s2">"</span> | jsonfilter <span class="nt">-e</span> <span class="s1">'$[0].hostname'</span><span class="si">)</span> <span class="o">||</span> <span class="nb">true</span>
+    </span><span class="nv">_url</span><span class="o">=</span><span class="k">${</span><span class="nv">_url</span><span class="k">}</span><span class="s2">"filters[servers_technologies][identifier]=openvpn_"</span><span class="k">${</span><span class="nv">protocol</span><span class="k">}</span><span class="s2">"&amp;limit="</span><span class="k">${</span><span class="nv">recommendations_n</span><span class="k">}</span>
+    logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Fetching VPN recommendations from: </span><span class="nv">$_url</span><span class="s2">"</span>
+    <span class="nv">_json</span><span class="o">=</span><span class="si">$(</span>wget <span class="nt">-q</span> <span class="nt">-O</span> - <span class="s2">"</span><span class="nv">$_url</span><span class="s2">"</span><span class="si">)</span> <span class="o">||</span> <span class="nb">true
+    </span><span class="nv">recommended</span><span class="o">=</span><span class="si">$(</span>jsonfilter <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$_json</span><span class="s2">"</span> <span class="nt">-e</span> <span class="s1">'$[0].hostname'</span><span class="si">)</span> <span class="o">||</span> <span class="nb">true
+    </span><span class="nv">recommendations</span><span class="o">=</span><span class="si">$(</span>jsonfilter <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$_json</span><span class="s2">"</span> <span class="nt">-e</span> <span class="s1">'$[*].hostname'</span><span class="si">)</span> <span class="o">||</span> <span class="nb">true
+    </span><span class="nv">loads</span><span class="o">=</span><span class="si">$(</span>jsonfilter <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$_json</span><span class="s2">"</span> <span class="nt">-e</span> <span class="s1">'$[*].load'</span><span class="si">)</span> <span class="o">||</span> <span class="nb">true</span>
 <span class="o">}</span>
 
 <span class="k">function </span>check_in_configs<span class="o">()</span> <span class="o">{</span>
-    <span class="nv">SERVER_NAME</span><span class="o">=</span><span class="si">$(</span>uci show openvpn | <span class="nb">grep</span> <span class="nv">$RECOMMENDED</span>.<span class="nv">$PROTOCOL</span> | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'\.'</span> <span class="s1">'/config/{print $2}'</span><span class="si">)</span>
+    <span class="nv">server_name</span><span class="o">=</span><span class="si">$(</span>uci show openvpn | <span class="nb">grep</span> <span class="nv">$recommended</span>.<span class="nv">$protocol</span> | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'\.'</span> <span class="s1">'/config/{print $2}'</span><span class="si">)</span>
 <span class="o">}</span>
 
 <span class="k">function </span>check_enabled<span class="o">()</span> <span class="o">{</span>
-    <span class="nv">ENABLED_SERVER</span><span class="o">=</span><span class="si">$(</span>uci show openvpn | <span class="nb">grep</span> <span class="s2">"enabled='1'"</span> | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'\.'</span> <span class="s1">'/.*/{print $2}'</span><span class="si">)</span>
+    <span class="nv">enabled_server</span><span class="o">=</span><span class="si">$(</span>uci show openvpn | <span class="nb">grep</span> <span class="s2">"enabled='1'"</span> | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'\.'</span> <span class="s1">'/.*/{print $2}'</span><span class="si">)</span>
+<span class="o">}</span>
+
+<span class="k">function </span>test_current_config<span class="o">()</span> <span class="o">{</span>
+    <span class="nv">_enabled_config</span><span class="o">=</span><span class="si">$(</span>uci show openvpn | <span class="nb">grep</span> <span class="s2">"</span><span class="nv">$enabled_server</span><span class="s2">.config"</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="se">\'</span> <span class="s1">'{sub (/\/etc\/openvpn\//,""); print $2}'</span><span class="si">)</span>
+
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$recommendations_n</span> <span class="nt">-gt</span> 1 <span class="o">]</span><span class="p">;</span> <span class="k">then
+        if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$_enabled_config</span><span class="s2">"</span> <span class="o">!=</span> <span class="s2">"</span><span class="nv">$recommended</span><span class="s2">.</span><span class="nv">$protocol</span><span class="s2">.ovpn"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+            </span><span class="nb">printf</span> <span class="s2">"Recommended servers ("</span> <span class="o">&gt;</span>recommended_servers.log
+            <span class="nb">printf</span> <span class="si">$(</span><span class="nb">date</span> <span class="s2">"+%d.%m.%Y-%H:%M:%S"</span><span class="si">)</span> <span class="o">&gt;&gt;</span>recommended_servers.log
+            <span class="nb">printf</span> <span class="s2">"):</span><span class="se">\n</span><span class="s2">"</span> <span class="o">&gt;&gt;</span>recommended_servers.log
+
+            <span class="k">for </span>x <span class="k">in</span> <span class="si">$(</span><span class="nb">seq</span> <span class="nv">$recommendations_n</span><span class="si">)</span><span class="p">;</span> <span class="k">do
+                </span><span class="nb">printf</span> <span class="s2">"</span><span class="nv">$x</span><span class="se">\t</span><span class="s2">"</span> <span class="o">&gt;&gt;</span>recommended_servers.log
+                <span class="nb">echo</span> <span class="nv">$recommendations</span> | <span class="nb">awk</span> <span class="nt">-v</span> <span class="nv">x</span><span class="o">=</span><span class="nv">$x</span> <span class="s1">'{printf("%s\t"), $x}'</span> <span class="o">&gt;&gt;</span>recommended_servers.log
+                <span class="nb">echo</span> <span class="nv">$loads</span> | <span class="nb">awk</span> <span class="nt">-v</span> <span class="nv">x</span><span class="o">=</span><span class="nv">$x</span> <span class="s1">'{printf("%d\n"), $x}'</span> <span class="o">&gt;&gt;</span>recommended_servers.log
+            <span class="k">done
+
+            if </span><span class="nb">cat </span>recommended_servers.log | <span class="nb">grep</span> <span class="nt">-q</span> <span class="nv">$_enabled_config</span><span class="p">;</span> <span class="k">then
+                </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Enabled config is in recommended severs list"</span>
+                test_load_distance <span class="nv">$_enabled_config</span>
+            <span class="k">else
+                </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Could not find the enabled config in recommended servers list"</span>
+            <span class="k">fi
+        else
+            </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Recommended server is the currently enabled config, quitting"</span>
+            <span class="nb">exit </span>0
+        <span class="k">fi
+    else
+        </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Configured to recieve only a single recommendation"</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="k">function </span>test_load_distance<span class="o">()</span> <span class="o">{</span>
+    <span class="nv">_comp_load</span><span class="o">=</span><span class="si">$(</span><span class="nb">awk</span> <span class="nt">-v</span> <span class="nv">x</span><span class="o">=</span><span class="nv">$1</span> <span class="nt">-F</span> <span class="s1">'\t'</span> <span class="s1">'$2~x {print $3}'</span> &lt;recommended_servers.log<span class="si">)</span>
+    <span class="nv">_rec_load</span><span class="o">=</span><span class="si">$(</span><span class="nb">awk</span> <span class="nt">-v</span> <span class="nv">x</span><span class="o">=</span><span class="nv">$recommended</span> <span class="nt">-F</span> <span class="s1">'\t'</span> <span class="s1">'$2~x {print $3}'</span> &lt;recommended_servers.log<span class="si">)</span>
+
+    <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$load_distance</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nb">let</span> <span class="s2">"_distance=</span><span class="nv">$_comp_load</span><span class="s2">-</span><span class="nv">$_rec_load</span><span class="s2">"</span> <span class="o">||</span> <span class="nb">true
+        </span><span class="k">if</span> <span class="o">[</span> <span class="nv">$_distance</span> <span class="nt">-gt</span> <span class="nv">$load_distance</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+            </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Load on enabled server is more then </span><span class="nv">$load_distance</span><span class="s2"> over recommended server, switching"</span>
+        <span class="k">else
+            </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Load difference between enabled and recommended servers is smaller then </span><span class="nv">$load_distance</span><span class="s2">, quitting without change"</span>
+            <span class="nb">exit </span>0
+        <span class="k">fi
+    else
+        </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) load_distance is not set"</span>
+    <span class="k">fi</span>
 <span class="o">}</span>
 
 <span class="k">function </span>grab_and_edit_config<span class="o">()</span> <span class="o">{</span>
-    wget <span class="nt">-q</span> https://downloads.nordcdn.com/configs/files/ovpn_<span class="nv">$PROTOCOL</span>/servers/<span class="nv">$RECOMMENDED</span>.<span class="nv">$PROTOCOL</span>.ovpn
-    <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$RECOMMENDED</span><span class="s2">.</span><span class="nv">$PROTOCOL</span><span class="s2">.ovpn"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    wget <span class="nt">-q</span> https://downloads.nordcdn.com/configs/files/ovpn_<span class="nv">$protocol</span>/servers/<span class="nv">$recommended</span>.<span class="nv">$protocol</span>.ovpn
+    <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$recommended</span><span class="s2">.</span><span class="nv">$protocol</span><span class="s2">.ovpn"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
         </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) The recommended server profile could not be downloaded from NordVPN's servers, quitting."</span>
         logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Not all server groups are available for OpenVPN connection, please see the list of available group + country combinations at: https://github.com/UriShX/vpn-profile-switcher/blob/db/group-countries.tsv"</span>
         logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Or check NordVPN's server recommendation site: https://nordvpn.com/servers/tools/"</span>
         <span class="nb">exit </span>1
     <span class="k">fi
-    </span><span class="nb">mv</span> <span class="nv">$RECOMMENDED</span>.<span class="nv">$PROTOCOL</span>.ovpn /etc/openvpn/
-    <span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/auth-user-pass/auth-user-pass </span><span class="nv">$SECRET</span><span class="s2">/g"</span> /etc/openvpn/<span class="nv">$RECOMMENDED</span>.<span class="nv">$PROTOCOL</span>.ovpn
+    </span><span class="nb">mv</span> <span class="nv">$recommended</span>.<span class="nv">$protocol</span>.ovpn /etc/openvpn/
+    <span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/auth-user-pass/auth-user-pass </span><span class="nv">$secret</span><span class="s2">/g"</span> /etc/openvpn/<span class="nv">$recommended</span>.<span class="nv">$protocol</span>.ovpn
 <span class="o">}</span>
 
 <span class="k">function </span>create_new_entry<span class="o">()</span> <span class="o">{</span>
-    <span class="nv">NEW_SERVER</span><span class="o">=</span><span class="si">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$RECOMMENDED</span><span class="s2">"</span> | <span class="nb">sed</span> <span class="s1">'s/[\.\ -]/_/g'</span> | <span class="nb">eval sed</span> <span class="s1">'s/com/$PROTOCOL/g'</span><span class="si">)</span>
-    uci <span class="nb">set </span>openvpn.<span class="nv">$NEW_SERVER</span><span class="o">=</span>openvpn
-    uci <span class="nb">set </span>openvpn.<span class="nv">$NEW_SERVER</span>.config<span class="o">=</span><span class="s2">"/etc/openvpn/</span><span class="nv">$RECOMMENDED</span><span class="s2">.</span><span class="nv">$PROTOCOL</span><span class="s2">.ovpn"</span>
+    <span class="nv">new_server</span><span class="o">=</span><span class="si">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$recommended</span><span class="s2">"</span> | <span class="nb">sed</span> <span class="s1">'s/[\.\ -]/_/g'</span> | <span class="nb">sed</span> <span class="s2">"s/com/</span><span class="nv">$protocol</span><span class="s2">/g"</span><span class="si">)</span>
+    uci <span class="nb">set </span>openvpn.<span class="nv">$new_server</span><span class="o">=</span>openvpn
+    uci <span class="nb">set </span>openvpn.<span class="nv">$new_server</span>.config<span class="o">=</span><span class="s2">"/etc/openvpn/</span><span class="nv">$recommended</span><span class="s2">.</span><span class="nv">$protocol</span><span class="s2">.ovpn"</span>
 <span class="o">}</span>
 
 <span class="k">function </span>enable_existing_entry<span class="o">()</span> <span class="o">{</span>
@@ -3827,7 +3890,7 @@ As part of my work there I was involved in elastomeric material selection, advis
 <span class="k">function </span>list_ovpn_configs<span class="o">()</span> <span class="o">{</span>
     uci show openvpn | <span class="nb">grep </span>nordvpn | <span class="k">while </span><span class="nb">read </span>y<span class="p">;</span> <span class="k">do
         if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">==</span> <span class="s1">'files'</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
-            </span><span class="nb">echo</span> <span class="si">$(</span><span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'='</span> <span class="s1">'/config/{print $2}'</span> | <span class="nb">sed</span> <span class="s2">"s/'//g"</span><span class="si">)</span>
+            </span><span class="nb">echo</span> <span class="si">$(</span><span class="nb">awk</span> <span class="nt">-F</span><span class="se">\'</span> <span class="s1">'/config/{print $2}'</span><span class="si">)</span>
         <span class="k">elif</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">==</span> <span class="s1">'names'</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
             </span><span class="nb">echo</span> <span class="si">$(</span><span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'.'</span> <span class="s1">'/config/{print $2}'</span><span class="si">)</span>
         <span class="k">else
@@ -3837,29 +3900,29 @@ As part of my work there I was involved in elastomeric material selection, advis
 <span class="o">}</span>
 
 <span class="k">function </span>remove_unused<span class="o">()</span> <span class="o">{</span>
-    <span class="nv">NORDVPN_CONFIGS</span><span class="o">=</span><span class="si">$(</span>list_ovpn_configs names<span class="si">)</span>
-    <span class="nv">NORDVPN_FILES</span><span class="o">=</span><span class="si">$(</span>list_ovpn_configs files<span class="si">)</span>
+    <span class="nv">nordvpn_configs</span><span class="o">=</span><span class="si">$(</span>list_ovpn_configs names<span class="si">)</span>
+    <span class="nv">nordvpn_files</span><span class="o">=</span><span class="si">$(</span>list_ovpn_configs files<span class="si">)</span>
 
-    <span class="k">for </span>X <span class="k">in</span> <span class="nv">$NORDVPN_CONFIGS</span><span class="p">;</span> <span class="k">do
-        if</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$SERVER_NAME</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$NEW_SERVER</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$ENABLED_SERVER</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    <span class="k">for </span>X <span class="k">in</span> <span class="nv">$nordvpn_configs</span><span class="p">;</span> <span class="k">do
+        if</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$server_name</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$new_server</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$enabled_server</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
             </span>uci del openvpn.<span class="nv">$X</span>
         <span class="k">fi
     done
 
     </span>uci commit
 
-    <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$ENABLED_SERVER</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
-        </span><span class="nv">ENABLED_FILE</span><span class="o">=</span><span class="si">$(</span>uci show openvpn.<span class="nv">$ENABLED_SERVER</span>.config | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'='</span> <span class="s1">'{print $2}'</span> | <span class="nb">sed</span> <span class="s2">"s/'//g"</span><span class="si">)</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$enabled_server</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nv">_enabled_config</span><span class="o">=</span><span class="s2">"/etc/openvpn/"</span><span class="k">${</span><span class="nv">_enabled_config</span><span class="k">}</span>
     <span class="k">fi
-    if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$SERVER_NAME</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
-        </span><span class="nv">EXISTING_FILE</span><span class="o">=</span><span class="si">$(</span>uci show openvpn.<span class="nv">$SERVER_NAME</span>.config | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'='</span> <span class="s1">'{print $2}'</span> | <span class="nb">sed</span> <span class="s2">"s/'//g"</span><span class="si">)</span>
+    if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$server_name</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nv">existing_file</span><span class="o">=</span><span class="si">$(</span>uci show openvpn.<span class="nv">$server_name</span>.config | <span class="nb">awk</span> <span class="nt">-F</span><span class="se">\'</span> <span class="s1">'{print $2}'</span><span class="si">)</span>
     <span class="k">fi
-    if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$NEW_SERVER</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
-        </span><span class="nv">NEW_FILE</span><span class="o">=</span><span class="si">$(</span>uci show openvpn.<span class="nv">$NEW_SERVER</span>.config | <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'='</span> <span class="s1">'{print $2}'</span> | <span class="nb">sed</span> <span class="s2">"s/'//g"</span><span class="si">)</span>
+    if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$new_server</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nv">new_file</span><span class="o">=</span><span class="si">$(</span>uci show openvpn.<span class="nv">$new_server</span>.config | <span class="nb">awk</span> <span class="nt">-F</span><span class="se">\'</span> <span class="s1">'{print $2}'</span><span class="si">)</span>
     <span class="k">fi
 
-    for </span>X <span class="k">in</span> <span class="nv">$NORDVPN_FILES</span><span class="p">;</span> <span class="k">do
-        if</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$ENABLED_FILE</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$EXISTING_FILE</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$NEW_FILE</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    for </span>X <span class="k">in</span> <span class="nv">$nordvpn_files</span><span class="p">;</span> <span class="k">do
+        if</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$_enabled_config</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$existing_file</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="o">!</span> <span class="s2">"</span><span class="nv">$X</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$new_file</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
             </span><span class="nb">rm</span> <span class="nv">$X</span>
         <span class="k">fi
     done</span>
@@ -3886,19 +3949,27 @@ check_required
         <span class="p">;;</span>
     <span class="nt">-p</span> <span class="p">|</span> <span class="nt">--protocol</span><span class="p">)</span>
         <span class="nb">shift
-        </span><span class="nv">PROTOCOL</span><span class="o">=</span><span class="si">$(</span>verify_protocol <span class="nv">$1</span><span class="si">)</span>
+        </span><span class="nv">protocol</span><span class="o">=</span><span class="si">$(</span>verify_protocol <span class="nv">$1</span><span class="si">)</span>
         <span class="p">;;</span>
     <span class="nt">-c</span> <span class="p">|</span> <span class="nt">--country</span><span class="p">)</span>
         <span class="nb">shift
-        </span><span class="nv">COUNTRY_ID</span><span class="o">=</span><span class="si">$(</span>country_code <span class="nv">$1</span><span class="si">)</span>
+        </span><span class="nv">country_id</span><span class="o">=</span><span class="si">$(</span>country_code <span class="nv">$1</span><span class="si">)</span>
         <span class="p">;;</span>
     <span class="nt">-g</span> <span class="p">|</span> <span class="nt">--group</span><span class="p">)</span>
         <span class="nb">shift
-        </span><span class="nv">GROUP_IDENTIFIER</span><span class="o">=</span><span class="si">$(</span>server_groups <span class="nv">$1</span><span class="si">)</span>
+        </span><span class="nv">group_identifier</span><span class="o">=</span><span class="si">$(</span>server_groups <span class="nv">$1</span><span class="si">)</span>
+        <span class="p">;;</span>
+    <span class="nt">-r</span> <span class="p">|</span> <span class="nt">--recommendations</span><span class="p">)</span>
+        <span class="nb">shift
+        </span><span class="nv">recommendations_n</span><span class="o">=</span><span class="si">$(</span>check_is_num <span class="nv">$1</span><span class="si">)</span>
+        <span class="p">;;</span>
+    <span class="nt">-d</span> <span class="p">|</span> <span class="nt">--distance</span><span class="p">)</span>
+        <span class="nb">shift
+        </span><span class="nv">load_distance</span><span class="o">=</span><span class="si">$(</span>check_is_num <span class="nv">$1</span><span class="si">)</span>
         <span class="p">;;</span>
     <span class="nt">-l</span> <span class="p">|</span> <span class="nt">--login-info</span><span class="p">)</span>
         <span class="nb">shift
-        </span><span class="nv">SECRET</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+        </span><span class="nv">secret</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
         <span class="p">;;</span>
     <span class="k">*</span><span class="p">)</span>
         logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Incorrect input provided"</span>
@@ -3908,11 +3979,11 @@ check_required
     <span class="nb">shift
 </span><span class="k">done
 
-</span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Arguments: Protocol: </span><span class="nv">$PROTOCOL</span><span class="s2">; Country: </span><span class="nv">$COUNTRY_ID</span><span class="s2">; NordVPN group: </span><span class="nv">$GROUP_IDENTIFIER</span><span class="s2">; User credentials: </span><span class="nv">$SECRET</span><span class="s2">."</span>
+</span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Arguments: Protocol: </span><span class="nv">$protocol</span><span class="s2">; Country: </span><span class="nv">$country_id</span><span class="s2">; NordVPN group: </span><span class="nv">$group_identifier</span><span class="s2">; User credentials: </span><span class="nv">$secret</span><span class="s2">."</span>
 
 get_recommended
 
-<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$RECOMMENDED</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$recommended</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
     </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Could not get recommended VPN, exiting script"</span>
     logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) This might be due to a group + country combination, or server group which is not supported by OpenVPN connection."</span>
     logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) To tune your request, please see the list of available combinations at: https://github.com/UriShX/vpn-profile-switcher/blob/db/group-countries.tsv"</span>
@@ -3920,36 +3991,38 @@ get_recommended
     <span class="nb">exit
 </span><span class="k">fi
 
-</span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Recommended server URL: </span><span class="nv">$RECOMMENDED</span><span class="s2">."</span>
+</span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Recommended server URL: </span><span class="nv">$recommended</span><span class="s2">."</span>
 
 check_in_configs
 
-<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$SERVER_NAME</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
-    </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Fetching OpenVPN config </span><span class="nv">$RECOMMENDED</span><span class="s2">.</span><span class="nv">$PROTOCOL</span><span class="s2">.ovpn, and setting credentials"</span>
+check_enabled
+
+logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Currently active server: </span><span class="nv">$enabled_server</span><span class="s2">"</span>
+
+test_current_config
+
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$server_name</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Fetching OpenVPN config </span><span class="nv">$recommended</span><span class="s2">.</span><span class="nv">$protocol</span><span class="s2">.ovpn, and setting credentials"</span>
     grab_and_edit_config
     create_new_entry
-    logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Entered new entry to OpenVPN configs: </span><span class="nv">$NEW_SERVER</span><span class="s2">"</span>
+    logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Entered new entry to OpenVPN configs: </span><span class="nv">$new_server</span><span class="s2">"</span>
 <span class="k">else
-    </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Recommended server name: </span><span class="nv">$SERVER_NAME</span><span class="s2">"</span>
+    </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Recommended server name: </span><span class="nv">$server_name</span><span class="s2">"</span>
 <span class="k">fi
 
-</span>check_enabled
-
-logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Currently active server: </span><span class="nv">$ENABLED_SERVER</span><span class="s2">"</span>
-
-<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$ENABLED_SERVER</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$SERVER_NAME</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$enabled_server</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"</span><span class="nv">$server_name</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
     </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Recommended server is already configured as active"</span>
     <span class="nb">exit
 </span><span class="k">else
-    if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$NEW_SERVER</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$new_server</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
         </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Enabling existing entry"</span>
-        enable_existing_entry <span class="nv">$SERVER_NAME</span>
+        enable_existing_entry <span class="nv">$server_name</span>
     <span class="k">else
         </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Enabling new entry"</span>
-        enable_existing_entry <span class="nv">$NEW_SERVER</span>
+        enable_existing_entry <span class="nv">$new_server</span>
     <span class="k">fi
     </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Disabling current active server"</span>
-    disable_current_entry <span class="nv">$ENABLED_SERVER</span>
+    disable_current_entry <span class="nv">$enabled_server</span>
 <span class="k">fi
 
 </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Comitting changes and restarting OpenVPN"</span>

@@ -1,0 +1,42 @@
+<h2 id="setting-up-an-openwrt-dev-environment-on-a-raspberry-pi-3-b">Setting Up an OpenWRT Dev Environment on a Raspberry Pi 3 B+</h2>
+
+<p>It’s been a while since I last tinkered with something fun, but I finally got around to setting up an OpenWRT development environment on my Raspberry Pi 3 B+. This time, it’s for version 2 of my VPN profile switcher script, which you can find on my <a href="https://github.com/urishx/vpn-profile-switcher">GitHub repo</a>.</p>
+
+<p><strong>Note: this post is about setting up a shell script dev environment on OpenWRT, not an actual OpenWRT development environment. For that, please follow the official <a href="https://openwrt.org/docs/guide-developer/start">developer’s guide</a></strong></p>
+
+<h3 id="flashing-openwrt">Flashing OpenWRT</h3>
+
+<p>To start, I obtained the most recent <a href="https://openwrt.org/toh/raspberry_pi_foundation/raspberry_pi">OpenWRT image for the Raspberry Pi</a> and flashed it onto an SD card. The process was simple - download the image, use Balena Etcher, and you’re ready to proceed. Afterward, I powered on the Pi, set a password, and added my SSH keys from my main machine. It’s important to prioritize security and accessibility, isn’t it?</p>
+
+<p>To make sure I had enough space for everything, I followed OpenWRT’s guide to <a href="https://openwrt.org/docs/guide-user/installation/installation_methods/sd_card#expanding_the_filesystem">expand the filesystem</a> for ext4. This step is crucial, especially if you plan on installing packages or running scripts.</p>
+
+<h3 id="wifi-hotspot-and-wan-setup">WiFi Hotspot and WAN Setup</h3>
+
+<p>Next, I turned the Pi into a WiFi hotspot and set the ethernet port as WAN. This means the Pi can share its internet connection wirelessly while staying wired to my main router.</p>
+
+<h3 id="adding-a-wifi-wwan">Adding a WiFi WWAN</h3>
+
+<p>Now, for a bit of fun – I had a spare TL-822N USB WiFi adapter and decided to add a WiFi WWAN. I followed a <a href="https://forum.openwrt.org/t/configuring-tl-wn822n-usb-wifi-adapter/60889/6">guide on the OpenWRT forum</a>, but ran into some issues with the adapter repeatedly failing to connect. After some head-scratching, I figured it might be a power issue. Swapped out the power supply for a beefier 3W one - and the problem was solved.</p>
+
+<h3 id="why-the-wwan">Why the WWAN?</h3>
+
+<p>You might wonder why go through the hassle of adding a WWAN. Well, I wanted to keep the ethernet port on my main router free and have a ready-to-use travel router for future adventures.</p>
+
+<h3 id="getting-openvpn-running">Getting OpenVPN Running</h3>
+
+<p>With the networking sorted, it was time to get OpenVPN up and running with NordVPN. I followed my own instructions from the <a href="https://github.com/urishx/vpn-profile-switcher#readme">repo’s README</a> – always nice when past me makes things easier for future me.</p>
+
+<h3 id="ssh-convenience">SSH Convenience</h3>
+
+<p>To make my life easier, I ensured my SSH connection was rock-solid and installed <code class="language-plaintext highlighter-rouge">nano</code> on the Pi. On my main machine, I set up the <a href="https://marketplace.visualstudio.com/items?itemName=Kelvin.vscode-sshfs">SSH FS</a> extension in VS Code and installed the <code class="language-plaintext highlighter-rouge">openssh-sftp-server</code> package on the Pi, following OpenWRT’s documentation. This setup lets me edit files on the Pi directly from VS Code, which provides some useful quality of life features, such as switching between files easily, syntax highlighting, and Copilot.</p>
+
+<h3 id="final-touches">Final Touches</h3>
+
+<p>Lastly, I installed <code class="language-plaintext highlighter-rouge">git</code> and <code class="language-plaintext highlighter-rouge">git-http</code> packages on the Pi so I could clone and manage repos directly. With everything in place, my OpenWRT dev environment was ready to roll.</p>
+
+<h3 id="wrapping-up">Wrapping Up</h3>
+
+<p>So there you have it – a solid OpenWRT development environment on a Raspberry Pi 3 B+. Perfect for freeing up your main router’s ethernet connection or having a travel-ready router. Happy tinkering!</p>
+
+<p>Cheers,
+Uri</p>
