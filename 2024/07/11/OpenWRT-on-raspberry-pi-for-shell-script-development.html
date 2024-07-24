@@ -77,15 +77,45 @@
 
 <p>To make sure I had enough space for everything, I followed OpenWRT’s guide to <a href="https://openwrt.org/docs/guide-user/installation/installation_methods/sd_card#expanding_the_filesystem">expand the filesystem</a> for ext4. This step is crucial, especially if you plan on installing packages or running scripts.</p>
 
+<p>For some reason, I had to also install <code class="language-plaintext highlighter-rouge">e2fsck</code> as well, so my process is as follows:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opkg update
+opkg <span class="nb">install </span>parted tune2fs resize2fs e2fsck
+
+parted
+p
+resizepart 2 8GB <span class="c"># or whatever size you want</span>
+q
+
+mount <span class="nt">-o</span> remount,ro /                  <span class="c">#Remount root as Read Only</span>
+tune2fs <span class="nt">-O</span>^resize_inode /dev/mmcblk0p2    <span class="c">#Remove reserved GDT blocks</span>
+<span class="c"># This failed, so I had to run e2fsck</span>
+e2fsck <span class="nt">-f</span> /dev/mmcblk0p2                <span class="c">#Answer yes to all questions</span>
+tune2fs <span class="nt">-O</span>^resize_inode /dev/mmcblk0p2    <span class="c">#Remove reserved GDT blocks</span>
+fsck.ext4 /dev/mmcblk0p2                  <span class="c">#Fix part, answer yes to remove GDT blocks remnants</span>
+reboot
+
+<span class="c"># After reboot</span>
+resize2fs /dev/mmcblk0p2
+</code></pre></div></div>
+
 <h3 id="wifi-hotspot-and-wan-setup">WiFi Hotspot and WAN Setup</h3>
 
 <p>Next, I turned the Pi into a WiFi hotspot and set the ethernet port as WAN. This means the Pi can share its internet connection wirelessly while staying wired to my main router.</p>
 
+<p>I actually tried to set up the wireless interface on the pi as a STA (client) + AP (master), but it didn’t work out. I ended up using the USB WiFi adapter as a WWAN instead. You can find some threads on the topic <a href="https://forum.openwrt.org/t/how-to-configure-raspberry-pi-3b-as-a-repeater/46202/14">here</a>, and some more info on the <a href="https://openwrt.org/packages/pkgdata/travelmate">travelmate</a> <a href="https://forum.openwrt.org/t/travelmate-support-thread/5155/755">support thread</a>. <em>Apperantly it is possible w/ Raspoberry pi OS, here’s a <a href="https://raspberrypi.stackexchange.com/questions/89803/access-point-as-wifi-router-repeater-optional-with-bridge">how-to</a></em>.</p>
+
 <h3 id="adding-a-wifi-wwan">Adding a WiFi WWAN</h3>
 
-<p>Now, for a bit of fun – I had a spare TL-822N USB WiFi adapter and decided to add a WiFi WWAN. I followed a <a href="https://forum.openwrt.org/t/configuring-tl-wn822n-usb-wifi-adapter/60889/6">guide on the OpenWRT forum</a>, but ran into some issues with the adapter repeatedly failing to connect. After some head-scratching, I figured it might be a power issue. Swapped out the power supply for a beefier 3W one - and the problem was solved.</p>
+<p>Now, for a bit of fun – I had a spare TL-822N USB WiFi adapter and decided to add a WiFi WWAN. I followed what worked for someone <a href="https://forum.openwrt.org/t/configuring-tl-wn822n-usb-wifi-adapter/60889/6">on the OpenWRT forum</a>, but ran into some issues with the adapter repeatedly failing to connect. After some head-scratching, I figured it might be a power issue. Swapped out the power supply for a beefier 3W one - and the problem was solved.</p>
 
-<h3 id="why-the-wwan">Why the WWAN?</h3>
+<p>So, assuming you have a beefy enough power supply, install the following packages:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opkg update
+opkg <span class="nb">install </span>kmod-usb2 rtl8192eu-firmware kmod-rtl8xxxu
+</code></pre></div></div>
+
+<h4 id="why-the-wwan">Why the WWAN?</h4>
 
 <p>You might wonder why go through the hassle of adding a WWAN. Well, I wanted to keep the ethernet port on my main router free and have a ready-to-use travel router for future adventures.</p>
 
@@ -100,6 +130,25 @@
 <h3 id="final-touches">Final Touches</h3>
 
 <p>Lastly, I installed <code class="language-plaintext highlighter-rouge">git</code> and <code class="language-plaintext highlighter-rouge">git-http</code> packages on the Pi so I could clone and manage repos directly. With everything in place, my OpenWRT dev environment was ready to roll.</p>
+
+<h4 id="edit-2024-07-24">Edit: 2024-07-24</h4>
+
+<p>When trying to work on the script on the Pi, I had a bit of trouble pushing the changes to the repo. I decided to set up a new SSH key on the Pi and add it to my GitHub account. This way, I could push changes without any issues. Sicne the default SSH agentt on tthe standard OpenWRT is <code class="language-plaintext highlighter-rouge">dropbear</code>, I followed <a href="https://openwrt.org/docs/guide-user/security/dropbear.public-key.auth#generating_public_and_private_keys_on_the_openwrt_machine">this how-to</a> on the OpenWRT wiki. Here’s how I did it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> ~/.ssh
+dropbearkey <span class="nt">-t</span> ed25519 <span class="nt">-f</span> ~/.ssh/id_dropbear
+dropbearkey <span class="nt">-y</span> <span class="nt">-f</span> ~/.ssh/id_dropbear
+</code></pre></div></div>
+
+<p>I then copied the public key to my GitHub account and added the private key to my SSH agent. This way, I could push changes to the repo without any issues.</p>
+
+<p>I also set the username and email for the git config:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="nt">--global</span> user.name <span class="s2">"Your Name"</span>
+git config <span class="nt">--global</span> user.email <span class="s2">"yourname@your.domain"</span>
+</code></pre></div></div>
+
+<p>I had trouble working with source control from my remote <code class="language-plaintext highlighter-rouge">sshfs</code> connection, so I decided to clone the repo directly to the Pi. This way, I could work on the script without any issues. That’s a bit of a bummer, but it’s a small price to pay for a stable development environment.</p>
 
 <h3 id="wrapping-up">Wrapping Up</h3>
 

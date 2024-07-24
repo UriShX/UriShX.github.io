@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://urishx.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://urishx.github.io/" rel="alternate" type="text/html" /><updated>2024-07-14T11:44:45+00:00</updated><id>https://urishx.github.io/feed.xml</id><title type="html">Uri Sh.</title><subtitle>A portfolio centered site with a blog, to feature my adventures and projects in  making, programming, and engineering. Built in Jekyll, to be served from Github pages.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://urishx.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://urishx.github.io/" rel="alternate" type="text/html" /><updated>2024-07-24T20:56:13+00:00</updated><id>https://urishx.github.io/feed.xml</id><title type="html">Uri Sh.</title><subtitle>A portfolio centered site with a blog, to feature my adventures and projects in  making, programming, and engineering. Built in Jekyll, to be served from Github pages.
 </subtitle><author><name>Uri Shani</name><email>urish@urishx.com</email></author><entry><title type="html">Openwrt On Raspberry Pi For Shell Script Development</title><link href="https://urishx.github.io/2024/07/11/OpenWRT-on-raspberry-pi-for-shell-script-development.html" rel="alternate" type="text/html" title="Openwrt On Raspberry Pi For Shell Script Development" /><published>2024-07-11T00:00:00+00:00</published><updated>2024-07-11T00:00:00+00:00</updated><id>https://urishx.github.io/2024/07/11/OpenWRT-on-raspberry-pi-for-shell-script-development</id><content type="html" xml:base="https://urishx.github.io/2024/07/11/OpenWRT-on-raspberry-pi-for-shell-script-development.html">&lt;h2 id=&quot;setting-up-an-openwrt-dev-environment-on-a-raspberry-pi-3-b&quot;&gt;Setting Up an OpenWRT Dev Environment on a Raspberry Pi 3 B+&lt;/h2&gt;
 
 &lt;p&gt;It’s been a while since I last tinkered with something fun, but I finally got around to setting up an OpenWRT development environment on my Raspberry Pi 3 B+. This time, it’s for version 2 of my VPN profile switcher script, which you can find on my &lt;a href=&quot;https://github.com/urishx/vpn-profile-switcher&quot;&gt;GitHub repo&lt;/a&gt;.&lt;/p&gt;
@@ -12,15 +12,45 @@
 
 &lt;p&gt;To make sure I had enough space for everything, I followed OpenWRT’s guide to &lt;a href=&quot;https://openwrt.org/docs/guide-user/installation/installation_methods/sd_card#expanding_the_filesystem&quot;&gt;expand the filesystem&lt;/a&gt; for ext4. This step is crucial, especially if you plan on installing packages or running scripts.&lt;/p&gt;
 
+&lt;p&gt;For some reason, I had to also install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;e2fsck&lt;/code&gt; as well, so my process is as follows:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;opkg update
+opkg &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;parted tune2fs resize2fs e2fsck
+
+parted
+p
+resizepart 2 8GB &lt;span class=&quot;c&quot;&gt;# or whatever size you want&lt;/span&gt;
+q
+
+mount &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; remount,ro /                  &lt;span class=&quot;c&quot;&gt;#Remount root as Read Only&lt;/span&gt;
+tune2fs &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt;^resize_inode /dev/mmcblk0p2    &lt;span class=&quot;c&quot;&gt;#Remove reserved GDT blocks&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# This failed, so I had to run e2fsck&lt;/span&gt;
+e2fsck &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; /dev/mmcblk0p2                &lt;span class=&quot;c&quot;&gt;#Answer yes to all questions&lt;/span&gt;
+tune2fs &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt;^resize_inode /dev/mmcblk0p2    &lt;span class=&quot;c&quot;&gt;#Remove reserved GDT blocks&lt;/span&gt;
+fsck.ext4 /dev/mmcblk0p2                  &lt;span class=&quot;c&quot;&gt;#Fix part, answer yes to remove GDT blocks remnants&lt;/span&gt;
+reboot
+
+&lt;span class=&quot;c&quot;&gt;# After reboot&lt;/span&gt;
+resize2fs /dev/mmcblk0p2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;h3 id=&quot;wifi-hotspot-and-wan-setup&quot;&gt;WiFi Hotspot and WAN Setup&lt;/h3&gt;
 
 &lt;p&gt;Next, I turned the Pi into a WiFi hotspot and set the ethernet port as WAN. This means the Pi can share its internet connection wirelessly while staying wired to my main router.&lt;/p&gt;
 
+&lt;p&gt;I actually tried to set up the wireless interface on the pi as a STA (client) + AP (master), but it didn’t work out. I ended up using the USB WiFi adapter as a WWAN instead. You can find some threads on the topic &lt;a href=&quot;https://forum.openwrt.org/t/how-to-configure-raspberry-pi-3b-as-a-repeater/46202/14&quot;&gt;here&lt;/a&gt;, and some more info on the &lt;a href=&quot;https://openwrt.org/packages/pkgdata/travelmate&quot;&gt;travelmate&lt;/a&gt; &lt;a href=&quot;https://forum.openwrt.org/t/travelmate-support-thread/5155/755&quot;&gt;support thread&lt;/a&gt;. &lt;em&gt;Apperantly it is possible w/ Raspoberry pi OS, here’s a &lt;a href=&quot;https://raspberrypi.stackexchange.com/questions/89803/access-point-as-wifi-router-repeater-optional-with-bridge&quot;&gt;how-to&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+
 &lt;h3 id=&quot;adding-a-wifi-wwan&quot;&gt;Adding a WiFi WWAN&lt;/h3&gt;
 
-&lt;p&gt;Now, for a bit of fun – I had a spare TL-822N USB WiFi adapter and decided to add a WiFi WWAN. I followed a &lt;a href=&quot;https://forum.openwrt.org/t/configuring-tl-wn822n-usb-wifi-adapter/60889/6&quot;&gt;guide on the OpenWRT forum&lt;/a&gt;, but ran into some issues with the adapter repeatedly failing to connect. After some head-scratching, I figured it might be a power issue. Swapped out the power supply for a beefier 3W one - and the problem was solved.&lt;/p&gt;
+&lt;p&gt;Now, for a bit of fun – I had a spare TL-822N USB WiFi adapter and decided to add a WiFi WWAN. I followed what worked for someone &lt;a href=&quot;https://forum.openwrt.org/t/configuring-tl-wn822n-usb-wifi-adapter/60889/6&quot;&gt;on the OpenWRT forum&lt;/a&gt;, but ran into some issues with the adapter repeatedly failing to connect. After some head-scratching, I figured it might be a power issue. Swapped out the power supply for a beefier 3W one - and the problem was solved.&lt;/p&gt;
 
-&lt;h3 id=&quot;why-the-wwan&quot;&gt;Why the WWAN?&lt;/h3&gt;
+&lt;p&gt;So, assuming you have a beefy enough power supply, install the following packages:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;opkg update
+opkg &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;kmod-usb2 rtl8192eu-firmware kmod-rtl8xxxu
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;why-the-wwan&quot;&gt;Why the WWAN?&lt;/h4&gt;
 
 &lt;p&gt;You might wonder why go through the hassle of adding a WWAN. Well, I wanted to keep the ethernet port on my main router free and have a ready-to-use travel router for future adventures.&lt;/p&gt;
 
@@ -35,6 +65,25 @@
 &lt;h3 id=&quot;final-touches&quot;&gt;Final Touches&lt;/h3&gt;
 
 &lt;p&gt;Lastly, I installed &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git-http&lt;/code&gt; packages on the Pi so I could clone and manage repos directly. With everything in place, my OpenWRT dev environment was ready to roll.&lt;/p&gt;
+
+&lt;h4 id=&quot;edit-2024-07-24&quot;&gt;Edit: 2024-07-24&lt;/h4&gt;
+
+&lt;p&gt;When trying to work on the script on the Pi, I had a bit of trouble pushing the changes to the repo. I decided to set up a new SSH key on the Pi and add it to my GitHub account. This way, I could push changes without any issues. Sicne the default SSH agentt on tthe standard OpenWRT is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dropbear&lt;/code&gt;, I followed &lt;a href=&quot;https://openwrt.org/docs/guide-user/security/dropbear.public-key.auth#generating_public_and_private_keys_on_the_openwrt_machine&quot;&gt;this how-to&lt;/a&gt; on the OpenWRT wiki. Here’s how I did it:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/.ssh
+dropbearkey &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; ed25519 &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; ~/.ssh/id_dropbear
+dropbearkey &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; ~/.ssh/id_dropbear
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I then copied the public key to my GitHub account and added the private key to my SSH agent. This way, I could push changes to the repo without any issues.&lt;/p&gt;
+
+&lt;p&gt;I also set the username and email for the git config:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; user.name &lt;span class=&quot;s2&quot;&gt;&quot;Your Name&quot;&lt;/span&gt;
+git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; user.email &lt;span class=&quot;s2&quot;&gt;&quot;yourname@your.domain&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I had trouble working with source control from my remote &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sshfs&lt;/code&gt; connection, so I decided to clone the repo directly to the Pi. This way, I could work on the script without any issues. That’s a bit of a bummer, but it’s a small price to pay for a stable development environment.&lt;/p&gt;
 
 &lt;h3 id=&quot;wrapping-up&quot;&gt;Wrapping Up&lt;/h3&gt;
 
