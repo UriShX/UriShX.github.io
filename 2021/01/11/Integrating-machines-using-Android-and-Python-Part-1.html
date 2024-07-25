@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Integrating Machines Using Android and Python - Part 1 | Uri Sh.</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Integrating Machines Using Android and Python - Part 1" />
+<meta name="author" content="Uri Shani" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="As part of working for an engineering firm, I sometimes need to integrate machines into a system designed by one of the firm’s mechanical engineers. This could be part of a POC, so we can move things a bit quicker. Or it could be part of our final product - integrating proven products into our designs means we can focus on getting the final machines built quicker, and less prone to errors. This is done on a regular basis in different disciplines of engineering. In mechanical engineering, a lot of designs integrate standard parts such as bearings or motors, for example. In electronics engineering, relying on pre-built modules in designs could save a lot of hassle. But in this one machine we’re building, I needed to integrate a couple of different machines that required a different set of skills, since they were (definitely) not meant to be included in any larger machine - and that’s what I want to write about." />
+<meta property="og:description" content="As part of working for an engineering firm, I sometimes need to integrate machines into a system designed by one of the firm’s mechanical engineers. This could be part of a POC, so we can move things a bit quicker. Or it could be part of our final product - integrating proven products into our designs means we can focus on getting the final machines built quicker, and less prone to errors. This is done on a regular basis in different disciplines of engineering. In mechanical engineering, a lot of designs integrate standard parts such as bearings or motors, for example. In electronics engineering, relying on pre-built modules in designs could save a lot of hassle. But in this one machine we’re building, I needed to integrate a couple of different machines that required a different set of skills, since they were (definitely) not meant to be included in any larger machine - and that’s what I want to write about." />
+<link rel="canonical" href="https://urishx.github.io/2021/01/11/Integrating-machines-using-Android-and-Python-Part-1.html" />
+<meta property="og:url" content="https://urishx.github.io/2021/01/11/Integrating-machines-using-Android-and-Python-Part-1.html" />
+<meta property="og:site_name" content="Uri Sh." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-01-11T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Integrating Machines Using Android and Python - Part 1" />
+<script type="application/ld+json">
+{"headline":"Integrating Machines Using Android and Python - Part 1","description":"As part of working for an engineering firm, I sometimes need to integrate machines into a system designed by one of the firm’s mechanical engineers. This could be part of a POC, so we can move things a bit quicker. Or it could be part of our final product - integrating proven products into our designs means we can focus on getting the final machines built quicker, and less prone to errors. This is done on a regular basis in different disciplines of engineering. In mechanical engineering, a lot of designs integrate standard parts such as bearings or motors, for example. In electronics engineering, relying on pre-built modules in designs could save a lot of hassle. But in this one machine we’re building, I needed to integrate a couple of different machines that required a different set of skills, since they were (definitely) not meant to be included in any larger machine - and that’s what I want to write about.","datePublished":"2021-01-11T00:00:00+00:00","dateModified":"2021-01-11T00:00:00+00:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://urishx.github.io/2021/01/11/Integrating-machines-using-Android-and-Python-Part-1.html"},"url":"https://urishx.github.io/2021/01/11/Integrating-machines-using-Android-and-Python-Part-1.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://urishx.github.io/logo.png"},"name":"Uri Shani"},"author":{"@type":"Person","name":"Uri Shani"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://urishx.github.io/feed.xml" title="Uri Sh." />
+<link href="https://fonts.googleapis.com/css2?family=Alef&family=Tinos&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link rel="icon" href="/assets/cropped-logo-1-32x32.png" sizes="32x32"/></head>
+<body><div>
+    <header class="site-header" style="background-image: url('/assets/img/banner.png');">
+        <div class="banner">
+            <div class="img-container">
+                
+                    <img alt="logo" src="/assets/img/logo.png"/>
+                
+            </div>
+            <h1 class="site-title">
+                <a rel="author" href="/">Uri Sh.</a>
+            </h1>
+            <h2>Making, Engineering, and Blogging about it too</h2>
+        </div>
+        <div class="wrapper"><nav class="site-nav">
+                    <input class="nav-trigger" id="nav-trigger" type="checkbox"/>
+                    <label for="nav-trigger">
+                        <span class="menu-icon">
+                            <svg height="15px" viewbox="0 0 18 15" width="18px">
+                                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+                            </svg>
+                        </span>
+                    </label>
+
+                    <div class="trigger">
+                        <a class="page-link" href="/" >Home</a><a class="page-link" href="/about/" >About me</a><a class="page-link" href="/portfolio/" >Portfolio</a></div>
+                </nav></div>
+    </header>
+</div>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Integrating Machines Using Android and Python - Part 1</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2021-01-11T00:00:00+00:00" itemprop="datePublished">
+        11.01.2021
+      </time>~<time class="dt-modified" datetime="2024-07-14T00:00:00+00:00" itemprop="dateModified">
+          14.07.2024
+        </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>As part of working for an engineering firm, I sometimes need to integrate machines into a system designed by one of the firm’s mechanical engineers. This could be part of a POC, so we can move things a bit quicker. Or it could be part of our final product - integrating proven products into our designs means we can focus on getting the final machines built quicker, and less prone to errors. This is done on a regular basis in different disciplines of engineering. In mechanical engineering, a lot of designs integrate standard parts such as bearings or motors, for example. In electronics engineering, relying on pre-built modules in designs could save a lot of hassle.</p>
+
+<p>But in this one machine we’re building, I needed to integrate a couple of different machines that required a different set of skills, since they were (definitely) not meant to be included in any larger machine - and that’s what I want to write about.
+<!--more-->
+In this particular machine, we needed to incorporate a consumer-level machine into our bigger system. We ended up incorporating two different machines, one for the POC, and a different one for the first real iteration of the machine.</p>
+
+<h2 id="what-are-my-options-anyway">What are my options, anyway?</h2>
+
+<p>There are a few different options for controlling machines that have Android interfaces.</p>
+
+<p>I’ve had a bit of a hard time figuring out how to get it working, so I wrote it down. Mostly, to not have to search for answers again in the future.</p>
+
+<p>These options include:</p>
+<ul>
+  <li>Automate the machine through macros I wrote with webhooks, controlling an app designed by the machine manufacturer, running on a phone hidden inside our machine.</li>
+  <li>Automate the machine by recording UART between the controller and the UI device (started, deemed too hard).</li>
+  <li>Automate the machine by reverse engineering the controller firmware (never tried, <em>WAYYYY</em> too hard for the specific machine).</li>
+  <li>Automate the machine by leveraging ADB:
+    <ul>
+      <li>Blindly.</li>
+      <li>UIAutomator (deprecated by Google, works only for static content).</li>
+      <li>OpenCV pattern matching (last resort).</li>
+      <li>Appium (UIAutomator2 driver, FOSS, QA tool).</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="the-first-machine">The first machine</h2>
+
+<p>The first machine was selected thanks to its ability to be controlled remotely via an Android app that sent commands through Bluetooth.</p>
+
+<h3 id="initial-probing">Initial probing</h3>
+
+<p>Since I knew it was Bluetooth-based, I first tried sniffing the communication, using Wireshark and Nordic nRF. I ordered an nRF52840 Feather from <a href="https://www.adafruit.com/product/4062">Adafruit</a>, and followed Adafruit’s great <a href="https://learn.adafruit.com/ble-sniffer-with-nrf52840?view=all">guide</a> for installing and using that to sniff BLE communication between the machine and the application installed on my phone. I also used Nordic’s own <a href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-for-mobile">nRF Connect</a> on my phone (there’s a desktop app as well) to see the BLE descriptors as well.</p>
+
+<p>But while looking at the sniffed packets I realized the machine was only advertising its existence through BLE, then (probably) moving onto the more secure Bluetooth Classic communication for actually being controlled through the accompanying smartphone app.</p>
+
+<p>A quick look through the code for the app (apk packages can mostly be unzipped) convinced us it was time to think of a simpler way for controlling this particular machine.</p>
+
+<h3 id="second-best---but-winning">Second best - but winning</h3>
+
+<p>As a quicker method to get the POC rolling, a consultant suggested we try installing a macro app for Android. Specifically, he suggested we use <a href="https://www.macrodroid.com/">Macrodroid</a>, since he’s had good results using it in the past.</p>
+
+<p>The process was quite simple, if a bit tedious. I found a disposable phone from an earlier project, installed the application for controlling the machine as well as Macrodroid, and started setting up a macro that would start the app, wait for a bit, then press the desired button on the second page, then delay again, and finally the third button.</p>
+
+<p>For selecting textual buttons, Macrodroid offers a search functionality. For moving sliders around, I enabled Android’s Pointer Location in the Developer’s options, and set up moving the slider based on the actual display of the device I used.</p>
+
+<p>Finally, I set up a webhook with some query parameters to trigger the macro on the device - and my part of the job was done.</p>
+
+<p>I passed the webhook addresses and the parameters to the guy writing the rest of the machine’s controller, made sure the phone was always on and had its Bluetooth, location, and WiFi, always on (and with power), and went on to the next project.</p>
+
+<h3 id="stay-tuned">Stay Tuned</h3>
+
+<p>In the nextt post, I’ll cover the next iteration of the machine, and how I had to use a (very) different approach to get it working. Stay tuned for a detailed walkthrough of the process and the final solution!</p>
+
+  </div><a class="u-url" href="/2021/01/11/Integrating-machines-using-Android-and-Python-Part-1.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">&#169; Uri Shani 2020</li>
+          <li><a class="u-email" href="mailto:urish@urishx.com">urish@urishx.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>A portfolio centered site with a blog, to feature my adventures and projects in  making, programming, and engineering. Built in Jekyll, to be served from Github pages.
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://hackaday.io/UriSh" title="UriSh"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#hackaday"></use></svg></a></li><li><a rel="me" href="https://www.facebook.com/uri.sh.982" title="uri.sh.982"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg></a></li><li><a rel="me" href="https://github.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/urishx" title="urishx"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Integrating Machines Using Android and Python - Part 2 | Uri Sh.</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Integrating Machines Using Android and Python - Part 2" />
+<meta name="author" content="Uri Shani" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="For the next iteration of our machine, a different machine was selected because the first one wasn’t quite up to the task. Besides functioning poorly (for our purposes, at least), the Bluetooth connection wasn’t reliable enough. Asking around, one of the entrepreneurs’ CTO heard of a (supposedly) better machine that had been “hacked” by one of the distributor’s clients. A few days passed, and we got to play with a new (secondhand) machine, already half disassembled by one of the mechanical engineers already modeling its parts. First thoughts, again Since the machine’s electronics were mostly out, I first tried figuring out what’s what. I found a microcontroller board at the back of the machine, and found that it was driven by a microcontroller I sort of know - STM32F103. I tried figuring out what each IO was doing, and doing so I found the TX/RX lines going to the touch screen at the front of the machine. I then followed SparkFun’s tutorial on using a logic analyzer with Sigrok, to capture the UART comm. At this point my goal was to record the communication sent back and forth between the uC and the touch screen, and to figure out how to trigger certain functions. It turned out to be a good learning experience, but not a worthwhile one. The communication protocol used in this particular machine was too complicated for me to decipher, as it was using what seemed to be changing in length with every operation. Without some prior knowledge about the communication scheme, it seemed like a lot of work was still ahead of me if I were to continue down this road. As the communication seemed too complex to replicate, I took another look at the machine. I found that what I assumed to be only a touch screen had actually a full microprocessor board driving it. When I first looked at the disassembled machine, I thought the whole machine was being driven by some firmware running on the STM32 board, and that the UART communication to the touch display was to a daughter board. But finding that the other board was sporting a microprocessor, in what seemed to be a smartphone development board form, changed my perspective. I was now thinking that the smartphone dev board was the actual computer doing the heavy lifting, while the STM32 board was functioning as a peripheral to it. I shared my findings with the consultant who suggested we use Macrodroid for the first machine. He suggested we start the machine and prod around the GUI on the touch screen to get a sense of what was the OS running behind the scenes. He also suggested it would probably be Android of some sort, as it was relatively easy to get that working as a touch screen UI for the machine. It took a while, but eventually, I got to the machine’s settings by trying to set the system language for the UI. It seems the developers of the GUI decided to use the OS language settings, and so I could confirm it was running a recent enough Android system. I also talked with the distributor, and through him got to the guy who “hacked” the machine prior to me. The last guy got to about where I got, by prodding the UI of the machine set in his office. But this guy got blocked by the distributor’s password - whereas in the case of my machine the distributor had unlocked it specifically for our use. Stay Tuned In the next post, I will cover how I used ADB and Appium to overcome the challenges posed by the dynamic screens of the second machine. Stay tuned for a detailed walkthrough of the process and the final solution!" />
+<meta property="og:description" content="For the next iteration of our machine, a different machine was selected because the first one wasn’t quite up to the task. Besides functioning poorly (for our purposes, at least), the Bluetooth connection wasn’t reliable enough. Asking around, one of the entrepreneurs’ CTO heard of a (supposedly) better machine that had been “hacked” by one of the distributor’s clients. A few days passed, and we got to play with a new (secondhand) machine, already half disassembled by one of the mechanical engineers already modeling its parts. First thoughts, again Since the machine’s electronics were mostly out, I first tried figuring out what’s what. I found a microcontroller board at the back of the machine, and found that it was driven by a microcontroller I sort of know - STM32F103. I tried figuring out what each IO was doing, and doing so I found the TX/RX lines going to the touch screen at the front of the machine. I then followed SparkFun’s tutorial on using a logic analyzer with Sigrok, to capture the UART comm. At this point my goal was to record the communication sent back and forth between the uC and the touch screen, and to figure out how to trigger certain functions. It turned out to be a good learning experience, but not a worthwhile one. The communication protocol used in this particular machine was too complicated for me to decipher, as it was using what seemed to be changing in length with every operation. Without some prior knowledge about the communication scheme, it seemed like a lot of work was still ahead of me if I were to continue down this road. As the communication seemed too complex to replicate, I took another look at the machine. I found that what I assumed to be only a touch screen had actually a full microprocessor board driving it. When I first looked at the disassembled machine, I thought the whole machine was being driven by some firmware running on the STM32 board, and that the UART communication to the touch display was to a daughter board. But finding that the other board was sporting a microprocessor, in what seemed to be a smartphone development board form, changed my perspective. I was now thinking that the smartphone dev board was the actual computer doing the heavy lifting, while the STM32 board was functioning as a peripheral to it. I shared my findings with the consultant who suggested we use Macrodroid for the first machine. He suggested we start the machine and prod around the GUI on the touch screen to get a sense of what was the OS running behind the scenes. He also suggested it would probably be Android of some sort, as it was relatively easy to get that working as a touch screen UI for the machine. It took a while, but eventually, I got to the machine’s settings by trying to set the system language for the UI. It seems the developers of the GUI decided to use the OS language settings, and so I could confirm it was running a recent enough Android system. I also talked with the distributor, and through him got to the guy who “hacked” the machine prior to me. The last guy got to about where I got, by prodding the UI of the machine set in his office. But this guy got blocked by the distributor’s password - whereas in the case of my machine the distributor had unlocked it specifically for our use. Stay Tuned In the next post, I will cover how I used ADB and Appium to overcome the challenges posed by the dynamic screens of the second machine. Stay tuned for a detailed walkthrough of the process and the final solution!" />
+<link rel="canonical" href="https://urishx.github.io/2021/11/01/Integrating-machines-using-Android-and-Python-Part-2.html" />
+<meta property="og:url" content="https://urishx.github.io/2021/11/01/Integrating-machines-using-Android-and-Python-Part-2.html" />
+<meta property="og:site_name" content="Uri Sh." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-01T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Integrating Machines Using Android and Python - Part 2" />
+<script type="application/ld+json">
+{"headline":"Integrating Machines Using Android and Python - Part 2","description":"For the next iteration of our machine, a different machine was selected because the first one wasn’t quite up to the task. Besides functioning poorly (for our purposes, at least), the Bluetooth connection wasn’t reliable enough. Asking around, one of the entrepreneurs’ CTO heard of a (supposedly) better machine that had been “hacked” by one of the distributor’s clients. A few days passed, and we got to play with a new (secondhand) machine, already half disassembled by one of the mechanical engineers already modeling its parts. First thoughts, again Since the machine’s electronics were mostly out, I first tried figuring out what’s what. I found a microcontroller board at the back of the machine, and found that it was driven by a microcontroller I sort of know - STM32F103. I tried figuring out what each IO was doing, and doing so I found the TX/RX lines going to the touch screen at the front of the machine. I then followed SparkFun’s tutorial on using a logic analyzer with Sigrok, to capture the UART comm. At this point my goal was to record the communication sent back and forth between the uC and the touch screen, and to figure out how to trigger certain functions. It turned out to be a good learning experience, but not a worthwhile one. The communication protocol used in this particular machine was too complicated for me to decipher, as it was using what seemed to be changing in length with every operation. Without some prior knowledge about the communication scheme, it seemed like a lot of work was still ahead of me if I were to continue down this road. As the communication seemed too complex to replicate, I took another look at the machine. I found that what I assumed to be only a touch screen had actually a full microprocessor board driving it. When I first looked at the disassembled machine, I thought the whole machine was being driven by some firmware running on the STM32 board, and that the UART communication to the touch display was to a daughter board. But finding that the other board was sporting a microprocessor, in what seemed to be a smartphone development board form, changed my perspective. I was now thinking that the smartphone dev board was the actual computer doing the heavy lifting, while the STM32 board was functioning as a peripheral to it. I shared my findings with the consultant who suggested we use Macrodroid for the first machine. He suggested we start the machine and prod around the GUI on the touch screen to get a sense of what was the OS running behind the scenes. He also suggested it would probably be Android of some sort, as it was relatively easy to get that working as a touch screen UI for the machine. It took a while, but eventually, I got to the machine’s settings by trying to set the system language for the UI. It seems the developers of the GUI decided to use the OS language settings, and so I could confirm it was running a recent enough Android system. I also talked with the distributor, and through him got to the guy who “hacked” the machine prior to me. The last guy got to about where I got, by prodding the UI of the machine set in his office. But this guy got blocked by the distributor’s password - whereas in the case of my machine the distributor had unlocked it specifically for our use. Stay Tuned In the next post, I will cover how I used ADB and Appium to overcome the challenges posed by the dynamic screens of the second machine. Stay tuned for a detailed walkthrough of the process and the final solution!","datePublished":"2021-11-01T00:00:00+00:00","dateModified":"2021-11-01T00:00:00+00:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://urishx.github.io/2021/11/01/Integrating-machines-using-Android-and-Python-Part-2.html"},"url":"https://urishx.github.io/2021/11/01/Integrating-machines-using-Android-and-Python-Part-2.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://urishx.github.io/logo.png"},"name":"Uri Shani"},"author":{"@type":"Person","name":"Uri Shani"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://urishx.github.io/feed.xml" title="Uri Sh." />
+<link href="https://fonts.googleapis.com/css2?family=Alef&family=Tinos&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link rel="icon" href="/assets/cropped-logo-1-32x32.png" sizes="32x32"/></head>
+<body><div>
+    <header class="site-header" style="background-image: url('/assets/img/banner.png');">
+        <div class="banner">
+            <div class="img-container">
+                
+                    <img alt="logo" src="/assets/img/logo.png"/>
+                
+            </div>
+            <h1 class="site-title">
+                <a rel="author" href="/">Uri Sh.</a>
+            </h1>
+            <h2>Making, Engineering, and Blogging about it too</h2>
+        </div>
+        <div class="wrapper"><nav class="site-nav">
+                    <input class="nav-trigger" id="nav-trigger" type="checkbox"/>
+                    <label for="nav-trigger">
+                        <span class="menu-icon">
+                            <svg height="15px" viewbox="0 0 18 15" width="18px">
+                                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+                            </svg>
+                        </span>
+                    </label>
+
+                    <div class="trigger">
+                        <a class="page-link" href="/" >Home</a><a class="page-link" href="/about/" >About me</a><a class="page-link" href="/portfolio/" >Portfolio</a></div>
+                </nav></div>
+    </header>
+</div>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Integrating Machines Using Android and Python - Part 2</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2021-11-01T00:00:00+00:00" itemprop="datePublished">
+        01.11.2021
+      </time>~<time class="dt-modified" datetime="2024-07-14T00:00:00+00:00" itemprop="dateModified">
+          14.07.2024
+        </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>For the next iteration of our machine, a different machine was selected because the first one wasn’t quite up to the task. Besides functioning poorly (for our purposes, at least), the Bluetooth connection wasn’t reliable enough.</p>
+
+<p>Asking around, one of the entrepreneurs’ CTO heard of a (supposedly) better machine that had been “hacked” by one of the distributor’s clients.</p>
+
+<p>A few days passed, and we got to play with a new (secondhand) machine, already half disassembled by one of the mechanical engineers already modeling its parts.</p>
+
+<h2 id="first-thoughts-again">First thoughts, again</h2>
+
+<p>Since the machine’s electronics were mostly out, I first tried figuring out what’s what. I found a microcontroller board at the back of the machine, and found that it was driven by a microcontroller I sort of know - STM32F103. I tried figuring out what each IO was doing, and doing so I found the TX/RX lines going to the touch screen at the front of the machine. I then followed SparkFun’s tutorial on <a href="https://learn.sparkfun.com/tutorials/using-the-usb-logic-analyzer-with-sigrok-pulseview/all">using a logic analyzer with Sigrok</a>, to capture the UART comm.</p>
+
+<p>At this point my goal was to record the communication sent back and forth between the uC and the touch screen, and to figure out how to trigger certain functions.</p>
+
+<p>It turned out to be a good learning experience, but not a worthwhile one. The communication protocol used in this particular machine was too complicated for me to decipher, as it was using what seemed to be changing in length with every operation. Without some prior knowledge about the communication scheme, it seemed like a lot of work was still ahead of me if I were to continue down this road.</p>
+
+<p>As the communication seemed too complex to replicate, I took another look at the machine. I found that what I assumed to be only a touch screen had actually a full microprocessor board driving it. When I first looked at the disassembled machine, I thought the whole machine was being driven by some firmware running on the STM32 board, and that the UART communication to the touch display was to a daughter board. But finding that the other board was sporting a microprocessor, in what seemed to be a smartphone development board form, changed my perspective. I was now thinking that the smartphone dev board was the actual computer doing the heavy lifting, while the STM32 board was functioning as a peripheral to it.</p>
+
+<p>I shared my findings with the consultant who suggested we use Macrodroid for the first machine. He suggested we start the machine and prod around the GUI on the touch screen to get a sense of what was the OS running behind the scenes. He also suggested it would probably be Android of some sort, as it was relatively easy to get that working as a touch screen UI for the machine.</p>
+
+<p>It took a while, but eventually, I got to the machine’s settings by trying to set the system language for the UI. It seems the developers of the GUI decided to use the OS language settings, and so I could confirm it was running a recent enough Android system.</p>
+
+<p>I also talked with the distributor, and through him got to the guy who “hacked” the machine prior to me. The last guy got to about where I got, by prodding the UI of the machine set in his office. But this guy got blocked by the distributor’s password - whereas in the case of my machine the distributor had unlocked it specifically for our use.</p>
+
+<h3 id="stay-tuned">Stay Tuned</h3>
+
+<p>In the next post, I will cover how I used ADB and Appium to overcome the challenges posed by the dynamic screens of the second machine. Stay tuned for a detailed walkthrough of the process and the final solution!</p>
+
+  </div><a class="u-url" href="/2021/11/01/Integrating-machines-using-Android-and-Python-Part-2.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">&#169; Uri Shani 2020</li>
+          <li><a class="u-email" href="mailto:urish@urishx.com">urish@urishx.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>A portfolio centered site with a blog, to feature my adventures and projects in  making, programming, and engineering. Built in Jekyll, to be served from Github pages.
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://hackaday.io/UriSh" title="UriSh"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#hackaday"></use></svg></a></li><li><a rel="me" href="https://www.facebook.com/uri.sh.982" title="uri.sh.982"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg></a></li><li><a rel="me" href="https://github.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/urishx" title="urishx"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
