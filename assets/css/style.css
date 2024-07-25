@@ -610,9 +610,9 @@ h1, h2, h3, h4, h5, h6 { font-family: "Tinos", serif; }
 
 @media screen and (min-width: 600px) { .site-nav { position: absolute; right: 0; margin-right: 0; padding-right: max(calc((100% - 800px) / 2), 10vw); border-radius: 0; border-top: none; border-left: none; border-right: none; border-bottom: 2px solid #93a1a1; background-color: rgba(251, 238, 203, 0.65); width: 100%; } .site-nav .page-link { padding: 0 20px; } .site-nav .page-link:not(:last-child) { margin-right: 0; } .site-nav .page-link:hover { background-color: rgba(248, 223, 156, 0.65); text-decoration: none; color: #cb4b16; } }
 
-.read-more { display: block; margin-top: 2rem; margin-bottom: 0; margin-left: auto; margin-right: auto; padding-bottom: 0; width: 40%; font-style: italic; color: #7d959d; }
+.read-more { display: block; margin-top: 2rem; margin-bottom: 0; margin-left: auto; margin-right: auto; padding-bottom: 0; font-style: italic; color: #7d959d; }
 
-@media screen and (max-width: 600px) { .read-more { width: 80%; } }
+.read-more :visited { color: #7d959d; }
 
 /** Posts */
 .post-block-image { display: block; margin-top: 2rem; margin-bottom: 0; margin-left: auto; margin-right: auto; padding-bottom: 0; width: 40%; }
