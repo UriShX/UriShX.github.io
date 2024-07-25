@@ -612,7 +612,7 @@ h1, h2, h3, h4, h5, h6 { font-family: "Tinos", serif; }
 
 .read-more { display: block; margin-top: 2rem; margin-bottom: 0; margin-left: auto; margin-right: auto; padding-bottom: 0; font-style: italic; color: #7d959d; }
 
-.read-more :visited { color: #7d959d; }
+.read-more a:visited { color: #6e8992; }
 
 /** Posts */
 .post-block-image { display: block; margin-top: 2rem; margin-bottom: 0; margin-left: auto; margin-right: auto; padding-bottom: 0; width: 40%; }
