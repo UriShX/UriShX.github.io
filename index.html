@@ -1,58 +1,4 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Uri Sh. | A portfolio centered site with a blog, to feature my adventures and projects in making, programming, and engineering. Built in Jekyll, to be served from Github pages.</title>
-<meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Uri Sh." />
-<meta name="author" content="Uri Shani" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="A portfolio centered site with a blog, to feature my adventures and projects in making, programming, and engineering. Built in Jekyll, to be served from Github pages." />
-<meta property="og:description" content="A portfolio centered site with a blog, to feature my adventures and projects in making, programming, and engineering. Built in Jekyll, to be served from Github pages." />
-<link rel="canonical" href="https://urishx.github.io/" />
-<meta property="og:url" content="https://urishx.github.io/" />
-<meta property="og:site_name" content="Uri Sh." />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Uri Sh." />
-<script type="application/ld+json">
-{"headline":"Uri Sh.","description":"A portfolio centered site with a blog, to feature my adventures and projects in making, programming, and engineering. Built in Jekyll, to be served from Github pages.","@type":"WebSite","url":"https://urishx.github.io/","name":"Uri Sh.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://urishx.github.io/logo.png"},"name":"Uri Shani"},"author":{"@type":"Person","name":"Uri Shani"},"@context":"https://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://urishx.github.io/feed.xml" title="Uri Sh." />
-<link href="https://fonts.googleapis.com/css2?family=Alef&family=Tinos&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-<link rel="icon" href="/assets/cropped-logo-1-32x32.png" sizes="32x32"/></head>
-<body><div>
-    <header class="site-header" style="background-image: url('/assets/img/banner.png');">
-        <div class="banner">
-            <div class="img-container">
-                
-                    <img alt="logo" src="/assets/img/logo.png"/>
-                
-            </div>
-            <h1 class="site-title">
-                <a rel="author" href="/">Uri Sh.</a>
-            </h1>
-            <h2>Making, Engineering, and Blogging about it too</h2>
-        </div>
-        <div class="wrapper"><nav class="site-nav">
-                    <input class="nav-trigger" id="nav-trigger" type="checkbox"/>
-                    <label for="nav-trigger">
-                        <span class="menu-icon">
-                            <svg height="15px" viewbox="0 0 18 15" width="18px">
-                                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
-                            </svg>
-                        </span>
-                    </label>
-
-                    <div class="trigger">
-                        <a class="page-current" href="/"  aria-disabled="true" >Home</a><a class="page-link" href="/about/" >About me</a><a class="page-link" href="/portfolio/" >Portfolio</a></div>
-                </nav></div>
-    </header>
-</div>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <div class="home"><h1 id="welcome"><em>Welcome!</em></h1>
+<div class="home"><h1 id="welcome"><em>Welcome!</em></h1>
 <p>My name is Uri Shani, and I am a maker, a tinkerer, and an engineer.</p>
 
 <p>I can design and build most anything out of wood, program and build Arduino and Raspberry Pi devices, design all sorts of mechanical contraptions and devices, and design rubber and plastic parts for any manufacturing technology. In the past year or so I’ve taught myself to program web apps, at first in order to provide virtual UI to Arduino apps, then later it became a goal all in it’s own.</p>
@@ -65,138 +11,14 @@
         <span class="post-meta">24.07.2024</span>
         <h3>
           <a class="post-link" href="/2024/07/24/Integrating-machines-using-Android-and-Python-Part-3.html">
-            Integrating Machines Using Android and Python - Part 2
+            Integrating Machines Using Android and Python - Part 3
           </a>
         </h3><h2 id="overcoming-dynamic-screen-challenges-with-adb-and-appium">Overcoming Dynamic Screen Challenges with ADB and Appium</h2>
 
 <p>When working with consumer-level machines integrated into larger systems, I faced a significant challenge: dynamic screens. These screens, which change frequently based on user interactions, made it impossible to control the machine using just ADB. This is where Appium came in handy.</p>
 
-<h3 id="setting-up-appium-for-development">Setting Up Appium for Development</h3>
-
-<p>Initially, I set up <a href="https://github.com/appium/appium-desktop">Appium Desktop</a> to explore the possibilities. This graphical interface allowed me to interact with the device and see the UI hierarchy in real-time, which was crucial for understanding how the app’s screens were structured. After gaining enough insight, I transitioned to using the Appium CLI version through NPM for more streamlined and automated control.</p>
-
-<h3 id="crafting-the-adb-hierarchy-handler">Crafting the ADB Hierarchy Handler</h3>
-
-<p>With the knowledge gained, I wrote a custom class to handle interactions with the device. This class, <code class="language-plaintext highlighter-rouge">ADB_Hierarchy_Handler</code>, encapsulates the logic for connecting to the device, parsing the UI hierarchy, and performing actions based on dynamic screen content. While I can’t share the full implementation, here’s an overview of its functionality:</p>
-
-<ol>
-  <li><strong>Initialization and Connection</strong>: The class starts the ADB server, connects to the device, and initializes Appium. If no device is found, it raises a custom error and exits.</li>
-  <li><strong>UI Hierarchy Parsing</strong>: Using <code class="language-plaintext highlighter-rouge">xmltodict</code> and regular expressions, the class parses the XML representation of the UI hierarchy to locate elements dynamically.</li>
-  <li><strong>Action Execution</strong>: Based on the parsed data, it performs actions such as clicking buttons or entering text.</li>
-</ol>
-
-<p>Here’s a description of the critical sections of the class:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">ppadb.client</span> <span class="kn">import</span> <span class="n">Client</span>
-<span class="kn">from</span> <span class="nn">appium</span> <span class="kn">import</span> <span class="n">webdriver</span>
-<span class="kn">from</span> <span class="nn">selenium.common</span> <span class="kn">import</span> <span class="n">exceptions</span> <span class="k">as</span> <span class="n">SE</span>
-<span class="kn">import</span> <span class="nn">xmltodict</span>
-
-<span class="k">class</span> <span class="nc">CustomError</span><span class="p">(</span><span class="nb">Exception</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="k">class</span> <span class="nc">ADB_Hierarchy_Handler</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">'ANDROID_HOME'</span><span class="p">])</span>
-    <span class="n">os</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">'adb start-server'</span><span class="p">)</span>
-    <span class="n">adb</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
-    <span class="n">devices</span> <span class="o">=</span> <span class="n">adb</span><span class="p">.</span><span class="n">devices</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">devices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'no device attached'</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="n">CustomError</span><span class="p">(</span><span class="s">"no device attached to ADB server"</span><span class="p">)</span>
-
-    <span class="n">appium_server</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="n">Popen</span><span class="p">(</span><span class="s">'appium'</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">DEVNULL</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">DEVNULL</span><span class="p">)</span>
-
-    <span class="n">caps</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">"platformName"</span><span class="p">:</span> <span class="s">"Android"</span><span class="p">,</span>
-        <span class="s">"automationName"</span><span class="p">:</span> <span class="s">"UiAutomator2"</span><span class="p">,</span>
-        <span class="s">"skipServerInstallation"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
-        <span class="s">"disableWindowAnimation"</span><span class="p">:</span> <span class="bp">True</span>
-    <span class="p">}</span>
-
-    <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="p">.</span><span class="n">Remote</span><span class="p">(</span><span class="s">"http://localhost:4723/wd/hub"</span><span class="p">,</span> <span class="n">caps</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">parse_ui_hierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">xml_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">driver</span><span class="p">.</span><span class="n">page_source</span>
-        <span class="n">data_dict</span> <span class="o">=</span> <span class="n">xmltodict</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">xml_data</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">data_dict</span>
-
-    <span class="k">def</span> <span class="nf">find_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_dict</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
-        <span class="n">elements</span> <span class="o">=</span> <span class="n">get_recursively</span><span class="p">(</span><span class="n">search_dict</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">elements</span>
-
-    <span class="k">def</span> <span class="nf">click_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
-        <span class="n">bounds</span> <span class="o">=</span> <span class="n">get_bounds_as_dict</span><span class="p">(</span><span class="n">element</span><span class="p">[</span><span class="s">'@bounds'</span><span class="p">])</span>
-        <span class="n">center</span> <span class="o">=</span> <span class="n">get_center</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">driver</span><span class="p">.</span><span class="n">tap</span><span class="p">([(</span><span class="n">center</span><span class="p">[</span><span class="s">'x'</span><span class="p">],</span> <span class="n">center</span><span class="p">[</span><span class="s">'y'</span><span class="p">])])</span>
-</code></pre></div></div>
-
-<h3 id="utilizing-helper-functions-for-parsing">Utilizing Helper Functions for Parsing</h3>
-
-<p>I leveraged several helper functions to streamline the process of parsing the UI hierarchy and extracting necessary information:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
-
-<span class="n">bounds_regex</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="s">"</span><span class="se">\\</span><span class="s">[(</span><span class="se">\\</span><span class="s">d+),(</span><span class="se">\\</span><span class="s">d+)</span><span class="se">\\</span><span class="s">]</span><span class="se">\\</span><span class="s">[(</span><span class="se">\\</span><span class="s">d+),(</span><span class="se">\\</span><span class="s">d+)</span><span class="se">\\</span><span class="s">]"</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">get_recursively</span><span class="p">(</span><span class="n">search_dict</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
-    <span class="n">fields_found</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">search_dict</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">field</span><span class="p">:</span>
-            <span class="n">fields_found</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="n">results</span> <span class="o">=</span> <span class="n">get_recursively</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
-            <span class="n">fields_found</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
-            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                    <span class="n">more_results</span> <span class="o">=</span> <span class="n">get_recursively</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
-                    <span class="n">fields_found</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">more_results</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">fields_found</span>
-
-<span class="k">def</span> <span class="nf">get_bounds_as_dict</span><span class="p">(</span><span class="n">bounds_str</span><span class="p">):</span>
-    <span class="n">bounds</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">matches</span> <span class="o">=</span> <span class="n">bounds_regex</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">bounds_str</span><span class="p">)</span>
-    <span class="n">bounds</span><span class="p">[</span><span class="s">'left'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">matches</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">bounds</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">matches</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-    <span class="n">bounds</span><span class="p">[</span><span class="s">'right'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">matches</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-    <span class="n">bounds</span><span class="p">[</span><span class="s">'bottom'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">matches</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">bounds</span>
-
-<span class="k">def</span> <span class="nf">get_center</span><span class="p">(</span><span class="n">bounds_dict</span><span class="p">):</span>
-    <span class="n">coordinates</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">coordinates</span><span class="p">[</span><span class="s">'x'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">bounds_dict</span><span class="p">[</span><span class="s">'right'</span><span class="p">]</span> <span class="o">-</span> <span class="n">bounds_dict</span><span class="p">[</span><span class="s">'left'</span><span class="p">])</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">bounds_dict</span><span class="p">[</span><span class="s">'left'</span><span class="p">]</span>
-    <span class="n">coordinates</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">bounds_dict</span><span class="p">[</span><span class="s">'bottom'</span><span class="p">]</span> <span class="o">-</span> <span class="n">bounds_dict</span><span class="p">[</span><span class="s">'top'</span><span class="p">])</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">bounds_dict</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">coordinates</span>
-</code></pre></div></div>
-
-<h3 id="wrapping-up-and-testing">Wrapping Up and Testing</h3>
-
-<p>The class includes a main test case to ensure everything works as expected:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">handler</span> <span class="o">=</span> <span class="n">ADB_Hierarchy_Handler</span><span class="p">()</span>
-        <span class="n">ui_data</span> <span class="o">=</span> <span class="n">handler</span><span class="p">.</span><span class="n">parse_ui_hierarchy</span><span class="p">()</span>
-        <span class="n">elements</span> <span class="o">=</span> <span class="n">handler</span><span class="p">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">ui_data</span><span class="p">,</span> <span class="s">'desired_element_id'</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">elements</span><span class="p">:</span>
-            <span class="n">handler</span><span class="p">.</span><span class="n">click_element</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">except</span> <span class="n">CustomError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">f"An error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>This code initializes the handler, parses the UI hierarchy, finds the desired element by its ID, and clicks it. This approach enabled me to automate interactions with the device efficiently, overcoming the challenges posed by dynamic screens without relying on OpenCV.</p>
-
-<h3 id="conclusion">Conclusion</h3>
-
-<p>Through the use of Appium and careful parsing of the UI hierarchy, I successfully automated the control of machines with dynamic screens. This solution proved robust and adaptable, paving the way for more efficient integration of consumer-level machines into larger systems.</p>
-
-<p>I also believe that using Appium and a virtual device runnning on the PC controlling the robot could have been a better solution for the first machine, instead of the unused cell phone we used to get that working. I should have tried to get it going, but I didn’t have the time to revive the old machine and tinker with it. I’ll definitely consider it for future projects.</p>
-</li><li>
+          
+          <a href="/2024/07/24/Integrating-machines-using-Android-and-Python-Part-3.html" class="read-more">Read more...</a></li><li>
         <span class="post-meta">11.07.2024</span>
         <h3>
           <a class="post-link" href="/2024/07/11/OpenWRT-on-raspberry-pi-for-shell-script-development.html">
@@ -208,7 +30,20 @@
 
 <p><strong>Note: this post is about setting up a shell script dev environment on OpenWRT, not an actual OpenWRT development environment. For that, please follow the official <a href="https://openwrt.org/docs/guide-developer/start">developer’s guide</a></strong></p>
 
-</li><li>
+
+          
+          <a href="/2024/07/11/OpenWRT-on-raspberry-pi-for-shell-script-development.html" class="read-more">Read more...</a></li><li>
+        <span class="post-meta">11.01.2022</span>
+        <h3>
+          <a class="post-link" href="/2022/01/11/Integrating-machines-using-Android-and-Python-Part-1.html">
+            Integrating Machines Using Android and Python - Part 1
+          </a>
+        </h3><p>As part of working for an engineering firm, I sometimes need to integrate machines into a system designed by one of the firm’s mechanical engineers. This could be part of a POC, so we can move things a bit quicker. Or it could be part of our final product - integrating proven products into our designs means we can focus on getting the final machines built quicker, and less prone to errors. This is done on a regular basis in different disciplines of engineering. In mechanical engineering, a lot of designs integrate standard parts such as bearings or motors, for example. In electronics engineering, relying on pre-built modules in designs could save a lot of hassle.</p>
+
+<p>But in this one machine we’re building, I needed to integrate a couple of different machines that required a different set of skills, since they were (definitely) not meant to be included in any larger machine - and that’s what I want to write about.</p>
+
+          
+          <a href="/2022/01/11/Integrating-machines-using-Android-and-Python-Part-1.html" class="read-more">Read more...</a></li><li>
         <span class="post-meta">01.11.2021</span>
         <h3>
           <a class="post-link" href="/2021/11/01/Integrating-machines-using-Android-and-Python-Part-2.html">
@@ -218,28 +53,8 @@
 
 <p>Asking around, one of the entrepreneurs’ CTO heard of a (supposedly) better machine that had been “hacked” by one of the distributor’s clients.</p>
 
-<p>A few days passed, and we got to play with a new (secondhand) machine, already half disassembled by one of the mechanical engineers already modeling its parts.</p>
-
-<h2 id="first-thoughts-again">First thoughts, again</h2>
-
-<p>Since the machine’s electronics were mostly out, I first tried figuring out what’s what. I found a microcontroller board at the back of the machine, and found that it was driven by a microcontroller I sort of know - STM32F103. I tried figuring out what each IO was doing, and doing so I found the TX/RX lines going to the touch screen at the front of the machine. I then followed SparkFun’s tutorial on <a href="https://learn.sparkfun.com/tutorials/using-the-usb-logic-analyzer-with-sigrok-pulseview/all">using a logic analyzer with Sigrok</a>, to capture the UART comm.</p>
-
-<p>At this point my goal was to record the communication sent back and forth between the uC and the touch screen, and to figure out how to trigger certain functions.</p>
-
-<p>It turned out to be a good learning experience, but not a worthwhile one. The communication protocol used in this particular machine was too complicated for me to decipher, as it was using what seemed to be changing in length with every operation. Without some prior knowledge about the communication scheme, it seemed like a lot of work was still ahead of me if I were to continue down this road.</p>
-
-<p>As the communication seemed too complex to replicate, I took another look at the machine. I found that what I assumed to be only a touch screen had actually a full microprocessor board driving it. When I first looked at the disassembled machine, I thought the whole machine was being driven by some firmware running on the STM32 board, and that the UART communication to the touch display was to a daughter board. But finding that the other board was sporting a microprocessor, in what seemed to be a smartphone development board form, changed my perspective. I was now thinking that the smartphone dev board was the actual computer doing the heavy lifting, while the STM32 board was functioning as a peripheral to it.</p>
-
-<p>I shared my findings with the consultant who suggested we use Macrodroid for the first machine. He suggested we start the machine and prod around the GUI on the touch screen to get a sense of what was the OS running behind the scenes. He also suggested it would probably be Android of some sort, as it was relatively easy to get that working as a touch screen UI for the machine.</p>
-
-<p>It took a while, but eventually, I got to the machine’s settings by trying to set the system language for the UI. It seems the developers of the GUI decided to use the OS language settings, and so I could confirm it was running a recent enough Android system.</p>
-
-<p>I also talked with the distributor, and through him got to the guy who “hacked” the machine prior to me. The last guy got to about where I got, by prodding the UI of the machine set in his office. But this guy got blocked by the distributor’s password - whereas in the case of my machine the distributor had unlocked it specifically for our use.</p>
-
-<h3 id="stay-tuned">Stay Tuned</h3>
-
-<p>In the next post, I will cover how I used ADB and Appium to overcome the challenges posed by the dynamic screens of the second machine. Stay tuned for a detailed walkthrough of the process and the final solution!</p>
-</li><li>
+          
+          <a href="/2021/11/01/Integrating-machines-using-Android-and-Python-Part-2.html" class="read-more">Read more...</a></li><li>
         <span class="post-meta">20.01.2021</span>
         <h3>
           <a class="post-link" href="/2021/01/20/Customizing-Jekyll-with-a-Portfolio.html">
@@ -248,23 +63,18 @@
         </h3><p>In my <a href="/2020/12/16/Customizing-Jekyll's-default-theme.html">last post</a> 
 I detailed how I used <a href="https://jekyllrb.com/">Jekyll</a> and the the new version (3) of the <a href="https://github.com/jekyll/minima">Minima</a> theme, to style my site so that it looked similar to the WordPress team’s <a href="https://wordpress.org/themes/twentythirteen/">Twentythirteen theme</a>. <br />
 In this post, I am going to outline how I created a new layout portfolio that could showcase any project of my making/tinkering/engineering/enginerding - be it a woodworking project, a mechanical contraption, or a Python script.</p>
-</li><li>
-        <span class="post-meta">11.01.2021</span>
-        <h3>
-          <a class="post-link" href="/2021/01/11/Integrating-machines-using-Android-and-Python-Part-1.html">
-            Integrating Machines Using Android and Python - Part 1
-          </a>
-        </h3><p>As part of working for an engineering firm, I sometimes need to integrate machines into a system designed by one of the firm’s mechanical engineers. This could be part of a POC, so we can move things a bit quicker. Or it could be part of our final product - integrating proven products into our designs means we can focus on getting the final machines built quicker, and less prone to errors. This is done on a regular basis in different disciplines of engineering. In mechanical engineering, a lot of designs integrate standard parts such as bearings or motors, for example. In electronics engineering, relying on pre-built modules in designs could save a lot of hassle.</p>
 
-<p>But in this one machine we’re building, I needed to integrate a couple of different machines that required a different set of skills, since they were (definitely) not meant to be included in any larger machine - and that’s what I want to write about.</p>
-</li><li>
+          
+          <a href="/2021/01/20/Customizing-Jekyll-with-a-Portfolio.html" class="read-more">Read more...</a></li><li>
         <span class="post-meta">16.12.2020</span>
         <h3>
           <a class="post-link" href="/2020/12/16/Customizing-Jekyll's-default-theme.html">
             Customizing Jekyll&#39;s Default Theme
           </a>
         </h3><p>Jekyll installs with a nice, clean theme, called <a href="https://github.com/jekyll/minima">Minima</a>. While there are <em>a lot</em> of nice themes out there, I had both a clear view in my head of what I wanted to accomplish, and ample time thanks to CoVid19. So, armed with <a href="https://github.com/jekyll/minima">Minima’s</a> source and <a href="https://jekyllrb.com/docs/themes/">Jekyll’s documentation</a>, I decided to have a go with modifying the theme a bit, and in this post I’ll try to outline the way I went about it.</p>
-</li><li>
+
+          
+          <a href="/2020/12/16/Customizing-Jekyll's-default-theme.html" class="read-more">Read more...</a></li><li>
         <span class="post-meta">21.11.2019</span>
         <h3>
           <a class="post-link" href="/2019/11/21/new-order.html">
@@ -272,14 +82,18 @@ In this post, I am going to outline how I created a new layout portfolio that co
           </a>
         </h3><p>I decided to separate this blog from my main website. The main reason being that I need to use the website as an online portfolio, and I did not think there’s a justification to mix in the blog and too much personal stuff in that. The other reason is that I feel more comfortable writing about technical stuff in English, and my portfolio and business pages need to be in both Hebrew and English. <br />
 Hope it works well, though if it doesn’t I can still probably figure out how to revert the process.</p>
-</li><li>
+
+          
+          <a href="/2019/11/21/new-order.html" class="read-more">Read more...</a></li><li>
         <span class="post-meta">07.04.2019</span>
         <h3>
           <a class="post-link" href="/2019/04/07/niti-light-1-2.html">
             NiTi Light (1/2)
           </a>
         </h3><p>This post is mostly a technical documentation of a project I have done a few years ago, and have never been documented before. The reason for doing a write-up now is so I can have a step back and see where I am today, compared to a few years ago. Also, it might be interesting to others. I hope my wife, which designed the lampshade, will someday do a write-up concerning her design decisions.</p>
-</li><li>
+
+          
+          <a href="/2019/04/07/niti-light-1-2.html" class="read-more">Read more...</a></li><li>
         <span class="post-meta">07.04.2018</span>
         <h3>
           <a class="post-link" href="/2018/04/07/whats-on-my-mind.html">
@@ -289,49 +103,17 @@ Hope it works well, though if it doesn’t I can still probably figure out how t
 <ol>
   <li>I have this vision of building an easy to assemble and program DIY MIDI controller. This is supposed to be a modular system for musicians, DJ’s, sound technicians, etc., who don’t want to learn electronics or (even basic) programming.</li>
 </ol>
-</li><li>
+
+          
+          <a href="/2018/04/07/whats-on-my-mind.html" class="read-more">Read more...</a></li><li>
         <span class="post-meta">26.01.2018</span>
         <h3>
           <a class="post-link" href="/2018/01/26/engineering-for-the-love-of-music.html">
             Engineering for the love of music
           </a>
         </h3><p>When I was about 13 I became fascinated with the design of electric guitars. My mother who is a librarian took me with her to a warehouse of a company that imported magazines from around the world to Israel. She took me there to look at comics, but I found there fascinating magazines on all kinds of subjects. There were firearms magazines, sewing magazines, magazines for car and motorcycle enthusiasts, and many other topics. The best magazines I found (and my mother bought me) were the fringe and wacky comics and musical instruments magazines.</p>
-</li></ul>
+
+          
+          <a href="/2018/01/26/engineering-for-the-love-of-music.html" class="read-more">Read more...</a></li></ul>
 
     </div>
-
-      </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/"></data>
-
-  <div class="wrapper">
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col">
-        <p class="feed-subscribe">
-          <a href="/feed.xml">
-            <svg class="svg-icon orange">
-              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
-            </svg><span>Subscribe</span>
-          </a>
-        </p>
-        <ul class="contact-list">
-          <li class="p-name">&#169; Uri Shani 2020</li>
-          <li><a class="u-email" href="mailto:urish@urishx.com">urish@urishx.com</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <p>A portfolio centered site with a blog, to feature my adventures and projects in  making, programming, and engineering. Built in Jekyll, to be served from Github pages.
-</p>
-      </div>
-    </div>
-
-    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://hackaday.io/UriSh" title="UriSh"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#hackaday"></use></svg></a></li><li><a rel="me" href="https://www.facebook.com/uri.sh.982" title="uri.sh.982"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg></a></li><li><a rel="me" href="https://github.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/urishx" title="urishx"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
-</div>
-
-  </div>
-
-</footer>
-</body>
-
-</html>
