@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Upgrading the VPN Profile Switcher Script for OpenWRT | Uri Sh.</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Upgrading the VPN Profile Switcher Script for OpenWRT" />
+<meta name="author" content="Uri Shani" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this post, I will walk you through the process of updating and upgrading a shell script I originally wrote a few years ago for changing the VPN profile on OpenWRT routers. This script connects to NordVPN’s recommended servers, and I’ve recently added support for WireGuard (NordLynx) alongside the existing OpenVPN functionality. The original script was intended for OpenWRT installations on TP-Link Archer C20i and Raspberry Pi 3B+ with 2019 firmware. You can find the VPN Profile Switcher script here. The script queries NordVPN’s API for the recommended server and then updates the OpenVPN or WireGuard configuration on the router accordingly." />
+<meta property="og:description" content="In this post, I will walk you through the process of updating and upgrading a shell script I originally wrote a few years ago for changing the VPN profile on OpenWRT routers. This script connects to NordVPN’s recommended servers, and I’ve recently added support for WireGuard (NordLynx) alongside the existing OpenVPN functionality. The original script was intended for OpenWRT installations on TP-Link Archer C20i and Raspberry Pi 3B+ with 2019 firmware. You can find the VPN Profile Switcher script here. The script queries NordVPN’s API for the recommended server and then updates the OpenVPN or WireGuard configuration on the router accordingly." />
+<link rel="canonical" href="https://urishx.github.io/2024/07/28/upgrading-the-VPN-profile-switcher-script-for-OpenWRT.html" />
+<meta property="og:url" content="https://urishx.github.io/2024/07/28/upgrading-the-VPN-profile-switcher-script-for-OpenWRT.html" />
+<meta property="og:site_name" content="Uri Sh." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-07-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Upgrading the VPN Profile Switcher Script for OpenWRT" />
+<script type="application/ld+json">
+{"headline":"Upgrading the VPN Profile Switcher Script for OpenWRT","description":"In this post, I will walk you through the process of updating and upgrading a shell script I originally wrote a few years ago for changing the VPN profile on OpenWRT routers. This script connects to NordVPN’s recommended servers, and I’ve recently added support for WireGuard (NordLynx) alongside the existing OpenVPN functionality. The original script was intended for OpenWRT installations on TP-Link Archer C20i and Raspberry Pi 3B+ with 2019 firmware. You can find the VPN Profile Switcher script here. The script queries NordVPN’s API for the recommended server and then updates the OpenVPN or WireGuard configuration on the router accordingly.","datePublished":"2024-07-28T00:00:00+00:00","dateModified":"2024-07-28T00:00:00+00:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://urishx.github.io/2024/07/28/upgrading-the-VPN-profile-switcher-script-for-OpenWRT.html"},"url":"https://urishx.github.io/2024/07/28/upgrading-the-VPN-profile-switcher-script-for-OpenWRT.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://urishx.github.io/logo.png"},"name":"Uri Shani"},"author":{"@type":"Person","name":"Uri Shani"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://urishx.github.io/feed.xml" title="Uri Sh." />
+<link href="https://fonts.googleapis.com/css2?family=Alef&family=Tinos&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link rel="icon" href="/assets/cropped-logo-1-32x32.png" sizes="32x32"/></head>
+<body><div>
+    <header class="site-header" style="background-image: url('/assets/img/banner.png');">
+        <div class="banner">
+            <div class="img-container">
+                
+                    <img alt="logo" src="/assets/img/logo.png"/>
+                
+            </div>
+            <h1 class="site-title">
+                <a rel="author" href="/">Uri Sh.</a>
+            </h1>
+            <h2>Making, Engineering, and Blogging about it too</h2>
+        </div>
+        <div class="wrapper"><nav class="site-nav">
+                    <input class="nav-trigger" id="nav-trigger" type="checkbox"/>
+                    <label for="nav-trigger">
+                        <span class="menu-icon">
+                            <svg height="15px" viewbox="0 0 18 15" width="18px">
+                                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+                            </svg>
+                        </span>
+                    </label>
+
+                    <div class="trigger">
+                        <a class="page-link" href="/" >Home</a><a class="page-link" href="/about/" >About me</a><a class="page-link" href="/portfolio/" >Portfolio</a></div>
+                </nav></div>
+    </header>
+</div>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Upgrading the VPN Profile Switcher Script for OpenWRT</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2024-07-28T00:00:00+00:00" itemprop="datePublished">
+        28.07.2024
+      </time></p>
+      <p class="post-heading-comment">This post is a continuation of my [previous post]({% post_url 2024-07-11-OpenWRT-on-raspberry-pi-for-shell-script-development %}) on setting up a Raspberry Pi for shell script development. I hope you find it useful!.</p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In this post, I will walk you through the process of updating and upgrading a shell script I originally wrote a few years ago for changing the VPN profile on OpenWRT routers. This script connects to NordVPN’s recommended servers, and I’ve recently added support for WireGuard (NordLynx) alongside the existing OpenVPN functionality.</p>
+
+<p>The original script was intended for OpenWRT installations on TP-Link Archer C20i and Raspberry Pi 3B+ with 2019 firmware. You can find the <a href="https://github.com/UriShX/vpn-profile-switcher">VPN Profile Switcher script here</a>.</p>
+
+<p>The script queries NordVPN’s API for the recommended server and then updates the OpenVPN or WireGuard configuration on the router accordingly.</p>
+
+<!-- more -->
+
+<p>Here, I’ll discuss the upgrade process, including adding support for WireGuard, and share the essential parts of the script without exposing application-specific details.</p>
+
+<h2 id="understanding-the-scripts-purpose">Understanding the Script’s Purpose</h2>
+
+<p>The primary goal of the script is to:</p>
+
+<ol>
+  <li>Fetch the recommended NordVPN server using their API.</li>
+  <li>Check if the recommended profile exists on the router.</li>
+  <li>If the profile does not exist, download it and configure it with the saved username and password.</li>
+  <li>Update the router’s VPN configuration to use the new profile.</li>
+  <li>Clean up old profiles, keeping only the currently connected and previously connected profiles.</li>
+</ol>
+
+<h2 id="research-and-preparation">Research and Preparation</h2>
+
+<p>Since NordVPN started offering WireGuard servers (NordLynx) but didn’t provide a tutorial for manual connection on OpenWRT, I had to spend some time researching how to set it up. I found an <a href="https://web.archive.org/web/20210127045908/https://nordvpn.com/">unofficial documentation</a> for NordVPN’s API long time ago, and used a <a href="https://gist.github.com/bluewalk/7b3db071c488c82c604baf76a42eaad3?permalink_comment_id=5075473#gistcomment-5075473">comment on a GitHub gist</a> as a starting point for extracting the necessary details.</p>
+
+<h2 id="setting-up-wireguard">Setting Up WireGuard</h2>
+
+<p>First, I set up WireGuard on my development machine (a Mac) and then ported it to OpenWRT. Since I was unfamiliar with WireGuard, this involved a lot of trial and error. I used Claude (Anthropic’s AI) to help convert cURL commands to the lighter <code class="language-plaintext highlighter-rouge">wget</code> command suitable for OpenWRT. Despite Claude’s help, I had to install the <code class="language-plaintext highlighter-rouge">wget-ssl</code> package to avoid errors from NordVPN’s servers.</p>
+
+<p>With the necessary data extracted using <code class="language-plaintext highlighter-rouge">jsonfilter</code>, I created a WireGuard interface using LuCI, OpenWRT’s web interface. This initial success allowed me to formalize my approach in a script.</p>
+
+<h2 id="script-details">Script Details</h2>
+
+<p>Below is a simplified description of the script’s structure and logic. The actual script is more detailed and includes error handling and logging.</p>
+
+<ol>
+  <li><strong>Check for Required Packages</strong>:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">function </span>check_packages<span class="o">()</span> <span class="o">{</span>
+     opkg list-installed wget-ssl | <span class="nb">grep</span> <span class="nt">-q</span> <span class="nb">.</span> <span class="o">||</span> opkg list-installed curl | <span class="nb">grep</span> <span class="nt">-q</span> <span class="nb">.</span>
+     <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
+         </span>logger <span class="nt">-s</span> <span class="s2">"(</span><span class="nv">$0</span><span class="s2">) Error: either wget-ssl or curl are required to run this script. Please install either one of the packages."</span>
+         <span class="nb">exit </span>1
+     <span class="k">fi</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Fetch Credentials</strong>:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">function </span>get_credentials<span class="o">()</span> <span class="o">{</span>
+     <span class="k">if </span>which curl <span class="o">&gt;</span>/dev/null 2&gt;&amp;1<span class="p">;</span> <span class="k">then
+         </span><span class="nv">response_json</span><span class="o">=</span><span class="si">$(</span>curl <span class="nt">-s</span> <span class="nt">-u</span> token:<span class="s2">"</span><span class="nv">$access_token</span><span class="s2">"</span> https://api.nordvpn.com/v1/users/services/credentials<span class="si">)</span>
+     <span class="k">else
+         </span><span class="nv">response_json</span><span class="o">=</span><span class="si">$(</span>wget <span class="nt">-q</span> <span class="nt">-O</span> - <span class="nt">--auth-no-challenge</span> <span class="nt">--user</span><span class="o">=</span>token <span class="nt">--password</span><span class="o">=</span><span class="s2">"</span><span class="nv">$access_token</span><span class="s2">"</span> https://api.nordvpn.com/v1/users/services/credentials<span class="si">)</span>
+     <span class="k">fi
+     if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
+         </span>logger <span class="nt">-s</span> <span class="s2">"</span><span class="si">$(</span>0<span class="si">)</span><span class="s2"> Error: Failed to fetch credentials. Please check your access token and internet connection."</span>
+         <span class="nb">exit </span>1
+     <span class="k">fi</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Save Credentials</strong>:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">function </span>save_credentials<span class="o">()</span> <span class="o">{</span>
+     <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$vpn_type</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"openvpn"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+         </span><span class="nv">_username</span><span class="o">=</span><span class="si">$(</span>jsonfilter <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$response_json</span><span class="s2">"</span> <span class="nt">-e</span> <span class="s1">'@.username'</span><span class="si">)</span>
+         <span class="nv">_password</span><span class="o">=</span><span class="si">$(</span>jsonfilter <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$response_json</span><span class="s2">"</span> <span class="nt">-e</span> <span class="s1">'@.password'</span><span class="si">)</span>
+         <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$_username</span><span class="s2">"</span> <span class="o">&gt;</span> /etc/openvpn/secret
+         <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$_password</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> /etc/openvpn/secret
+     <span class="k">else
+         </span><span class="nv">_key</span><span class="o">=</span><span class="si">$(</span>jsonfilter <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$response_json</span><span class="s2">"</span> <span class="nt">-e</span> <span class="s2">"@.nordlynx_private_key"</span><span class="si">)</span>
+         uci <span class="nb">set </span>network.<span class="nv">$wg_iface</span><span class="o">=</span>interface
+         uci <span class="nb">set </span>network.<span class="nv">$wg_iface</span>.proto<span class="o">=</span><span class="s1">'wireguard'</span>
+         uci <span class="nb">set </span>network.<span class="nv">$wg_iface</span>.private_key<span class="o">=</span><span class="nv">$_key</span>
+         uci <span class="nb">set </span>network.<span class="nv">$wg_iface</span>.listen_port<span class="o">=</span><span class="s1">'51820'</span>
+         uci <span class="nb">set </span>network.<span class="nv">$wg_iface</span>.addresses<span class="o">=</span><span class="s1">'10.5.0.2/32'</span>
+         uci commit network
+     <span class="k">fi</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Script Execution</strong>:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> check_packages
+ get_credentials
+ save_credentials
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>For more details, you can review the full script in the <a href="https://github.com/UriShX/vpn-profile-switcher/blob/dev/get_nordvpn_credentials.sh">GitHub repository</a>.</p>
+
+<p>In the next post, I’ll cover the final integration of the updated script into the VPN Profile Switcher, ensuring seamless switching between OpenVPN and WireGuard profiles.</p>
+
+  </div><a class="u-url" href="/2024/07/28/upgrading-the-VPN-profile-switcher-script-for-OpenWRT.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">&#169; Uri Shani 2020</li>
+          <li><a class="u-email" href="mailto:urish@urishx.com">urish@urishx.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>A portfolio centered site with a blog, to feature my adventures and projects in  making, programming, and engineering. Built in Jekyll, to be served from Github pages.
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://hackaday.io/UriSh" title="UriSh"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#hackaday"></use></svg></a></li><li><a rel="me" href="https://www.facebook.com/uri.sh.982" title="uri.sh.982"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg></a></li><li><a rel="me" href="https://github.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/urishx" title="urishx"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
