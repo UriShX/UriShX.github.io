@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Enhancing the VPN Profile Switcher: Introducing Local DB Creation and a Self-Test Tool | Uri Sh.</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Enhancing the VPN Profile Switcher: Introducing Local DB Creation and a Self-Test Tool" />
+<meta name="author" content="Uri Shani" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In my last post, I mentioned upcoming enhancements to the VPN Profile Switcher, and today, I’m excited to share two new scripts that take this project to the next level. These scripts not only add functionality but also pave the way for a more robust and self-sufficient toolset. 1. Creating a Local Database with get_groups_and_countries_to_tsv.sh One of the critical components of the VPN Profile Switcher is the ability to maintain an updated list of available VPN server types and countries. Previously, this information was stored in the db branch of the repository and updated through a GitHub action. However, this approach comes with a caveat: the GitHub action will be canceled after two months of inactivity in the repository, potentially leaving the database outdated." />
+<meta property="og:description" content="In my last post, I mentioned upcoming enhancements to the VPN Profile Switcher, and today, I’m excited to share two new scripts that take this project to the next level. These scripts not only add functionality but also pave the way for a more robust and self-sufficient toolset. 1. Creating a Local Database with get_groups_and_countries_to_tsv.sh One of the critical components of the VPN Profile Switcher is the ability to maintain an updated list of available VPN server types and countries. Previously, this information was stored in the db branch of the repository and updated through a GitHub action. However, this approach comes with a caveat: the GitHub action will be canceled after two months of inactivity in the repository, potentially leaving the database outdated." />
+<link rel="canonical" href="https://urishx.github.io/2024/08/18/Introducing-Local-DB-Creation-and-a-Self-Test-Tool.html" />
+<meta property="og:url" content="https://urishx.github.io/2024/08/18/Introducing-Local-DB-Creation-and-a-Self-Test-Tool.html" />
+<meta property="og:site_name" content="Uri Sh." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-08-18T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Enhancing the VPN Profile Switcher: Introducing Local DB Creation and a Self-Test Tool" />
+<script type="application/ld+json">
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://urishx.github.io/logo.png"},"name":"Uri Shani"},"description":"In my last post, I mentioned upcoming enhancements to the VPN Profile Switcher, and today, I’m excited to share two new scripts that take this project to the next level. These scripts not only add functionality but also pave the way for a more robust and self-sufficient toolset. 1. Creating a Local Database with get_groups_and_countries_to_tsv.sh One of the critical components of the VPN Profile Switcher is the ability to maintain an updated list of available VPN server types and countries. Previously, this information was stored in the db branch of the repository and updated through a GitHub action. However, this approach comes with a caveat: the GitHub action will be canceled after two months of inactivity in the repository, potentially leaving the database outdated.","mainEntityOfPage":{"@type":"WebPage","@id":"https://urishx.github.io/2024/08/18/Introducing-Local-DB-Creation-and-a-Self-Test-Tool.html"},"@type":"BlogPosting","url":"https://urishx.github.io/2024/08/18/Introducing-Local-DB-Creation-and-a-Self-Test-Tool.html","headline":"Enhancing the VPN Profile Switcher: Introducing Local DB Creation and a Self-Test Tool","dateModified":"2024-08-18T00:00:00+00:00","datePublished":"2024-08-18T00:00:00+00:00","author":{"@type":"Person","name":"Uri Shani"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://urishx.github.io/feed.xml" title="Uri Sh." />
+<link href="https://fonts.googleapis.com/css2?family=Alef&family=Tinos&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link rel="icon" href="/assets/cropped-logo-1-32x32.png" sizes="32x32"/></head>
+<body><div>
+    <header class="site-header" style="background-image: url('/assets/img/banner.png');">
+        <div class="banner">
+            <div class="img-container">
+                
+                    <img alt="logo" src="/assets/img/logo.png"/>
+                
+            </div>
+            <h1 class="site-title">
+                <a rel="author" href="/">Uri Sh.</a>
+            </h1>
+            <h2>Making, Engineering, and Blogging about it too</h2>
+        </div>
+        <div class="wrapper"><nav class="site-nav">
+                    <input class="nav-trigger" id="nav-trigger" type="checkbox"/>
+                    <label for="nav-trigger">
+                        <span class="menu-icon">
+                            <svg height="15px" viewbox="0 0 18 15" width="18px">
+                                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+                            </svg>
+                        </span>
+                    </label>
+
+                    <div class="trigger">
+                        <a class="page-link" href="/" >Home</a><a class="page-link" href="/about/" >About me</a><a class="page-link" href="/portfolio/" >Portfolio</a></div>
+                </nav></div>
+    </header>
+</div>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Enhancing the VPN Profile Switcher: Introducing Local DB Creation and a Self-Test Tool</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2024-08-18T00:00:00+00:00" itemprop="datePublished">
+        18.08.2024
+      </time></p>
+      <div class="post-heading-comment"><p>This post is a continuation of my <a href="/2024/07/30/updating-the-vpn-swittching-script.html">previous post</a> on adding WireGuard support to my NordVPN server switching script. Check it out, and check tthe <a href="https://github.com/UriShX/vpn-profile-switcher/tree/dev"><code class="language-plaintext highlighter-rouge">dev</code></a> branch of the repo for more info.</p>
+</div>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In my last post, I mentioned upcoming enhancements to the VPN Profile Switcher, and today, I’m excited to share two new scripts that take this project to the next level. These scripts not only add functionality but also pave the way for a more robust and self-sufficient toolset.</p>
+
+<h4 id="1-creating-a-local-database-with-get_groups_and_countries_to_tsvsh">1. Creating a Local Database with <code class="language-plaintext highlighter-rouge">get_groups_and_countries_to_tsv.sh</code></h4>
+
+<p>One of the critical components of the VPN Profile Switcher is the ability to maintain an updated list of available VPN server types and countries. Previously, this information was stored in the <code class="language-plaintext highlighter-rouge">db</code> branch of the repository and updated through a GitHub action. However, this approach comes with a caveat: the GitHub action will be canceled after two months of inactivity in the repository, potentially leaving the database outdated.
+<!-- more -->
+To address this, I’ve developed the <code class="language-plaintext highlighter-rouge">get_groups_and_countries_to_tsv.sh</code> script. This script enables users to generate a local database of VPN server types (like TOR and P2P) and the countries where these services are available. By running this script, you can ensure that your local database is always up-to-date, independent of the GitHub action.</p>
+
+<p>The script relies on <code class="language-plaintext highlighter-rouge">wget</code> and <code class="language-plaintext highlighter-rouge">jsonfilter</code> to mimic the functionality of the GitHub action. The action itself, housed at <a href="https://github.com/UriShX/curl-then-jq-shell-action">curl-then-jq-shell-action</a>, utilizes <code class="language-plaintext highlighter-rouge">curl</code> and <code class="language-plaintext highlighter-rouge">jq</code> for its operations. With this script, you no longer need to rely on the remote repository’s database, making the <code class="language-plaintext highlighter-rouge">db</code> branch redundant and streamlining your setup.</p>
+
+<h4 id="2-building-a-self-test-tool-with-vpn-status-checker-openwrtsh">2. Building a Self-Test Tool with <code class="language-plaintext highlighter-rouge">vpn-status-checker-openwrt.sh</code></h4>
+
+<p>Another essential aspect of managing VPN connections is ensuring that your VPN is functioning correctly and securely. To this end, I’ve started building a self-test tool with the <code class="language-plaintext highlighter-rouge">vpn-status-checker-openwrt.sh</code> script. This script is designed to perform basic checks such as DNS leak tests and connection status verification, similar to what you might find on the <a href="https://nordvpn.com/what-is-my-ip/">NordVPN What Is My IP page</a>, but in a command-line interface (CLI) format.</p>
+
+<p>While this script is in its early stages, it lays the groundwork for a more comprehensive self-test tool that can be integrated into the VPN Profile Switcher. It’s a straightforward yet powerful way to ensure your VPN is operating as expected, providing peace of mind in an increasingly complex digital landscape.</p>
+
+<h4 id="looking-ahead-wireguard-testing-and-beyond">Looking Ahead: WireGuard Testing and Beyond</h4>
+
+<p>As I continue to enhance the VPN Profile Switcher, one area I plan to explore further is testing the connectivity and robustness of WireGuard. While I haven’t had the chance to dive into this yet, it’s on my radar, and I’m eager to see how WireGuard performs in various scenarios.</p>
+
+<p>In the meantime, these two scripts represent significant steps forward in making the VPN Profile Switcher more self-reliant and user-friendly. Whether you’re looking to maintain an up-to-date local database or ensure your VPN connection is secure, these tools are here to help.</p>
+
+<p>Stay tuned for more updates, including additional features and test results, as I continue to refine and expand the capabilities of the VPN Profile Switcher!</p>
+
+  </div><a class="u-url" href="/2024/08/18/Introducing-Local-DB-Creation-and-a-Self-Test-Tool.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">&#169; Uri Shani 2020</li>
+          <li><a class="u-email" href="mailto:urish@urishx.com">urish@urishx.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>A portfolio centered site with a blog, to feature my adventures and projects in  making, programming, and engineering. Built in Jekyll, to be served from Github pages.
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://hackaday.io/UriSh" title="UriSh"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#hackaday"></use></svg></a></li><li><a rel="me" href="https://www.facebook.com/uri.sh.982" title="uri.sh.982"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg></a></li><li><a rel="me" href="https://github.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/urishx" title="urishx"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
