@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Adding Staticman To Jekylls Minima Theme | Uri Sh.</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Adding Staticman To Jekylls Minima Theme" />
+<meta name="author" content="Uri Shani" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="After modifying the theme to fit my aesthetics, then adding a nice portfolio layout (which required writing and modifying a couple of plgugins), it was time to add a commenting system to my blog. Now, it’s not that I write a lot of blog posts, but for some projects I want to write some sort of how-to, or some sort of a thought process documentation - and for those, I really do wish for people to interact with me. Now, Minima already comes with a layout ready for adding Disqus comments. But I don’t really like relying on the free tier of a paid service, so I did a quick search and found Staticman, which is a self hosted solution." />
+<meta property="og:description" content="After modifying the theme to fit my aesthetics, then adding a nice portfolio layout (which required writing and modifying a couple of plgugins), it was time to add a commenting system to my blog. Now, it’s not that I write a lot of blog posts, but for some projects I want to write some sort of how-to, or some sort of a thought process documentation - and for those, I really do wish for people to interact with me. Now, Minima already comes with a layout ready for adding Disqus comments. But I don’t really like relying on the free tier of a paid service, so I did a quick search and found Staticman, which is a self hosted solution." />
+<link rel="canonical" href="https://urishx.github.io/2020/10/21/Adding-Staticman-to-Jekylls-Minima-theme.html" />
+<meta property="og:url" content="https://urishx.github.io/2020/10/21/Adding-Staticman-to-Jekylls-Minima-theme.html" />
+<meta property="og:site_name" content="Uri Sh." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-21T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Adding Staticman To Jekylls Minima Theme" />
+<script type="application/ld+json">
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://urishx.github.io/logo.png"},"name":"Uri Shani"},"description":"After modifying the theme to fit my aesthetics, then adding a nice portfolio layout (which required writing and modifying a couple of plgugins), it was time to add a commenting system to my blog. Now, it’s not that I write a lot of blog posts, but for some projects I want to write some sort of how-to, or some sort of a thought process documentation - and for those, I really do wish for people to interact with me. Now, Minima already comes with a layout ready for adding Disqus comments. But I don’t really like relying on the free tier of a paid service, so I did a quick search and found Staticman, which is a self hosted solution.","mainEntityOfPage":{"@type":"WebPage","@id":"https://urishx.github.io/2020/10/21/Adding-Staticman-to-Jekylls-Minima-theme.html"},"@type":"BlogPosting","url":"https://urishx.github.io/2020/10/21/Adding-Staticman-to-Jekylls-Minima-theme.html","headline":"Adding Staticman To Jekylls Minima Theme","dateModified":"2020-10-21T00:00:00+00:00","datePublished":"2020-10-21T00:00:00+00:00","author":{"@type":"Person","name":"Uri Shani"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://urishx.github.io/feed.xml" title="Uri Sh." />
+<link href="https://fonts.googleapis.com/css2?family=Alef&family=Tinos&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link rel="icon" href="/assets/cropped-logo-1-32x32.png" sizes="32x32"/></head>
+<body><div>
+    <header class="site-header" style="background-image: url('/assets/img/banner.png');">
+        <div class="banner">
+            <div class="img-container">
+                
+                    <img alt="logo" src="/assets/img/logo.png"/>
+                
+            </div>
+            <h1 class="site-title">
+                <a rel="author" href="/">Uri Sh.</a>
+            </h1>
+            <h2>Making, Engineering, and Blogging about it too</h2>
+        </div>
+        <div class="wrapper"><nav class="site-nav">
+                    <input class="nav-trigger" id="nav-trigger" type="checkbox"/>
+                    <label for="nav-trigger">
+                        <span class="menu-icon">
+                            <svg height="15px" viewbox="0 0 18 15" width="18px">
+                                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+                            </svg>
+                        </span>
+                    </label>
+
+                    <div class="trigger">
+                        <a class="page-link" href="/" >Home</a><a class="page-link" href="/about/" >About me</a><a class="page-link" href="/portfolio/" >Portfolio</a></div>
+                </nav></div>
+    </header>
+</div>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Adding Staticman To Jekylls Minima Theme</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2020-10-21T00:00:00+00:00" itemprop="datePublished">
+        21.10.2020
+      </time>~<time class="dt-modified" datetime="2024-10-07T00:00:00+00:00" itemprop="dateModified">
+          07.10.2024
+        </time></p>
+      <div class="post-heading-comment"><p>I started writing this post 4 years ago, but never finished it. I recently decided to get a VPS to host my miscellaneous projects, and decided to deploy these using <a href="https://dokku.com/docs/getting-started/installation/">Dokku</a>, since Heroku’s free tier is long gone now. Since I needed an introduction to Dokku, I decided to try and deploy Staticman, to test the waters. This post is a mix of the old post, and the new experience.</p>
+</div>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>After modifying the theme to fit my aesthetics, then adding a nice portfolio layout (which required writing and modifying a couple of plgugins), it was time to add a commenting system to my blog. Now, it’s not that I write a lot of blog posts, but for some projects I want to write some sort of how-to, or some sort of a thought process documentation - and for those, I really do wish for people to interact with me. Now, <a href="https://github.com/jekyll/minima">Minima</a> already comes with a layout ready for adding <a href="https://disqus.com/">Disqus</a> comments. But I don’t really like relying on the free tier of a paid service, so I did a quick search and found <a href="https://staticman.net/">Staticman</a>, which is a self hosted solution.
+<!--more-->
+I think Staticman works in quite a clever way, using Jekyll’s own structure to save the comments as <a href="https://jekyllrb.com/docs/datafiles/">data files</a>. Staticman’s back end is a self hosted endpoint which receives a <code class="language-plaintext highlighter-rouge">POST</code> request of the comment from a form displayed on each post. It then opens a <em>Pull Request</em> on the repository containing the blog with a new data file containing the comment - which in turn will be rendered with the related post when the site re-renders. <br />
+Staticman’s <a href="https://github.com/eduardoboucas/staticman">Github repository</a> lists a couple of useful links for setting those up, which I followed. The first is Travis Downs’ <a href="https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html#invite-and-accept-bot-to-blog-repo">tutorial</a>, which is great, and the second is Michael Rose’s <a href="https://mademistakes.com/articles/improving-jekyll-static-comments/">blog post</a> documenting how he implemented Staticman in his own theme. I followed these two, adjusting as I went along to fit with my blog’s layout. <br />
+Required changes:</p>
+<ul>
+  <li>Include files <code class="language-plaintext highlighter-rouge">comments.html</code>, <code class="language-plaintext highlighter-rouge">comment.html</code>, and <code class="language-plaintext highlighter-rouge">comment_form.html</code>. If my memory serves me right, I copied these from Michael Rose’s blog post (<em>MadeMistakes</em>).</li>
+  <li>Rewrite JS to not require JQuery. That was done since that’s the only part in my site that uses JQuery, so that’s an unnecessary dependency. Since I don’t want this blog post to be entirely about that, I’ll just mention that I used the <code class="language-plaintext highlighter-rouge">fetch</code> API to send the comment to the Staticman endpoint, and you can find the code <a href="https://raw.githubusercontent.com/UriShX/microblog/refs/heads/master/assets/script/staticman-comments.js?token=GHSAT0AAAAAACXKXELF6N3ODUA2MPPGXL7IZYEFQPA">here</a>.</li>
+  <li>Substitute colors in <code class="language-plaintext highlighter-rouge">comment-styles.scss</code> to work with Minima’s skins.</li>
+  <li>Add comments tag to <code class="language-plaintext highlighter-rouge">_layouts/post.html</code> as in adding the following to the bottom of the file:</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  {%- if page.comments == true -%}
+    {%- include comments.html -%}
+  {%- endif -%}
+</code></pre></div></div>
+
+<ul>
+  <li>Add the <code class="language-plaintext highlighter-rouge">comments</code> tag to the front matter of the posts I want to have comments on.
+<del>I also found that using the Heroku deploy button does not work correctly with my browser, so I followed issue <a href="https://github.com/eduardoboucas/staticman/issues/394">#394</a> on the Staticman repo.</del> I used Heroku for the first deployment, but since the free tier is long gone, I did not use it for a good while. Since I recently got a VPS, I decided to deploy Staticman on it. I’ll document that process in the next section.</li>
+</ul>
+
+<h3 id="deploying-staticman-on-a-vps">Deploying Staticman on a VPS</h3>
+
+<p>I looked online for resources on how to deploy Staticman on a VPS, using Dokku, and found <a href="https://shoreviewanalytics.github.io/Staticman-API-Dokku-Deployment/">this</a> blog post. Reading through it, I decided I didn’t like the idea of setting up Node.JS and NPM, so I re-read the post and found there’s a link to <a href="https://www.flyinggrizzly.net/2017/12/setting-up-staticman-server/">another post</a>, on another blog, that used the Docker image which Staticman ships with. So, I decided to document my own experience, to save myself the future headache of when I try to re-deploy it (which I know will happen sometime in the future, when I change VPS providers or something). <br />
+Here’s what I did:</p>
+<ul>
+  <li>Created a new app on my Dokku instance.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dokku apps:create staticman
+</code></pre></div>    </div>
+  </li>
+  <li>Set up a URL for the app.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dokku domains:set staticman staticman-subdomain.domain.com
+</code></pre></div>    </div>
+  </li>
+  <li>Set up letsencrypt for the app.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dokku letsencrypt:set staticman email yourname@domain.com
+dokku letsencrypt:enable staticman
+</code></pre></div>    </div>
+  </li>
+  <li>Create a GitHub token, from my existing bot account (I used the same account for the Heroku deployment).
+    <ul>
+      <li>Go to <code class="language-plaintext highlighter-rouge">Settings</code> -&gt; <code class="language-plaintext highlighter-rouge">Developer settings</code> -&gt; <code class="language-plaintext highlighter-rouge">Personal access tokens</code> -&gt; <code class="language-plaintext highlighter-rouge">Generate new token</code>.</li>
+      <li>Select the ‘Tokens (classic)’ option.</li>
+      <li>Give the token a name, and select the <code class="language-plaintext highlighter-rouge">repo</code> scope.</li>
+      <li>Copy the token.</li>
+    </ul>
+  </li>
+  <li>Create a RSA key pair for the app.
+    <ul>
+      <li>It’s important to use the <code class="language-plaintext highlighter-rouge">-m PEM</code> flag, since the default is <code class="language-plaintext highlighter-rouge">OPENSSH</code>.
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen <span class="nt">-m</span> PEM <span class="nt">-t</span> rsa <span class="nt">-b</span> 4096 <span class="nt">-C</span> <span class="s2">"yourname@domain.com"</span> <span class="nt">-f</span> ~/.ssh/staticman_rsa.pem 
+<span class="c"># copy the public key to the clipboard (pbcopy works on MacOS)</span>
+<span class="nb">cat</span> ~/.ssh/staticman_rsa.pem.pub | pbcopy
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>Add the public key to the GitHub bot account.
+    <ul>
+      <li>Go to <code class="language-plaintext highlighter-rouge">Settings</code> -&gt; <code class="language-plaintext highlighter-rouge">SSH and GPG keys</code> -&gt; <code class="language-plaintext highlighter-rouge">New SSH key</code>.</li>
+      <li>Paste the public key.</li>
+      <li>Give the key a name.</li>
+      <li>Click <code class="language-plaintext highlighter-rouge">Add SSH key</code>.</li>
+    </ul>
+  </li>
+  <li>Set up the required environment variables.
+    <ul>
+      <li>I <code class="language-plaintext highlighter-rouge">scp</code>‘d the private key to the Dokku instance from my local machine (<code class="language-plaintext highlighter-rouge">scp ~/.ssh/staticman_rsa.pem user@ip:~</code>) and then added it to the app.
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dokku config:set staticman <span class="nv">RSA_PRIVATE_KEY</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">cat </span>staticman_rsa.pem<span class="si">)</span><span class="s2">"</span>
+dokku config:set staticman <span class="nv">GITHUB_TOKEN</span><span class="o">=</span>your_github_token
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>Deploy the app (from my local machine).
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/eduardoboucas/staticman.git
+<span class="nb">cd </span>staticman
+git remote add dokku dokku@yourserver:staticman
+git push dokku master
+</code></pre></div>    </div>
+  </li>
+  <li>Test the app exists.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://staticman-subdomain.domain.com:port
+<span class="c"># Should return 'Hello from Staticman version 3.0.0!'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Invite the bot to the repository.
+    <ul>
+      <li>Go to the repository settings.</li>
+      <li>Go to <code class="language-plaintext highlighter-rouge">Manage access</code>.
+        <ul>
+          <li>In my had to delete the bot’s access, since I had previously added it to the repository to work with Heroku.</li>
+          <li>Click <code class="language-plaintext highlighter-rouge">Delete</code> on the bot’s username.</li>
+        </ul>
+      </li>
+      <li>Click <code class="language-plaintext highlighter-rouge">Invite a collaborator</code>.</li>
+      <li>Paste the bot’s username.</li>
+      <li>Click <code class="language-plaintext highlighter-rouge">Add</code>.</li>
+    </ul>
+  </li>
+  <li>Accept the invitation using the Staicman app.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://staticman-subdomain.domain.com/v2/connect/github/your_github_username/your_repository_name
+<span class="c"># Should return 'OK'</span>
+<span class="c"># If it returns 'Invitation not found' it might be that you've already accepted the invitation manually, or that your GITHUB_TOKEN is not right.</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Add (or modify) the existing <code class="language-plaintext highlighter-rouge">_config.yml</code> file in the Jekyll blog to point to the correct Staticman endpoint.
+    <ul>
+      <li>I decided to stick to the <code class="language-plaintext highlighter-rouge">v2</code> endpoint, since I was using it before. From what I understand, the <code class="language-plaintext highlighter-rouge">v3</code> endpoint requires a GitHub app, which I did not want to set up at this point in time.
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">staticman_url</span><span class="pi">:</span> <span class="s">https://staticman-subdomain.domain.com:port/v2/entry/your_github_username/your_repository_name/master/comments</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>Test the configuration.
+    <ul>
+      <li>Add a comment to a post.</li>
+      <li>If the comment does form does not seem to work, check the browser’s console for errors.</li>
+      <li>In my case, I noticed that in the ‘network’ tab, I got a ‘500’ error. I checked for possible causes until I remembered I had to set the ‘reCpatcha’ keys in the Staticman app correctly. Since I didn’t remember how I initially set them, a great help here was this <a href="https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html#invite-and-accept-bot-to-blog-repo">blog post</a>, which I mentioned earlier, and <a href="https://spinningnumbers.org/a/staticman-heroku.html#encryption-overview">another post</a> I stumbled upon when trying to figure things up.</li>
+    </ul>
+  </li>
+  <li>Set up the reCaptcha keys.
+    <ul>
+      <li>Go to the <a href="https://www.google.com/recaptcha/admin/create">reCaptcha admin console</a>.</li>
+      <li>Register a new site.</li>
+      <li>Copy the <code class="language-plaintext highlighter-rouge">site key</code> to both the <code class="language-plaintext highlighter-rouge">_config.yml</code> file and the <code class="language-plaintext highlighter-rouge">staticman.yml</code> in the Jekyll blog.</li>
+      <li>Copy the <code class="language-plaintext highlighter-rouge">secret key</code>, and go to <code class="language-plaintext highlighter-rouge">https://staticman-subdomain.domain.com/v2/encrypt/[recaptcha-secret-key]</code> in your browser to get the encrypted key.</li>
+      <li>Copy the encrypted key to both the <code class="language-plaintext highlighter-rouge">_config.yml</code> file and the <code class="language-plaintext highlighter-rouge">staticman.yml</code> in the Jekyll blog.</li>
+    </ul>
+  </li>
+  <li>Save and re-deploy the Jekyll blog.</li>
+  <li>Test the comment form again.
+    <ul>
+      <li>If the comment form does not work, check the browser’s console for errors.</li>
+      <li>If the comment form does work, check the repository for the new pull request.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>I suppose that’s it. I really hope this post helps someone in the future, or at least helps me when I need to re-deploy Staticman. I’m really happy with how it turned out, and I’m looking forward to interacting with people on my blog. I’m also looking forward to writing more blog posts, and maybe even finishing some of the drafts I have lying around.</p>
+
+  </div><section class="comments" id="comment-section">
+  <hr>
+  
+
+  <!-- New comment form -->
+  <div id="respond" class="comment__new">
+    <form class="js-form form" method="post" action="https://staticman.urishx.com:3000/v2/entry/urishx/microblog/master/comments">
+  <input type="hidden" name="options[origin]" value="https://urishx.github.io/2020/10/21/Adding-Staticman-to-Jekylls-Minima-theme.html">
+  <input type="hidden" name="options[parent]" value="https://urishx.github.io/2020/10/21/Adding-Staticman-to-Jekylls-Minima-theme.html">
+  <input type="hidden" id="comment-replying-to-uid" name="fields[replying_to_uid]" value="">
+  <input type="hidden" name="options[slug]" value="Adding-Staticman-to-Jekylls-Minima-theme">
+  <input type="hidden" name="options[reCaptcha][siteKey]" value="6LcoC1oqAAAAAD97UUqATIuMEDq_zNcoW7rc2MSz">
+  <input type="hidden" name="options[reCaptcha][secret]"  value="JzJJCItj4Qlw8FDIUGJegq7uEayjKLj/npOSXvjgYC0kZ8fbD8Ouy7xeiC+6jswomTW1sb4M23TOMsL9aIwazM+zYBQzK61LOlrIyc7OzTgEf5Gas9QXGMaK2PnGd7MZ38515tpGM2v7K5Ay+YNC78v+LB17uM17Qnf80rW7nWUJpylh2amWrMVzc9M8Nw7ZPPwYbIhuAj6BeNQ+8zvG6DAoDuKciQqxUlALdF1LxIOxFLpoQ7oq3Aee62Fp4Dlr0XoNPLFYXUSS8epNTAmudbRH4jkPnDt/0ki6rMkTwS9eMQKfEPNCElv8lGfK/gk/rexKXddb5Zm+mfb0bLqn8f1Q0XdNM09AZTdY/qJ3Wu+HTAvDHduZzEOrZMIky8B433ixM2zARA1Rm4zcHdxGFfnJV9Eu52NOA417n6kBl5H7SjhelJfM5dn471jMvSICENYf+HExAc8RwP8Rg00aTjxmAGO0jsylfjHalaA69H2VFNKYER5up29kw2YuFLfnJpUg5ks+QddJBZgMwv3U8Gmhlj6deUrRHVOTawqSYZ9hDNcUfYmLKTCK7Fx8KembiCfU3BuRNcLN9AFYs+Rijo2sA/SxNPjLujP/H+WIdjL1mzTL6Rj1o8GKrAQhQdhZchZfSTXJ2RODLeyQsDUpTxs/qkgqte0UK9u86799n6g=">
+
+  <div class="textfield">
+    <label for="comment-form-message"><h2>Add Comment<small><a rel="nofollow" id="cancel-comment-reply-link" href="https://urishx.github.io/2020/10/21/Adding-Staticman-to-Jekylls-Minima-theme.html#respond" style="display:none;">(cancel reply)</a></small></h2>
+      <textarea class="textfield__input" name="fields[message]" type="text" id="comment-form-message" placeholder="Your comment (markdown accepted)" required rows="6"></textarea>
+    </label>
+  </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-name">Name
+        <input class="textfield__input" name="fields[name]" type="text" id="comment-form-name" placeholder="Your name (required)" required/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield">
+      <label for="comment-form-email">E-mail
+        <input class="textfield__input" name="fields[email]" type="email" id="comment-form-email" placeholder="Your email (optional)"/>
+      </label>
+    </div>
+
+    <div class="textfield narrowfield hp">
+      <label for="hp">
+        <input class="textfield__input" name="fields[hp]" id="hp" type="text" placeholder="Leave blank">
+      </label>
+    </div>
+
+    <div id="reCaptcha" class="g-recaptcha" data-sitekey="6LcoC1oqAAAAAD97UUqATIuMEDq_zNcoW7rc2MSz" data-callback="recaptcha_callback"></div>
+
+    <button disabled="disabled" class="button" id="comment-form-submit">
+      Submit
+    </button>
+
+</form>
+
+<article class="modal mdl-card mdl-shadow--2dp">
+  <div>
+    <h3 class="modal-title js-modal-title"></h3>
+  </div>
+  <div class="mdl-card__supporting-text js-modal-text"></div>
+  <div class="mdl-card__actions mdl-card--border">
+    <button class="button mdl-button--colored mdl-js-button mdl-js-ripple-effect js-close-modal">Close</button>
+  </div>
+</article>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none" >
+  <symbol id="icon-loading" viewBox="149.8 37.8 499.818 525"><path d="M557.8 187.8c13.8 0 24.601-10.8 24.601-24.6S571.6 138.6 557.8 138.6s-24.6 10.8-24.6 24.6c0 13.2 10.8 24.6 24.6 24.6zm61.2 90.6c-16.8 0-30.6 13.8-30.6 30.6s13.8 30.6 30.6 30.6 30.6-13.8 30.6-30.6c.6-16.8-13.2-30.6-30.6-30.6zm-61.2 145.2c-20.399 0-36.6 16.2-36.6 36.601 0 20.399 16.2 36.6 36.6 36.6 20.4 0 36.601-16.2 36.601-36.6C595 439.8 578.2 423.6 557.8 423.6zM409 476.4c-24 0-43.2 19.199-43.2 43.199s19.2 43.2 43.2 43.2 43.2-19.2 43.2-43.2S433 476.4 409 476.4zM260.8 411c-27 0-49.2 22.2-49.2 49.2s22.2 49.2 49.2 49.2 49.2-22.2 49.2-49.2-22.2-49.2-49.2-49.2zm-10.2-102c0-27.6-22.8-50.4-50.4-50.4-27.6 0-50.4 22.8-50.4 50.4 0 27.6 22.8 50.4 50.4 50.4 27.6 0 50.4-22.2 50.4-50.4zm10.2-199.8c-30 0-54 24-54 54s24 54 54 54 54-24 54-54-24.6-54-54-54zM409 37.8c-35.4 0-63.6 28.8-63.6 63.6S374.2 165 409 165s63.6-28.8 63.6-63.6-28.2-63.6-63.6-63.6z"/>
+  </symbol>
+</svg>
+
+
+
+  </div>
+</section>
+
+<script src="/assets/script/staticman-comments.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<a class="u-url" href="/2020/10/21/Adding-Staticman-to-Jekylls-Minima-theme.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">&#169; Uri Shani 2020</li>
+          <li><a class="u-email" href="mailto:urish@urishx.com">urish@urishx.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>A portfolio centered site with a blog, to feature my adventures and projects in  making, programming, and engineering. Built in Jekyll, to be served from Github pages.
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://hackaday.io/UriSh" title="UriSh"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#hackaday"></use></svg></a></li><li><a rel="me" href="https://www.facebook.com/uri.sh.982" title="uri.sh.982"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#facebook"></use></svg></a></li><li><a rel="me" href="https://github.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/urishx" title="urishx"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/UriShX" title="UriShX"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
